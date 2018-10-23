@@ -22,7 +22,7 @@
       <Button layoutX="61.0" layoutY="61.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: transparent;" text=" " />
       <JFXButton fx:id="returnHome" layoutX="78.0" layoutY="61.0" onAction="#home" text=" ">
          <graphic>
-            <ImageView fx:id="returnHome" fitHeight="56.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="56.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/images/icons8-arrière-52.png" />
                </image>

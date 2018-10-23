@@ -6,7 +6,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1232.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.HomeController">
     <children>
-        <JFXButton onAction="#placeToEat" prefHeight="1237.0" prefWidth="1177.0" stylesheets="@../assets/css/app.css" text="Touch to start...">
+        <JFXButton fx:id="startBtn" onAction="#placeToEat" prefHeight="1237.0" prefWidth="1177.0" stylesheets="@../assets/css/app.css" text="Touch to start...">
             <styleClass>
                 <String fx:value="btn" />
                 <String fx:value="btn-transparent" />
