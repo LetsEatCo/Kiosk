@@ -1,0 +1,12 @@
+.btn{
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+}
+
+.btn-transparent{
+
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-background-color: transparent;
+
+}
