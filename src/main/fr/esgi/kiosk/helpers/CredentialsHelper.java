@@ -26,13 +26,9 @@ public class CredentialsHelper {
 
     }
 
-    public StoreCredentials getStoreCredentials() throws IOException {
+    public Properties getStoreCredentials() throws IOException {
 
-        Properties properties = getProperties(config);
-
-        // Retrieve Properties
-
-        return new StoreCredentials(properties.getProperty("jwt"));
+        return getProperties(config);
     }
 
     private Properties getProperties(String pathFile) throws IOException {

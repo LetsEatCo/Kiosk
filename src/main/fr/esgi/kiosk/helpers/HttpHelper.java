@@ -15,12 +15,13 @@ import java.util.List;
 public class HttpHelper {
 
 
-    public JSONObject getResponseBody(String url) throws IOException, ParseException {
+    public static Object httpGetRequest(String url, String jwt) throws IOException, ParseException {
 
-        JSONObject body;
+        Object body;
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
+        httpGet.setHeader("Authorization", "Bearer " + jwt);
 
         try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
 
@@ -31,7 +32,7 @@ public class HttpHelper {
         return body;
     }
 
-    public static JSONObject httpPostRequest(String url, List<NameValuePair> credentials) throws IOException, ParseException {
+    public static Object httpPostRequest(String url, List<NameValuePair> credentials) throws IOException, ParseException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -51,7 +52,7 @@ public class HttpHelper {
         httpGet.setHeader("Authorization", "Bearer " + jwt);
         CloseableHttpResponse response = httpClient.execute(httpGet);
 
-        return JsonHelper.getResponseBody(response);
+        return (JSONObject) JsonHelper.getResponseBody(response);
 
     }
 

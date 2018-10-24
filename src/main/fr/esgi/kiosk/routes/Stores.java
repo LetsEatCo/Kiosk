@@ -5,6 +5,7 @@ import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.models.StoreCredentials;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -15,7 +16,7 @@ import java.util.Properties;
 
 public class Stores {
 
-    public static void login(String email, String password) throws IOException, ParseException {
+    public void login(String email, String password) throws IOException, ParseException {
 
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties routes = credentialsHelper.getRoutes();
@@ -24,7 +25,7 @@ public class Stores {
         credentials.add(new BasicNameValuePair("email", email));
         credentials.add(new BasicNameValuePair("password", password));
 
-        JSONObject jsonObject = HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
+        JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
 
         if( jsonObject.get("jwt") instanceof String){
 
@@ -32,6 +33,18 @@ public class Stores {
             credentialsHelper.createCredentials(storeCredentials);
         }
 
+    }
+
+    public JSONArray getProducts() throws IOException, ParseException {
+
+        CredentialsHelper credentialsHelper = new CredentialsHelper();
+        Properties routes = credentialsHelper.getRoutes();
+        Properties config = credentialsHelper.getStoreCredentials();
+
+        String route = routes.getProperty("getProducts");
+        String jwt = config.getProperty("jwt");
+
+        return (JSONArray) HttpHelper.httpGetRequest(route, jwt);
     }
 
 
