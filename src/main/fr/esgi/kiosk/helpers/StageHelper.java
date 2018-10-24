@@ -39,4 +39,9 @@ public class StageHelper {
 
     }
 
+    public static Parent loadFxml(String path) throws IOException {
+
+        return FXMLLoader.load(StageHelper.class.getResource(path));
+    }
+
 }

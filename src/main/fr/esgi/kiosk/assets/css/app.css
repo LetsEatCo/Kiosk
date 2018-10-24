@@ -1,12 +1,37 @@
+@font-face {
+    font-family: "Arvo Bold";
+    src: url("../fonts/Arvo/Arvo-Bold.ttf");
+}
+
 .btn{
-    -fx-font-weight: bold;
-    -fx-font-size: 30;
+    -fx-font-size: 20;
+    -fx-background-color: transparent;
+    -fx-font-family: "Arvo Bold";
+
+}
+.btn:hover{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-border-color: dodgerblue;
+    -fx-border-width: 0px 0px 0px 5px;
+    -fx-border-style: solid;
 }
 
 .btn-transparent{
 
+    -fx-font-family: "Arvo Bold";
     -fx-font-weight: bold;
     -fx-font-size: 30;
     -fx-background-color: transparent;
 
+}
+
+.contentPane{
+    -fx-background-color:  #F0F0F0;
+}
+
+.box-shadow{
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+    -fx-border-color: #555555;
+    -fx-border-radius: 10;
 }

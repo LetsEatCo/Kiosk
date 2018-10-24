@@ -19,7 +19,7 @@ public class CredentialsHelper {
         // Conf properties
         properties.setProperty("jwt", storeCredentials.getJwt());
 
-        // Store properties
+        // StoreRouter properties
         properties.store(outputStream, null);
 
         outputStream.close();
