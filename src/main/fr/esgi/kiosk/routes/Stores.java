@@ -44,7 +44,12 @@ public class Stores {
         String route = routes.getProperty("getProducts");
         String jwt = config.getProperty("jwt");
 
-        return (JSONArray) HttpHelper.httpGetRequest(route, jwt);
+        if(HttpHelper.httpGetRequest(route, jwt) instanceof JSONArray){
+
+           return (JSONArray) HttpHelper.httpGetRequest(route, jwt);
+        }
+
+        return null ;
     }
 
 

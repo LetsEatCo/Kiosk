@@ -7,7 +7,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.util.List;
@@ -44,7 +43,7 @@ public class HttpHelper {
 
     }
 
-    public static JSONObject getMe(String url, String jwt) throws IOException, ParseException {
+    public static Object getMe(String url, String jwt) throws IOException, ParseException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -52,7 +51,7 @@ public class HttpHelper {
         httpGet.setHeader("Authorization", "Bearer " + jwt);
         CloseableHttpResponse response = httpClient.execute(httpGet);
 
-        return (JSONObject) JsonHelper.getResponseBody(response);
+        return JsonHelper.getResponseBody(response);
 
     }
 
