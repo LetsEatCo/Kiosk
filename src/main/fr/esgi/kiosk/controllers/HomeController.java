@@ -19,6 +19,9 @@ public class HomeController {
     private int adminCounter = 0 ;
 
     @FXML
+    private JFXButton startBtn;
+
+    @FXML
     private JFXTextField emailInput;
 
     @FXML
@@ -53,6 +56,15 @@ public class HomeController {
     void home(ActionEvent event){
 
         StageHelper.returnHome(event);
+    }
+
+    @FXML
+    void placeToEat(ActionEvent event){
+
+        Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        String locationPlace = "/main/fr/esgi/kiosk/views/location.fxml";
+        StageHelper.loadWindow(locationPlace, "Place To Eat", rootStage);
+
     }
 
 }

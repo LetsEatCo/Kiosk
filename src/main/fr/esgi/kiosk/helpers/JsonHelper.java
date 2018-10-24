@@ -1,6 +1,7 @@
 package main.fr.esgi.kiosk.helpers;
 
 import org.apache.http.HttpResponse;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -32,15 +33,15 @@ public class JsonHelper {
 
     }
 
-    public static JSONObject parseJsonData(String json) throws ParseException {
+    public static Object parseJsonData(String json) throws ParseException {
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject)jsonParser.parse(json);
 
-        return (JSONObject) jsonObject.get("data");
+        return jsonObject.get("data");
     }
 
-    public static JSONObject getResponseBody(HttpResponse httpResponse) throws IOException, ParseException {
+    public static Object getResponseBody(HttpResponse httpResponse) throws IOException, ParseException {
 
 
         InputStream inputStream = httpResponse.getEntity().getContent();

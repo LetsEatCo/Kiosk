@@ -7,21 +7,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
 
 public class HttpHelper {
 
 
-    public JSONObject getResponseBody(String url) throws IOException, ParseException {
+    public static Object httpGetRequest(String url, String jwt) throws IOException, ParseException {
 
-        JSONObject body;
+        Object body;
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
+        httpGet.setHeader("Authorization", "Bearer " + jwt);
 
         try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
 
@@ -32,7 +31,7 @@ public class HttpHelper {
         return body;
     }
 
-    public static JSONObject httpPostRequest(String url, List<NameValuePair> credentials) throws IOException, ParseException {
+    public static Object httpPostRequest(String url, List<NameValuePair> credentials) throws IOException, ParseException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -44,7 +43,7 @@ public class HttpHelper {
 
     }
 
-    public static JSONObject getMe(String url, String jwt) throws IOException, ParseException {
+    public static Object getMe(String url, String jwt) throws IOException, ParseException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 

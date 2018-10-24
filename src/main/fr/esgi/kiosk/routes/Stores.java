@@ -5,6 +5,7 @@ import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.models.StoreCredentials;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -15,23 +16,40 @@ import java.util.Properties;
 
 public class Stores {
 
-    public static void login(String email, String password) throws IOException, ParseException {
+    public void login(String email, String password) throws IOException, ParseException {
 
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties routes = credentialsHelper.getRoutes();
-
-        System.out.println(routes.getProperty("login"));
 
         List<NameValuePair> credentials = new ArrayList<>();
         credentials.add(new BasicNameValuePair("email", email));
         credentials.add(new BasicNameValuePair("password", password));
 
-        JSONObject jsonObject = HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
+        JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
 
-        StoreCredentials storeCredentials = new StoreCredentials(email, password);
-        storeCredentials.setJwt((String) jsonObject.get("jwt"));
+        if( jsonObject.get("jwt") instanceof String){
 
-        credentialsHelper.createCredentials(storeCredentials);
+            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"));
+            credentialsHelper.createCredentials(storeCredentials);
+        }
+
+    }
+
+    public JSONArray getProducts() throws IOException, ParseException {
+
+        CredentialsHelper credentialsHelper = new CredentialsHelper();
+        Properties routes = credentialsHelper.getRoutes();
+        Properties config = credentialsHelper.getStoreCredentials();
+
+        String route = routes.getProperty("getProducts");
+        String jwt = config.getProperty("jwt");
+
+        if(HttpHelper.httpGetRequest(route, jwt) instanceof JSONArray){
+
+           return (JSONArray) HttpHelper.httpGetRequest(route, jwt);
+        }
+
+        return null ;
     }
 
 

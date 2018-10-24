@@ -17,8 +17,6 @@ public class CredentialsHelper {
         OutputStream  outputStream = new FileOutputStream(config);
 
         // Conf properties
-        properties.setProperty("email", storeCredentials.getEmail());
-        properties.setProperty("password", storeCredentials.getPassword());
         properties.setProperty("jwt", storeCredentials.getJwt());
 
         // Store properties
@@ -28,16 +26,9 @@ public class CredentialsHelper {
 
     }
 
-    public StoreCredentials getStoreCredentials() throws IOException {
+    public Properties getStoreCredentials() throws IOException {
 
-        Properties properties = getProperties(config);
-
-        // Retrieve Properties
-
-        StoreCredentials storeCredentials = new StoreCredentials(properties.getProperty("email"), properties.getProperty("password"));
-        storeCredentials.setJwt(properties.getProperty("jwt"));
-
-        return storeCredentials;
+        return getProperties(config);
     }
 
     private Properties getProperties(String pathFile) throws IOException {
