@@ -10,7 +10,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
 
 public class HttpHelper {

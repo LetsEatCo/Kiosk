@@ -20,18 +20,18 @@ public class Stores {
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties routes = credentialsHelper.getRoutes();
 
-        System.out.println(routes.getProperty("login"));
-
         List<NameValuePair> credentials = new ArrayList<>();
         credentials.add(new BasicNameValuePair("email", email));
         credentials.add(new BasicNameValuePair("password", password));
 
         JSONObject jsonObject = HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
 
-        StoreCredentials storeCredentials = new StoreCredentials(email, password);
-        storeCredentials.setJwt((String) jsonObject.get("jwt"));
+        if( jsonObject.get("jwt") instanceof String){
 
-        credentialsHelper.createCredentials(storeCredentials);
+            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"));
+            credentialsHelper.createCredentials(storeCredentials);
+        }
+
     }
 
 
