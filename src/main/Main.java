@@ -16,7 +16,10 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("fr/esgi/kiosk/views/home.fxml"));
         primaryStage.setTitle("Let\'s Eat");
-        primaryStage.setScene(new Scene(root, 800, 800));
+        Scene mainScene = new Scene(root, 1248, 1169);
+        primaryStage.minHeightProperty().bind(mainScene.heightProperty());
+        primaryStage.minWidthProperty().bind(mainScene.widthProperty());
+        primaryStage.setScene(mainScene);
         primaryStage.show();
     }
 

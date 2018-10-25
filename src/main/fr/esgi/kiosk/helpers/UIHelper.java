@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class StageHelper {
+public class UIHelper {
 
 
     public static void loadWindow(String path, String title, Stage rootStage){
 
         try {
-            Parent root = FXMLLoader.load(StageHelper.class.getResource(path));
+            Parent root = FXMLLoader.load(UIHelper.class.getResource(path));
 
             rootStage.setTitle(title);
             Scene myScene =new Scene(root);
@@ -41,7 +41,7 @@ public class StageHelper {
 
     public static Parent loadFxml(String path) throws IOException {
 
-        return FXMLLoader.load(StageHelper.class.getResource(path));
+        return FXMLLoader.load(UIHelper.class.getResource(path));
     }
 
 }
