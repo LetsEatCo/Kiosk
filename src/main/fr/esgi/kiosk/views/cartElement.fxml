@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="323.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+         <image>
+            <Image url="@../assets/images/doughnut.png" />
+         </image>
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin>
+      </ImageView>
+      <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="150.0">
+         <children>
+            <Label text="Product Name">
+               <font>
+                  <Font name="Arvo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" text="Qty :  3">
+               <font>
+                  <Font name="Arvo Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="89.0" layoutY="110.0" text="10 €">
+               <font>
+                  <Font name="Arvo Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="120.0">
+         <children>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" text=" X" textFill="#e80e0e">
+               <font>
+                  <Font name="Arvo Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" text="+" textFill="#2dd349">
+               <font>
+                  <Font name="Arvo Bold" size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</HBox>

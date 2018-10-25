@@ -9,6 +9,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.parser.ParseException;
 import java.io.*;
+import java.net.URL;
 import java.util.List;
 
 public class HttpHelper {
@@ -53,6 +54,22 @@ public class HttpHelper {
 
         return JsonHelper.getResponseBody(response);
 
+    }
+
+    private static void downloadImage(String url, String destination) throws IOException {
+
+        URL imageUrl = new URL(url);
+
+        InputStream inputStream = new BufferedInputStream(imageUrl.openStream());
+        OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(destination));
+
+        int readByte;
+        while ((readByte = inputStream.read())!=-1){
+
+            outputStream.write(readByte);
+        }
+        inputStream.close();
+        outputStream.close();
     }
 
 

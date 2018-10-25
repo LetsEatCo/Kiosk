@@ -10,6 +10,8 @@ public class CredentialsHelper {
     private static String path ="src/main/fr/esgi/kiosk/config/";
     private static String config =path+"config.properties";
     private static String routes =path+"routes.properties";
+    private static String cssAppCss =path+"style.config.properties";
+    private static String views =path+"views.config.properties";
 
     public void createCredentials(StoreCredentials storeCredentials) throws IOException {
 
@@ -19,7 +21,7 @@ public class CredentialsHelper {
         // Conf properties
         properties.setProperty("jwt", storeCredentials.getJwt());
 
-        // Store properties
+        // StoreRouter properties
         properties.store(outputStream, null);
 
         outputStream.close();
@@ -48,6 +50,17 @@ public class CredentialsHelper {
 
         return getProperties(routes);
 
+    }
+
+    public Properties getStyle() throws IOException {
+
+        return getProperties(cssAppCss);
+
+    }
+
+    public Properties getViews() throws IOException {
+
+        return getProperties(views);
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class Stores {
+public class StoreRouter {
 
     public void login(String email, String password) throws IOException, ParseException {
 
