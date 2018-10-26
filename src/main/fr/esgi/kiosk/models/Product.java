@@ -1,15 +1,16 @@
 package main.fr.esgi.kiosk.models;
 
+import javafx.scene.image.Image;
+
 public class Product {
 
     private String name;
     private double price;
-    private int quantity;
+    private Image image;
 
-    public Product(String name, double price, int quantity) {
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
     }
 
     public String getName() {
@@ -28,11 +29,12 @@ public class Product {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Image getImage() {
+        return image;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setImage(Image image) {
+        this.image = image;
     }
+
 }

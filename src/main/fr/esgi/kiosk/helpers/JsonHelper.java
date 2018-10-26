@@ -1,5 +1,6 @@
 package main.fr.esgi.kiosk.helpers;
 
+import main.fr.esgi.kiosk.models.Product;
 import org.apache.http.HttpResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,8 +14,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class JsonHelper {
 
@@ -57,6 +58,27 @@ public class JsonHelper {
         }
 
         return parseJsonData(stringBuilder.toString());
+    }
+
+    public static ArrayList<Product> parseJsonProducts(JSONArray products){
+
+        ArrayList<Product> productArrayList = new ArrayList<>();
+
+        for(Object jsonProduct : products){
+
+            if( jsonProduct instanceof JSONObject){
+
+                String name = (String) ((JSONObject) jsonProduct).get("name");
+                double price = Double.valueOf(String.valueOf(((JSONObject) jsonProduct).get("name")));
+
+                Product product = new Product(name, price);
+
+                productArrayList.add(product);
+            }
+
+        }
+
+        return productArrayList;
     }
 
 
