@@ -5,7 +5,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.fr.esgi.kiosk.models.ui.ProductElementUI;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UIHelper {
 
