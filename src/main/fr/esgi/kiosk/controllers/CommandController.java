@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,6 +16,8 @@ import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.ui.CartElementUI;
 import main.fr.esgi.kiosk.models.ui.ProductElementUI;
+import main.fr.esgi.kiosk.routes.StoreRouter;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -78,7 +81,7 @@ public class CommandController {
     }
 
     @FXML
-    void order(ActionEvent event) throws IOException, ParseException {
+    void order(ActionEvent event)  {
 
         System.out.println("Order process...");
 
