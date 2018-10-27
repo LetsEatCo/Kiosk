@@ -6,7 +6,7 @@ public class Product {
 
     private String name;
     private double price;
-    private Image image;
+    private Image image = new Image("/main/fr/esgi/kiosk/assets/images/chicken-leg.png");
 
     public Product(String name, double price) {
         this.name = name;

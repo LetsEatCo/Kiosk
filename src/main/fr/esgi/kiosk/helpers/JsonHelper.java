@@ -69,7 +69,7 @@ public class JsonHelper {
             if( jsonProduct instanceof JSONObject){
 
                 String name = (String) ((JSONObject) jsonProduct).get("name");
-                double price = Double.valueOf(String.valueOf(((JSONObject) jsonProduct).get("name")));
+                double price = Double.valueOf(String.valueOf(((JSONObject) jsonProduct).get("price")));
 
                 Product product = new Product(name, price);
 
