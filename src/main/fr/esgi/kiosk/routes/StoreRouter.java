@@ -27,9 +27,9 @@ public class StoreRouter {
 
         JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
 
-        if( jsonObject.get("jwt") instanceof String){
+        if( jsonObject.get("jwt") instanceof String && jsonObject.get("uuid") instanceof String){
 
-            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"));
+            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"), (String) jsonObject.get("uuid"));
             credentialsHelper.createCredentials(storeCredentials);
         }
 
@@ -50,6 +50,24 @@ public class StoreRouter {
         }
 
         return null ;
+    }
+
+    public JSONObject getStore() throws IOException, ParseException {
+
+        CredentialsHelper credentialsHelper = new CredentialsHelper();
+        Properties routes = credentialsHelper.getRoutes();
+        Properties config = credentialsHelper.getStoreCredentials();
+
+        String uuid = config.getProperty("uuid");
+        String route = routes.getProperty("getStore") + uuid;
+
+
+        if(HttpHelper.httpGetRequest(route) instanceof JSONObject){
+
+            return (JSONObject) HttpHelper.httpGetRequest(route);
+        }
+
+        return null;
     }
 
 

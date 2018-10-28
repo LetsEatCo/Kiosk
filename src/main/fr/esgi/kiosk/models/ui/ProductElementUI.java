@@ -18,6 +18,7 @@ public class ProductElementUI extends Parent {
     private String productName;
     private String price;
     private ImageView imageView;
+    private Product product;
 
     public ProductElementUI(Product product) throws IOException {
 
@@ -26,6 +27,8 @@ public class ProductElementUI extends Parent {
         Parent fxml = UIHelper.loadFxml(properties.getProperty("productElement"));
         this.getChildren().removeAll();
         this.getChildren().setAll(fxml);
+
+        this.product = product;
 
         Pane pane = (Pane)this.getChildren().get(0);
         JFXButton jfxButton = (JFXButton)pane.getChildren().get(0);

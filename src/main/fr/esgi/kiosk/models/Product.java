@@ -2,7 +2,7 @@ package main.fr.esgi.kiosk.models;
 
 import javafx.scene.image.Image;
 
-public class Product {
+public class Product extends Ressource{
 
     private String name;
     private double price;

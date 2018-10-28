@@ -15,6 +15,7 @@ import main.fr.esgi.kiosk.models.Product;
 import main.fr.esgi.kiosk.models.ui.ProductElementUI;
 import main.fr.esgi.kiosk.routes.StoreRouter;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -26,7 +27,9 @@ public class CommandController implements Initializable {
 
     private int adminCounter = 0;
     private ArrayList<Product> productsArrayList;
-    ArrayList<ProductElementUI> productElementUIArrayList;
+    private ArrayList<ProductElementUI> productElementUIArrayList;
+    private JSONObject store;
+    private JSONArray meals;
 
     @FXML
     private Pane mainContent;
@@ -70,21 +73,16 @@ public class CommandController implements Initializable {
     void loadMenu() throws IOException {
 
         String menu = "/main/fr/esgi/kiosk/views/menu.fxml";
-        loadContent(menu);
+        loadUIContent(menu);
+        System.out.println(meals);
 
 
     }
 
     @FXML
-    void loadProducts() throws IOException {
+    void loadProducts() {
 
-        String productsView = "/main/fr/esgi/kiosk/views/products.fxml";
-
-        for(ProductElementUI productElementUI : productElementUIArrayList){
-
-            System.out.println(productElementUI);
-        }
-        loadContent(productsView, productElementUIArrayList);
+        loadUIContent(productElementUIArrayList);
 
     }
 
@@ -92,7 +90,7 @@ public class CommandController implements Initializable {
     void loadDesserts() throws IOException {
 
         String desserts = "/main/fr/esgi/kiosk/views/desserts.fxml";
-        loadContent(desserts);
+        loadUIContent(desserts);
 
     }
 
@@ -103,16 +101,15 @@ public class CommandController implements Initializable {
 
     }
 
-    private void loadContent(String viewPath) throws IOException {
+    private void loadUIContent(String viewPath) throws IOException {
 
         Parent fxml = UIHelper.loadFxml(viewPath);
         mainContent.getChildren().removeAll();
         mainContent.getChildren().setAll(fxml);
     }
 
-    private void loadContent(String viewPath, ArrayList<ProductElementUI> productElementUIS) throws IOException {
+    private void loadUIContent(ArrayList<ProductElementUI> productElementUIS) {
 
-        Parent fxml = UIHelper.loadFxml(viewPath);
         VBox vBox = new VBox();
 
         int size = productElementUIS.size();
@@ -138,7 +135,9 @@ public class CommandController implements Initializable {
     private void lazyLoadProducts() throws IOException, ParseException {
 
         StoreRouter storeRouter = new StoreRouter();
-        JSONArray products = storeRouter.getProducts();
+        store = storeRouter.getStore();
+        JSONArray products = (JSONArray) store.get("products");
+        meals = (JSONArray) store.get("meals");
 
         productsArrayList = JsonHelper.parseJsonProducts(products);
         productElementUIArrayList = UIHelper.createProductsUI(productsArrayList);
