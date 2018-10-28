@@ -2,6 +2,10 @@ package main.fr.esgi.kiosk.routes;
 
 import main.fr.esgi.kiosk.helpers.CredentialsHelper;
 import main.fr.esgi.kiosk.helpers.HttpHelper;
+import main.fr.esgi.kiosk.helpers.JsonHelper;
+import main.fr.esgi.kiosk.models.Meal;
+import main.fr.esgi.kiosk.models.Product;
+import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.models.StoreCredentials;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -52,19 +56,38 @@ public class StoreRouter {
         return null ;
     }
 
-    public JSONObject getStore() throws IOException, ParseException {
+    public Store getStore() throws IOException, ParseException {
 
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties routes = credentialsHelper.getRoutes();
         Properties config = credentialsHelper.getStoreCredentials();
 
-        String uuid = config.getProperty("uuid");
-        String route = routes.getProperty("getStore") + uuid;
+        String storeUuid = config.getProperty("uuid");
+        String route = routes.getProperty("getStore") + storeUuid;
 
 
         if(HttpHelper.httpGetRequest(route) instanceof JSONObject){
 
-            return (JSONObject) HttpHelper.httpGetRequest(route);
+            JSONObject storeJson = (JSONObject) HttpHelper.httpGetRequest(route);
+
+            if(storeJson.get("meals") instanceof JSONArray && storeJson.get("products") instanceof JSONArray){
+
+                String uuid = (String)storeJson.get("uuid");
+                String name = (String) storeJson.get("name");
+                String email = (String) storeJson.get("email");
+                String phoneNumber = (String) storeJson.get("phoneNumber");
+                String imageUrl = (String)storeJson.get("imageUrl");
+
+                JSONArray mealsJson = (JSONArray) storeJson.get("meals");
+                ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
+
+                JSONArray productsJson = (JSONArray) storeJson.get("products");
+                ArrayList<Product> products = JsonHelper.parseJsonProducts(productsJson);
+
+                return new Store(uuid,name,email,phoneNumber, imageUrl, meals, products);
+
+            }
+
         }
 
         return null;

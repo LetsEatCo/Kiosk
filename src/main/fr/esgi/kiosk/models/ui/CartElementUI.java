@@ -32,7 +32,7 @@ public class CartElementUI extends Parent {
 
         // Set Product Credentials
 
-        product = new Product(productName, price);
+//        product = new Product(productName, price);
 
         /* Extracting fxml content
         / Check FXML Models Structure

@@ -9,13 +9,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.fr.esgi.kiosk.helpers.JsonHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
+import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.Product;
+import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.models.ui.ProductElementUI;
 import main.fr.esgi.kiosk.routes.StoreRouter;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -26,10 +25,10 @@ import java.util.ResourceBundle;
 public class CommandController implements Initializable {
 
     private int adminCounter = 0;
-    private ArrayList<Product> productsArrayList;
+    private ArrayList<Product> products;
+    private ArrayList<Meal> meals;
     private ArrayList<ProductElementUI> productElementUIArrayList;
-    private JSONObject store;
-    private JSONArray meals;
+    private Store store;
 
     @FXML
     private Pane mainContent;
@@ -136,11 +135,11 @@ public class CommandController implements Initializable {
 
         StoreRouter storeRouter = new StoreRouter();
         store = storeRouter.getStore();
-        JSONArray products = (JSONArray) store.get("products");
-        meals = (JSONArray) store.get("meals");
 
-        productsArrayList = JsonHelper.parseJsonProducts(products);
-        productElementUIArrayList = UIHelper.createProductsUI(productsArrayList);
+        products = store.getProducts();
+        meals = store.getMeals();
+
+        productElementUIArrayList = UIHelper.createProductsUI(products);
 
     }
 

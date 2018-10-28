@@ -8,7 +8,8 @@ public class Product extends Ressource{
     private double price;
     private Image image = new Image("/main/fr/esgi/kiosk/assets/images/chicken-leg.png");
 
-    public Product(String name, double price) {
+    public Product(String uuid,String name, double price) {
+        this.uuid = uuid;
         this.name = name;
         this.price = price;
     }
