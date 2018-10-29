@@ -1,14 +1,14 @@
 package main.fr.esgi.kiosk.models;
 
-public class Meal extends Ressource{
+import javafx.scene.image.Image;
+
+public class Meal extends RessourceElementProduct{
 
     private String reference;
-    private String name;
-    private double price;
     private int productQuantity;
     private Product product;
 
-    public Meal(String uuid,String reference, String name, double price, int productQuantity, Product product) {
+    public Meal(String uuid, String reference, String name, double price, int productQuantity, Product product) {
         this.uuid = uuid;
         this.reference = reference;
         this.name = name;
@@ -55,6 +55,10 @@ public class Meal extends Ressource{
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
 }

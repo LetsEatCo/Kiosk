@@ -2,11 +2,8 @@ package main.fr.esgi.kiosk.models;
 
 import javafx.scene.image.Image;
 
-public class Product extends Ressource{
+public class Product extends RessourceElementProduct{
 
-    private String name;
-    private double price;
-    private Image image = new Image("/main/fr/esgi/kiosk/assets/images/chicken-leg.png");
 
     public Product(String uuid,String name, double price) {
         this.uuid = uuid;

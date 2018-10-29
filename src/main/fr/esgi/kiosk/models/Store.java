@@ -11,9 +11,6 @@ public class Store extends Ressource {
     private ArrayList<Meal> meals;
     private ArrayList<Product> products;
 
-    public Store(){
-
-    }
 
     public Store(String uuid, String name, String email, String phoneNumber, String imageUrl, ArrayList<Meal> meals, ArrayList<Product> products) {
         this.uuid = uuid;
