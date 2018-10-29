@@ -2,8 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,35 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="1492.0" prefWidth="1678.0" styleClass="contentPane" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.CommandController">
+<HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1800.0" styleClass="contentPane" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.CommandController">
    <children>
-      <Pane prefHeight="1492.0" prefWidth="293.0">
+      <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="400.0" spacing="20.0">
          <children>
-            <JFXButton layoutX="42.0" layoutY="348.0" onAction="#loadMenu" styleClass="btn" text="Menus">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/burger_menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic></JFXButton>
-            <JFXButton layoutX="33.0" layoutY="404.0" onAction="#loadProducts" styleClass="btn" text="Products">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/chicken-leg.png" />
-                     </image>
-                  </ImageView>
-               </graphic></JFXButton>
-            <JFXButton layoutX="33.0" layoutY="460.0" onAction="#loadDesserts" styleClass="btn" text="Desserts">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/cupcake.png" />
-                     </image>
-                  </ImageView>
-               </graphic></JFXButton>
-            <JFXButton layoutX="32.0" layoutY="27.0" onAction="#adminRegistration" prefHeight="126.0" prefWidth="151.0" text=" ">
+            <JFXButton onAction="#adminRegistration" prefHeight="126.0" prefWidth="151.0" text=" ">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="141.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="logo">
                      <image>
@@ -51,38 +25,44 @@
                      </effect>
                   </ImageView>
                </graphic>
+               <VBox.margin>
+                  <Insets bottom="200.0" />
+               </VBox.margin>
             </JFXButton>
-         </children></Pane>
-      <VBox prefHeight="1492.0" prefWidth="1039.0">
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadMenu" prefHeight="200.0" prefWidth="350.0" styleClass="btn" text="Menus">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/burger_2_pinterest.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadProducts" prefHeight="200.0" prefWidth="350.0" styleClass="btn" text="Products">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/burger_3_pinterest.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadDesserts" prefHeight="200.0" prefWidth="350.0" styleClass="btn" text="Desserts">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/dessert.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="1039.0">
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <HBox alignment="CENTER">
                <children>
-                  <JFXButton layoutX="210.0" layoutY="46.0" text="Our Offers">
-                     <font>
-                        <Font name="Arvo Bold" size="20.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="409.0" layoutY="46.0" text="Promotions">
-                     <font>
-                        <Font name="Arvo Bold" size="20.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="628.0" layoutY="46.0" text="Very Bon Plans">
-                     <font>
-                        <Font name="Arvo Bold" size="20.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="210.0" layoutY="107.0" text="On the map">
-                     <font>
-                        <Font name="Arvo Bold" size="20.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="416.0" layoutY="107.0" text="Now...">
-                     <font>
-                        <Font name="Arvo Bold" size="20.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="44.0" layoutY="72.0" onAction="#loadPreviousPage" text=" ">
+                  <JFXButton onAction="#loadPreviousPage" text=" ">
                      <graphic>
                         <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,127 +70,89 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
                   </JFXButton>
-               </children></Pane>
-            <Pane fx:id="mainContent" prefHeight="1296.0" prefWidth="962.0" />
+                  <VBox spacing="20.0">
+                     <children>
+                        <HBox spacing="50.0">
+                           <children>
+                              <JFXButton style="-fx-background-color: black;" text="Our Offers" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arvo Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton style="-fx-background-color: black;" text="Promotions" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arvo Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton style="-fx-background-color: black;" text="Very Bon Plans" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arvo Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox spacing="50.0">
+                           <children>
+                              <JFXButton style="-fx-background-color: black;" text="On the map" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arvo Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton style="-fx-background-color: black;" text="Now..." textFill="WHITE">
+                                 <font>
+                                    <Font name="Arvo Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <Pane fx:id="mainContent" prefHeight="1400.0" prefWidth="1039.0">
+               <VBox.margin>
+                  <Insets top="150.0" />
+               </VBox.margin>
+            </Pane>
          </children>
+         <HBox.margin>
+            <Insets top="50.0" />
+         </HBox.margin>
       </VBox>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="323.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="323.0" spacing="10.0">
          <children>
             <ImageView fitHeight="98.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/images/cart.png" />
+                  <Image url="@../assets/images/shopping-cart.png" />
                </image>
                <VBox.margin>
-                  <Insets top="200.0" />
+                  <Insets />
                </VBox.margin>
             </ImageView>
-            <Pane prefHeight="561.0" prefWidth="323.0">
+            <VBox fx:id="cartPane" minWidth="-Infinity" prefHeight="600.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="90.0" prefWidth="323.0">
                <children>
-                  <Pane styleClass="box-shadow">
-                     <children>
-                        <VBox>
-                           <children>
-                              <VBox fx:id="cartPane">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="323.0">
-                                       <children>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../assets/images/burger.png" />
-                                             </image>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                          <Label prefHeight="59.0" prefWidth="119.0" text="Big Mac">
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="Arvo Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="6,50 €">
-                                             <font>
-                                                <Font name="Arvo Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <cursor>
-                                          <Cursor fx:constant="DEFAULT" />
-                                       </cursor>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="323.0">
-                                       <children>
-                                          <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../assets/images/burger_menu.png" />
-                                             </image>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                          <Label prefHeight="59.0" prefWidth="176.0" text="Big Mac Menu">
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="Arvo Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="10,30 €">
-                                             <font>
-                                                <Font name="Arvo Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="323.0">
-                                       <children>
-                                          <ImageView fitHeight="52.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../assets/images/doughnut.png" />
-                                             </image>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                          <Label prefHeight="59.0" prefWidth="119.0" text="Donut">
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="Arvo Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="2 €">
-                                             <font>
-                                                <Font name="Arvo Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <HBox alignment="BOTTOM_RIGHT" prefHeight="90.0" prefWidth="323.0">
-                                 <children>
-                                    <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#order" style="-fx-border-color: black;" text="Order">
-                                       <font>
-                                          <Font name="Arvo Bold" size="20.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </Pane>
-               </children></Pane>
+                  <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#order" style="-fx-background-color: black;" text="Order" textFill="WHITE">
+                     <font>
+                        <Font name="Arvo Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="20.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
          </children>
+         <HBox.margin>
+            <Insets top="200.0" />
+         </HBox.margin>
       </VBox>
    </children>
 </HBox>

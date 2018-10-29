@@ -1,39 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1169.0" prefWidth="1248.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.LocationController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1169.0" prefWidth="1248.0" styleClass="location-background" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.LocationController">
    <center>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="40.0">
                <children>
-                  <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openCommandHome" prefHeight="180.0" prefWidth="180.0" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="89.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/images/icons8-petite-entreprise-80.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <JFXButton fx:id="onTheSpot" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openCommandHome" prefHeight="110.0" prefWidth="220.0" style="-fx-background-color: #212121; -fx-border-radius: 20;" text="On The Spot" textFill="WHITE">
+                     <font>
+                        <Font name="Arvo Bold" size="25.0" />
+                     </font>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openCommandHome" prefHeight="180.0" prefWidth="180.0" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/images/icons8-sac-de-courses-100.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openCommandHome" prefHeight="110.0" prefWidth="220.0" style="-fx-background-color: #212121; -fx-border-radius: 20;" text="Take Away" textFill="WHITE">
+                     <font>
+                        <Font name="Arvo Bold" size="25.0" />
+                     </font>
                   </JFXButton>
                </children>
             </HBox>
          </children>
       </VBox>
    </center>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#home" prefHeight="74.0" prefWidth="84.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/icons8-arrière-52.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
 </BorderPane>
