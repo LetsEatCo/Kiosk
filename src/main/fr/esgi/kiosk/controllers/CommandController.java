@@ -1,10 +1,10 @@
 package main.fr.esgi.kiosk.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -13,7 +13,7 @@ import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.Product;
 import main.fr.esgi.kiosk.models.Store;
-import main.fr.esgi.kiosk.models.ui.ProductElementUI;
+import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.routes.StoreRouter;
 import org.json.simple.parser.ParseException;
 
@@ -27,7 +27,8 @@ public class CommandController implements Initializable {
     private int adminCounter = 0;
     private ArrayList<Product> products;
     private ArrayList<Meal> meals;
-    private ArrayList<ProductElementUI> productElementUIArrayList;
+    private ArrayList<ElementUI> productElementUIArrayList;
+    private ArrayList<ElementUI> mealsElementUIArrayList;
     private Store store;
 
     @FXML
@@ -69,12 +70,9 @@ public class CommandController implements Initializable {
     }
 
     @FXML
-    void loadMenu() throws IOException {
+    void loadMenu() {
 
-        String menu = "/main/fr/esgi/kiosk/views/menu.fxml";
-        loadUIContent(menu);
-        System.out.println(meals);
-
+        loadUIContent(mealsElementUIArrayList);
 
     }
 
@@ -86,10 +84,8 @@ public class CommandController implements Initializable {
     }
 
     @FXML
-    void loadDesserts() throws IOException {
+    void loadDesserts() {
 
-        String desserts = "/main/fr/esgi/kiosk/views/desserts.fxml";
-        loadUIContent(desserts);
 
     }
 
@@ -100,26 +96,19 @@ public class CommandController implements Initializable {
 
     }
 
-    private void loadUIContent(String viewPath) throws IOException {
-
-        Parent fxml = UIHelper.loadFxml(viewPath);
-        mainContent.getChildren().removeAll();
-        mainContent.getChildren().setAll(fxml);
-    }
-
-    private void loadUIContent(ArrayList<ProductElementUI> productElementUIS) {
+    private <T> void loadUIContent(ArrayList<T> elementUI) {
 
         VBox vBox = new VBox();
 
-        int size = productElementUIS.size();
+        int size = elementUI.size();
         int productsIndexJourney = 0;
         for(int i =0; i<size; i++){
 
             HBox hBox = new HBox();
 
-            for(int j=productsIndexJourney;j<productElementUIS.size();j++){
+            for(int j=productsIndexJourney;j<elementUI.size();j++){
 
-                hBox.getChildren().add(productElementUIS.get(productsIndexJourney));
+                hBox.getChildren().add((Node) elementUI.get(productsIndexJourney));
                 productsIndexJourney +=1;
             }
 
@@ -139,7 +128,8 @@ public class CommandController implements Initializable {
         products = store.getProducts();
         meals = store.getMeals();
 
-        productElementUIArrayList = UIHelper.createProductsUI(products);
+        productElementUIArrayList = UIHelper.createProductsElementsUI(products);
+        mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
 
     }
 
