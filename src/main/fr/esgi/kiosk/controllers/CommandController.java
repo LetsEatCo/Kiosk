@@ -3,35 +3,50 @@ package main.fr.esgi.kiosk.controllers;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
-import main.fr.esgi.kiosk.models.ui.CartElementUI;
-import main.fr.esgi.kiosk.models.ui.ProductElementUI;
+import main.fr.esgi.kiosk.models.Meal;
+import main.fr.esgi.kiosk.models.Product;
+import main.fr.esgi.kiosk.models.Store;
+import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.routes.StoreRouter;
-import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class CommandController {
+public class CommandController implements Initializable {
 
     private int adminCounter = 0;
+    private ArrayList<Product> products;
+    private ArrayList<Meal> meals;
+    private ArrayList<ElementUI> productElementUIArrayList;
+    private ArrayList<ElementUI> mealsElementUIArrayList;
+    private Store store;
 
     @FXML
     private Pane mainContent;
 
     @FXML
     private VBox cartPane;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            lazyLoadProducts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void adminRegistration(ActionEvent event) {
@@ -55,28 +70,22 @@ public class CommandController {
     }
 
     @FXML
-    void loadMenu() throws IOException {
+    void loadMenu() {
 
-        String menu = "/main/fr/esgi/kiosk/views/menu.fxml";
-        loadContent(menu);
-
+        loadUIContent(mealsElementUIArrayList);
 
     }
 
     @FXML
-    void loadProducts() throws IOException {
+    void loadProducts() {
 
-        String products = "/main/fr/esgi/kiosk/views/products.fxml";
-        loadContent(products);
-
+        loadUIContent(productElementUIArrayList);
 
     }
 
     @FXML
-    void loadDesserts() throws IOException {
+    void loadDesserts() {
 
-        String desserts = "/main/fr/esgi/kiosk/views/desserts.fxml";
-        loadContent(desserts);
 
     }
 
@@ -87,10 +96,42 @@ public class CommandController {
 
     }
 
-    private void loadContent(String viewPath) throws IOException {
+    private <T> void loadUIContent(ArrayList<T> elementUI) {
 
-        Parent fxml = UIHelper.loadFxml(viewPath);
+        VBox vBox = new VBox();
+
+        int size = elementUI.size();
+        int productsIndexJourney = 0;
+        for(int i =0; i<size; i++){
+
+            HBox hBox = new HBox();
+
+            for(int j=productsIndexJourney;j<elementUI.size();j++){
+
+                hBox.getChildren().add((Node) elementUI.get(productsIndexJourney));
+                productsIndexJourney +=1;
+            }
+
+            vBox.getChildren().add(hBox);
+
+        }
+
         mainContent.getChildren().removeAll();
-        mainContent.getChildren().setAll(fxml);
+        mainContent.getChildren().setAll(vBox);
     }
+
+    private void lazyLoadProducts() throws IOException, ParseException {
+
+        StoreRouter storeRouter = new StoreRouter();
+        store = storeRouter.getStore();
+
+        products = store.getProducts();
+        meals = store.getMeals();
+
+        productElementUIArrayList = UIHelper.createProductsElementsUI(products);
+        mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
+
+    }
+
+
 }

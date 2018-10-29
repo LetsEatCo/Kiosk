@@ -5,7 +5,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.fr.esgi.kiosk.models.RessourceElementProduct;
+import main.fr.esgi.kiosk.models.ui.ElementUI;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UIHelper {
 
@@ -42,6 +46,25 @@ public class UIHelper {
     public static Parent loadFxml(String path) throws IOException {
 
         return FXMLLoader.load(UIHelper.class.getResource(path));
+    }
+
+    public static <T extends RessourceElementProduct> ArrayList<ElementUI> createProductsElementsUI(ArrayList<T> productsElements){
+
+        ArrayList<ElementUI> productElementUIArrayList = new ArrayList<>();
+
+        for(T productElement : productsElements){
+
+            try {
+                ElementUI productElementUI = new ElementUI(productElement);
+                productElementUIArrayList.add(productElementUI);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return productElementUIArrayList;
+
     }
 
 }

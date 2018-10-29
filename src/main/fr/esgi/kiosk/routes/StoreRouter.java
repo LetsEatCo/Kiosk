@@ -2,6 +2,10 @@ package main.fr.esgi.kiosk.routes;
 
 import main.fr.esgi.kiosk.helpers.CredentialsHelper;
 import main.fr.esgi.kiosk.helpers.HttpHelper;
+import main.fr.esgi.kiosk.helpers.JsonHelper;
+import main.fr.esgi.kiosk.models.Meal;
+import main.fr.esgi.kiosk.models.Product;
+import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.models.StoreCredentials;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -27,9 +31,9 @@ public class StoreRouter {
 
         JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
 
-        if( jsonObject.get("jwt") instanceof String){
+        if( jsonObject.get("jwt") instanceof String && jsonObject.get("uuid") instanceof String){
 
-            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"));
+            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"), (String) jsonObject.get("uuid"));
             credentialsHelper.createCredentials(storeCredentials);
         }
 
@@ -50,6 +54,43 @@ public class StoreRouter {
         }
 
         return null ;
+    }
+
+    public Store getStore() throws IOException, ParseException {
+
+        CredentialsHelper credentialsHelper = new CredentialsHelper();
+        Properties routes = credentialsHelper.getRoutes();
+        Properties config = credentialsHelper.getStoreCredentials();
+
+        String storeUuid = config.getProperty("uuid");
+        String route = routes.getProperty("getStore") + storeUuid;
+
+
+        if(HttpHelper.httpGetRequest(route) instanceof JSONObject){
+
+            JSONObject storeJson = (JSONObject) HttpHelper.httpGetRequest(route);
+
+            if(storeJson.get("meals") instanceof JSONArray && storeJson.get("products") instanceof JSONArray){
+
+                String uuid = (String)storeJson.get("uuid");
+                String name = (String) storeJson.get("name");
+                String email = (String) storeJson.get("email");
+                String phoneNumber = (String) storeJson.get("phoneNumber");
+                String imageUrl = (String)storeJson.get("imageUrl");
+
+                JSONArray mealsJson = (JSONArray) storeJson.get("meals");
+                ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
+
+                JSONArray productsJson = (JSONArray) storeJson.get("products");
+                ArrayList<Product> products = JsonHelper.parseJsonProducts(productsJson);
+
+                return new Store(uuid,name,email,phoneNumber, imageUrl, meals, products);
+
+            }
+
+        }
+
+        return null;
     }
 
 

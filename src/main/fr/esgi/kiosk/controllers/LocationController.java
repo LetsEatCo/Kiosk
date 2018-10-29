@@ -8,7 +8,6 @@ import main.fr.esgi.kiosk.helpers.UIHelper;
 
 public class LocationController {
 
-
     @FXML
     void openCommandHome(ActionEvent event){
 
@@ -17,4 +16,9 @@ public class LocationController {
 
     }
 
+    @FXML
+    void home(ActionEvent event){
+        Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        UIHelper.loadWindow("/main/fr/esgi/kiosk/views/home.fxml", "Let\'s Eat", rootStage);
+    }
 }

@@ -32,6 +32,22 @@ public class HttpHelper {
         return body;
     }
 
+    public static Object httpGetRequest(String url) throws IOException, ParseException {
+
+        Object body;
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet(url);
+
+        try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
+
+            body = JsonHelper.getResponseBody(httpResponse);
+
+        }
+
+        return body;
+    }
+
     public static Object httpPostRequest(String url, List<NameValuePair> credentials) throws IOException, ParseException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -44,17 +60,6 @@ public class HttpHelper {
 
     }
 
-    public static Object getMe(String url, String jwt) throws IOException, ParseException {
-
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-
-        HttpGet httpGet = new HttpGet(url);
-        httpGet.setHeader("Authorization", "Bearer " + jwt);
-        CloseableHttpResponse response = httpClient.execute(httpGet);
-
-        return JsonHelper.getResponseBody(response);
-
-    }
 
     private static void downloadImage(String url, String destination) throws IOException {
 

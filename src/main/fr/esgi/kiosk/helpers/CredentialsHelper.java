@@ -19,6 +19,7 @@ public class CredentialsHelper {
         OutputStream  outputStream = new FileOutputStream(config);
 
         // Conf properties
+        properties.setProperty("uuid", storeCredentials.getUuid());
         properties.setProperty("jwt", storeCredentials.getJwt());
 
         // StoreRouter properties

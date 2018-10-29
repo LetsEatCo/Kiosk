@@ -12,7 +12,7 @@
 .btn:hover{
     -fx-background-color: transparent;
     -fx-background-radius: 0px;
-    -fx-border-color: dodgerblue;
+    -fx-border-color: black;
     -fx-border-width: 0px 0px 0px 5px;
     -fx-border-style: solid;
 }
@@ -31,7 +31,24 @@
 }
 
 .box-shadow{
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
     -fx-border-color: #555555;
     -fx-border-radius: 10;
+}
+
+.home-background {
+
+    -fx-background-image: url("../images/HeroImage-1.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-fill-height: 100%;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+.location-background {
+
+    -fx-background-image: url("../images/cafe_restaurant_3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-fill-height: 100%;
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
