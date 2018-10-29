@@ -5,8 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.fr.esgi.kiosk.models.Product;
-import main.fr.esgi.kiosk.models.ui.ProductElementUI;
+import main.fr.esgi.kiosk.models.RessourceElementProduct;
+import main.fr.esgi.kiosk.models.ui.ElementUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,14 +48,14 @@ public class UIHelper {
         return FXMLLoader.load(UIHelper.class.getResource(path));
     }
 
-    public static ArrayList<ProductElementUI> createProductsUI (ArrayList<Product> products){
+    public static <T extends RessourceElementProduct> ArrayList<ElementUI> createProductsElementsUI(ArrayList<T> productsElements){
 
-        ArrayList<ProductElementUI> productElementUIArrayList = new ArrayList<>();
+        ArrayList<ElementUI> productElementUIArrayList = new ArrayList<>();
 
-        for(Product product : products){
+        for(T productElement : productsElements){
 
             try {
-                ProductElementUI productElementUI = new ProductElementUI(product);
+                ElementUI productElementUI = new ElementUI(productElement);
                 productElementUIArrayList.add(productElementUI);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -111,6 +111,10 @@ public class JsonHelper {
 
                 Meal meal = new Meal(uuid, reference, name, price, productQuantity, product);
 
+                // TODO: load image product
+                meal.setImageUrl("/main/fr/esgi/kiosk/assets/images/burger_3.png");
+                meal.setImage();
+
                 // TODO : add subsections
 
                 mealArrayList.add(meal);
