@@ -124,12 +124,12 @@ public class CommandController implements Initializable {
 
         StoreRouter storeRouter = new StoreRouter();
         store = storeRouter.getStore();
-        System.out.println(store);
-//        products = store.getProducts();
-//        meals = store.getMeals();
-//
-//        productElementUIArrayList = UIHelper.createProductsElementsUI(products);
-//        mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
+
+        products = store.getSections().get(0).getProducts();
+        meals = store.getSections().get(0).getMeals();
+
+        productElementUIArrayList = UIHelper.createProductsElementsUI(products);
+        mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
 
     }
 
