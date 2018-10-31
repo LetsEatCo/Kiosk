@@ -3,6 +3,11 @@
     src: url("../fonts/Arvo/Arvo-Bold.ttf");
 }
 
+.label-font {
+    -fx-font-family: "Arvo Bold";
+    -fx-font-size: 60;
+}
+
 .btn{
     -fx-font-size: 20;
     -fx-background-color: transparent;
