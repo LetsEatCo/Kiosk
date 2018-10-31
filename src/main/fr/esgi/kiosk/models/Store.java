@@ -8,18 +8,16 @@ public class Store extends Ressource {
     private String email;
     private String phoneNumber;
     private String imageUrl;
-    private ArrayList<Meal> meals;
-    private ArrayList<Product> products;
+    private Sections sections;
 
 
-    public Store(String uuid, String name, String email, String phoneNumber, String imageUrl, ArrayList<Meal> meals, ArrayList<Product> products) {
+    public Store(String uuid, String name, String email, String phoneNumber, String imageUrl, Sections sections) {
         this.uuid = uuid;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.imageUrl = imageUrl;
-        this.meals = meals;
-        this.products = products;
+        this.sections = sections;
     }
 
     public String getName() {
@@ -54,19 +52,11 @@ public class Store extends Ressource {
         this.imageUrl = imageUrl;
     }
 
-    public ArrayList<Meal> getMeals() {
-        return meals;
+    public Sections getSections() {
+        return sections;
     }
 
-    public void setMeals(ArrayList<Meal> meals) {
-        this.meals = meals;
-    }
-
-    public ArrayList<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setSections(Sections sections) {
+        this.sections = sections;
     }
 }

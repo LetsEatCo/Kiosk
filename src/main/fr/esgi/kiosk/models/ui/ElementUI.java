@@ -49,7 +49,7 @@ public class ElementUI<T extends RessourceElementProduct> extends Parent{
 
             if(vBox.getChildren().get(2) instanceof Label){
 
-                ((Label)vBox.getChildren().get(2)).setText(String.valueOf(element.getPrice()));
+                ((Label)vBox.getChildren().get(2)).setText(String.valueOf(element.getPrice() + " €"));
             }
         }
     }

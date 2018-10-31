@@ -3,10 +3,7 @@ package main.fr.esgi.kiosk.routes;
 import main.fr.esgi.kiosk.helpers.CredentialsHelper;
 import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.helpers.JsonHelper;
-import main.fr.esgi.kiosk.models.Meal;
-import main.fr.esgi.kiosk.models.Product;
-import main.fr.esgi.kiosk.models.Store;
-import main.fr.esgi.kiosk.models.StoreCredentials;
+import main.fr.esgi.kiosk.models.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.simple.JSONArray;
@@ -70,23 +67,45 @@ public class StoreRouter {
 
             JSONObject storeJson = (JSONObject) HttpHelper.httpGetRequest(route);
 
-            if(storeJson.get("meals") instanceof JSONArray && storeJson.get("products") instanceof JSONArray){
 
-                String uuid = (String)storeJson.get("uuid");
-                String name = (String) storeJson.get("name");
-                String email = (String) storeJson.get("email");
-                String phoneNumber = (String) storeJson.get("phoneNumber");
-                String imageUrl = (String)storeJson.get("imageUrl");
+            String uuid = (String)storeJson.get("uuid");
+            String name = (String) storeJson.get("name");
+            String email = (String) storeJson.get("email");
+            String phoneNumber = (String) storeJson.get("phoneNumber");
+            String imageUrl = (String)storeJson.get("imageUrl");
 
-                JSONArray mealsJson = (JSONArray) storeJson.get("meals");
-                ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
+            if(storeJson.get("sections") instanceof JSONArray){
 
-                JSONArray productsJson = (JSONArray) storeJson.get("products");
-                ArrayList<Product> products = JsonHelper.parseJsonProducts(productsJson);
+                JSONArray sectionsJson = (JSONArray) storeJson.get("sections");
+                Sections sections = new Sections();
 
-                return new Store(uuid,name,email,phoneNumber, imageUrl, meals, products);
+                for (Object section : sectionsJson) {
+
+                    if(section instanceof JSONObject){
+
+                        if(((JSONObject) section).get("meals") instanceof JSONArray && ((JSONObject) section).get("products") instanceof JSONArray){
+
+                            String sectionName = (String) ((JSONObject) section).get("name");
+                            JSONArray mealsJson = (JSONArray) ((JSONObject) section).get("meals");
+                            ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
+
+                            JSONArray productsJson = (JSONArray) ((JSONObject) section).get("products");
+                            ArrayList<Product> products = JsonHelper.parseJsonProducts(productsJson);
+
+                            Section realSection = new Section(sectionName,meals,products);
+                            sections.add(realSection);
+
+                        }
+
+                    }
+
+                }
+
+
+            return new Store(uuid,name,email,phoneNumber, imageUrl, sections);
 
             }
+
 
         }
 
