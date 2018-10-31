@@ -33,7 +33,7 @@
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/burger_2_pinterest.jpg" />
+                        <Image url="@../assets/images/873086.jpg" />
                      </image>
                   </ImageView>
                </graphic>
@@ -42,7 +42,7 @@
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/burger_3_pinterest.jpg" />
+                        <Image url="@../assets/images/560491.jpg" />
                      </image>
                   </ImageView>
                </graphic>
@@ -51,7 +51,7 @@
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/dessert.jpg" />
+                        <Image url="@../assets/images/jelly_dessert_berries_raspberries.jpg" />
                      </image>
                   </ImageView>
                </graphic>

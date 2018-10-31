@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
@@ -16,9 +17,12 @@
                </image>
             </ImageView>
          </graphic></JFXButton>
-        <JFXButton fx:id="startBtn" onAction="#placeToEat" prefHeight="1237.0" prefWidth="1177.0" text="Touch To Start..." textFill="WHITE">
+        <JFXButton fx:id="startBtn" onAction="#placeToEat" prefHeight="1237.0" prefWidth="1177.0" styleClass="label-font" textFill="WHITE">
          <font>
             <Font name="Arvo Bold" size="60.0" />
-         </font></JFXButton>
+         </font>
+         <graphic>
+            <Label styleClass="label-font" text="Touch To Start..." textFill="WHITE" />
+         </graphic></JFXButton>
     </children>
 </VBox>
