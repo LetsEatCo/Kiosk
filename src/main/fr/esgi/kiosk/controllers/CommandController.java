@@ -1,6 +1,5 @@
 package main.fr.esgi.kiosk.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,20 +8,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.Product;
 import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.routes.StoreRouter;
+import main.fr.esgi.kiosk.views.FxmlView;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CommandController implements Initializable {
+@Component
+public class CommandController implements FxmlController {
 
     private int adminCounter = 0;
     private ArrayList<Product> products;
@@ -37,16 +42,23 @@ public class CommandController implements Initializable {
     @FXML
     private VBox cartPane;
 
+    private final StageManagerHelper stageManagerHelper;
+
+    @Autowired @Lazy
+    public CommandController(StageManagerHelper stageManagerHelper) {
+        this.stageManagerHelper = stageManagerHelper;
+    }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @Lazy
+    public void initialize() {
         try {
             lazyLoadProducts();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void adminRegistration(ActionEvent event) {
@@ -55,18 +67,14 @@ public class CommandController implements Initializable {
 
         if(adminCounter == 10) {
 
-            Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            UIHelper.loadWindow("/main/fr/esgi/kiosk/views/login.fxml", "Admin Login", rootStage);
-
             adminCounter=0;
+            stageManagerHelper.switchScene(FxmlView.ADMIN_LOGIN);
         }
     }
 
     @FXML
     void loadPreviousPage(ActionEvent event) {
-        String placeToEat = "/main/fr/esgi/kiosk/views/location.fxml";
-        Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        UIHelper.loadWindow(placeToEat, "Place To Eat", rootStage);
+        stageManagerHelper.switchScene(FxmlView.LOCATION);
     }
 
     @FXML
@@ -132,6 +140,7 @@ public class CommandController implements Initializable {
         mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
 
     }
+
 
 
 }
