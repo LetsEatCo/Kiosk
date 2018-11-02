@@ -3,6 +3,7 @@ package main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
+import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -13,6 +14,7 @@ public class Main extends Application {
 
     protected ConfigurableApplicationContext springContext;
     protected StageManagerHelper stageManagerHelper;
+    protected Store store;
 
 
     /**
@@ -38,6 +40,7 @@ public class Main extends Application {
     public void start(Stage stage){
 
         stageManagerHelper = springContext.getBean(StageManagerHelper.class, stage);
+        store = springContext.getBean(Store.class);
         displayInitialScene();
     }
 
