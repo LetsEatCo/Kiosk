@@ -45,18 +45,15 @@ public class CommandController implements FxmlController {
     private final StageManagerHelper stageManagerHelper;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store) {
         this.stageManagerHelper = stageManagerHelper;
+        this.store = store;
     }
 
     @Override
-    @Lazy
     public void initialize() {
-        try {
             lazyLoadProducts();
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
+        System.out.println(store);
     }
 
 
@@ -128,10 +125,7 @@ public class CommandController implements FxmlController {
         mainContent.getChildren().setAll(vBox);
     }
 
-    private void lazyLoadProducts() throws IOException, ParseException {
-
-        StoreRouter storeRouter = new StoreRouter();
-        store = storeRouter.getStore();
+    private void lazyLoadProducts() {
 
         products = store.getSections().get(0).getProducts();
         meals = store.getSections().get(0).getMeals();
