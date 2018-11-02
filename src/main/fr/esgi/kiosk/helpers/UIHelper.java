@@ -13,6 +13,11 @@ import java.util.ArrayList;
 
 public class UIHelper {
 
+    private final Stage primaryStage;
+
+    public UIHelper(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     public static void loadWindow(String path, String title, Stage rootStage){
 
@@ -35,7 +40,7 @@ public class UIHelper {
 
     public static void returnHome(ActionEvent event) {
 
-        String home ="/main/fr/esgi/kiosk/views/home.fxml";
+        String home = "/main/resources/fxml/Home.fxml";
 
         Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 

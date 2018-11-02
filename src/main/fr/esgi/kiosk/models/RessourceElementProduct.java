@@ -9,7 +9,7 @@ public class RessourceElementProduct {
     protected double price;
 
     protected String imageUrl;
-    protected Image image = new Image("/main/fr/esgi/kiosk/assets/images/560491.jpg");
+    protected Image image = new Image("/main/resources/assets/images/560491.jpg");
 
     public String getUuid() {
         return uuid;

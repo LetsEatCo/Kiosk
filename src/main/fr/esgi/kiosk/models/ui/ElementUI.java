@@ -54,12 +54,6 @@ public class ElementUI<T extends RessourceElementProduct> extends Parent{
         }
     }
 
-    public void onClick(){
-        btn.setOnAction(event -> {
-            System.out.println("On me!");
-        });
-    }
-
     public T getElement() {
         return element;
     }
