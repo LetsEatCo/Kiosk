@@ -1,7 +1,6 @@
 package main.fr.esgi.kiosk.models.ui;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -24,9 +23,11 @@ public class CartElementUI extends Parent {
 
         // Loading XML Object
 
+//        ProductElementController productController = new ProductElementController();
+        Object productController = new Object();
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties properties = credentialsHelper.getViews();
-        Parent fxml = UIHelper.loadFxml(properties.getProperty("cartElement"));
+        Parent fxml = UIHelper.loadFxml(properties.getProperty("cartElement"), productController);
         this.getChildren().removeAll();
         this.getChildren().setAll(fxml);
 

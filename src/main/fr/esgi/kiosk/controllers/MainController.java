@@ -5,7 +5,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
+import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.routes.StoreRouter;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.json.simple.parser.ParseException;
@@ -21,7 +24,10 @@ public class MainController implements FxmlController{
     private int adminCounter = 0 ;
 
     @FXML
-    private JFXButton startBtn;
+    private VBox root;
+
+    @FXML
+    private HBox adminRoot;
 
     @FXML
     private JFXTextField emailInput;
@@ -31,23 +37,9 @@ public class MainController implements FxmlController{
 
     private final StageManagerHelper stageManagerHelper;
 
-    private final LocationController locationController;
-
-    private final CommandController commandController;
-
     @Autowired @Lazy
-    public MainController(StageManagerHelper stageManagerHelper, LocationController locationController, CommandController commandController) {
+    public MainController(StageManagerHelper stageManagerHelper) {
         this.stageManagerHelper = stageManagerHelper;
-        this.locationController = locationController;
-        this.commandController = commandController;
-    }
-
-    public LocationController getLocationController() {
-        return locationController;
-    }
-
-    public CommandController getCommandController() {
-        return commandController;
     }
 
     @FXML
@@ -57,9 +49,7 @@ public class MainController implements FxmlController{
 
         if(adminCounter == 10) {
 
-//            Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//            UIHelper.loadWindow("/main/resources/fxml/AdminLogin.fxml", "Admin Login", rootStage);
-            stageManagerHelper.switchScene(FxmlView.ADMIN_LOGIN);
+            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.ADMIN_LOGIN);
 
             adminCounter=0;
         }
@@ -78,22 +68,18 @@ public class MainController implements FxmlController{
     @FXML
     void home(ActionEvent event){
 
-        stageManagerHelper.switchScene(FxmlView.HOME);
+        UIHelper.makeFadeOutTransition(adminRoot, stageManagerHelper, FxmlView.HOME);
     }
 
     @FXML
     void placeToEat(ActionEvent event){
 
-//        Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        String locationPlace = "/main/resources/fxml/Location.fxml";
-//        UIHelper.loadWindow(locationPlace, "Place To Eat", rootStage);
-
-        stageManagerHelper.switchScene(FxmlView.LOCATION);
+        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.LOCATION);
 
     }
 
     @Override
     public void initialize() {
-
+        UIHelper.makeFadeInTransition(root);
     }
 }

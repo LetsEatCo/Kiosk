@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.MainController">
+<HBox fx:id="adminRoot" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1800.0" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.MainController">
    <children>
-      <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" style="-fx-background-color: black;">
+      <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="500.0" style="-fx-background-color: black;">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -23,7 +22,7 @@
             </ImageView>
          </children>
       </VBox>
-      <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="900.0">
+      <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1300.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="900.0">
                <children>
@@ -43,7 +42,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Label prefHeight="65.0" prefWidth="377.0" styleClass="label-font" text="Admin Login :">
+                  <Label prefHeight="72.0" prefWidth="495.0" styleClass="label-font" text="Admin Login :">
                      <font>
                         <Font size="40.0" />
                      </font>

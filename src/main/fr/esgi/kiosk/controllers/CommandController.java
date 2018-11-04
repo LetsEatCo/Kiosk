@@ -1,30 +1,24 @@
 package main.fr.esgi.kiosk.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.Product;
+import main.fr.esgi.kiosk.models.RessourceElementProduct;
 import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
-import main.fr.esgi.kiosk.routes.StoreRouter;
 import main.fr.esgi.kiosk.views.FxmlView;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 @Component
 public class CommandController implements FxmlController {
@@ -35,6 +29,9 @@ public class CommandController implements FxmlController {
     private ArrayList<ElementUI> productElementUIArrayList;
     private ArrayList<ElementUI> mealsElementUIArrayList;
     private Store store;
+
+    @FXML
+    private HBox root;
 
     @FXML
     private Pane mainContent;
@@ -52,8 +49,10 @@ public class CommandController implements FxmlController {
 
     @Override
     public void initialize() {
-            lazyLoadProducts();
-        System.out.println(store);
+
+        root.setOpacity(0);
+        UIHelper.makeFadeInTransition(root);
+        lazyLoadProducts();
     }
 
 
@@ -65,33 +64,43 @@ public class CommandController implements FxmlController {
         if(adminCounter == 10) {
 
             adminCounter=0;
-            stageManagerHelper.switchScene(FxmlView.ADMIN_LOGIN);
+            UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.ADMIN_LOGIN);
         }
     }
 
     @FXML
     void loadPreviousPage(ActionEvent event) {
-        stageManagerHelper.switchScene(FxmlView.LOCATION);
+
+        UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.LOCATION);
     }
 
     @FXML
     void loadMenu() {
 
-        loadUIContent(mealsElementUIArrayList);
+        if(mealsElementUIArrayList != null)loadUIContent(mealsElementUIArrayList);
 
     }
 
     @FXML
     void loadProducts() {
 
-        loadUIContent(productElementUIArrayList);
+        if(productElementUIArrayList != null)loadUIContent(productElementUIArrayList);
 
     }
 
     @FXML
     void loadDesserts() {
 
+    }
 
+    public void addProductElement(Object productElement){
+
+        System.out.println(productElement);
+        System.out.println(this);
+    }
+
+    public static void getProduct(Object productElement) {
+        System.out.println(productElement);
     }
 
     @FXML
@@ -134,6 +143,7 @@ public class CommandController implements FxmlController {
         mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
 
     }
+
 
 
 

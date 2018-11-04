@@ -1,9 +1,9 @@
 package main.fr.esgi.kiosk.controllers;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.views.FxmlView;
@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LocationController implements FxmlController {
+
+    @FXML
+    private BorderPane root;
 
     private final StageManagerHelper stageManagerHelper;
 
@@ -25,18 +28,18 @@ public class LocationController implements FxmlController {
     @FXML
     void openCommandHome(ActionEvent event){
 
-        stageManagerHelper.switchScene(FxmlView.COMMAND_HOME);
+        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
 
     }
 
     @FXML
     void home(ActionEvent event){
 
-        stageManagerHelper.switchScene(FxmlView.HOME);
+        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.HOME);
     }
 
     @Override
     public void initialize() {
-
+        UIHelper.makeFadeInTransition(root);
     }
 }
