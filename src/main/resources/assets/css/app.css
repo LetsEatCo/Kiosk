@@ -1,17 +1,17 @@
 @font-face {
-    font-family: "Arvo Bold";
-    src: url("../Arvo/Arvo-Bold.ttf");
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Black.ttf");
 }
 
 .label-font {
-    -fx-font-family: "Arvo Bold";
+    -fx-font-family: "Roboto Light";
     -fx-font-size: 60;
 }
 
 .btn{
     -fx-font-size: 20;
     -fx-background-color: transparent;
-    -fx-font-family: "Arvo Bold";
+    -fx-font-family: "Roboto";
 
 }
 .btn:hover{

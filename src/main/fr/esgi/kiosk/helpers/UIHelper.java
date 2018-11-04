@@ -1,12 +1,13 @@
 package main.fr.esgi.kiosk.helpers;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
+import main.fr.esgi.kiosk.views.FxmlView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,38 +20,32 @@ public class UIHelper {
         this.primaryStage = primaryStage;
     }
 
-    public static void loadWindow(String path, String title, Stage rootStage){
+    public static void makeFadeInTransition(Parent root) {
+        FadeTransition fadeTransition = new FadeTransition();
 
-        try {
-            Parent root = FXMLLoader.load(UIHelper.class.getResource(path));
-
-            rootStage.setTitle(title);
-            Scene myScene =new Scene(root);
-
-            rootStage.setScene(myScene);
-
-            rootStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+        fadeTransition.setDuration(Duration.millis(1000));
+        fadeTransition.setNode(root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
     }
 
-    public static void returnHome(ActionEvent event) {
+    public static void makeFadeOutTransition(Parent root, StageManagerHelper stageManagerHelper, FxmlView view) {
+        FadeTransition fadeTransition = new FadeTransition();
 
-        String home = "/main/resources/fxml/Home.fxml";
-
-        Stage rootStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        loadWindow(home , "Home", rootStage);
-
+        fadeTransition.setDuration(Duration.millis(1000));
+        fadeTransition.setNode(root);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setOnFinished(event1 -> stageManagerHelper.switchScene(view));
+        fadeTransition.play();
     }
 
-    public static Parent loadFxml(String path) throws IOException {
+    public static Parent loadFxml(String path, Object controller) throws IOException {
 
-        return FXMLLoader.load(UIHelper.class.getResource(path));
+        FXMLLoader fxmlLoader = new FXMLLoader(UIHelper.class.getResource(path));
+        fxmlLoader.setController(controller);
+        return fxmlLoader.load();
     }
 
     public static <T extends RessourceElementProduct> ArrayList<ElementUI> createProductsElementsUI(ArrayList<T> productsElements){
@@ -59,12 +54,8 @@ public class UIHelper {
 
         for(T productElement : productsElements){
 
-            try {
-                ElementUI productElementUI = new ElementUI(productElement);
-                productElementUIArrayList.add(productElementUI);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ElementUI productElementUI = new ElementUI(productElement);
+            productElementUIArrayList.add(productElementUI);
 
         }
 

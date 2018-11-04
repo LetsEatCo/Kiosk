@@ -14,7 +14,6 @@ public class Main extends Application {
 
     protected ConfigurableApplicationContext springContext;
     protected StageManagerHelper stageManagerHelper;
-    protected Store store;
 
 
     /**
@@ -39,8 +38,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage){
 
+        stage.setMinHeight(1492);
+        stage.setMinWidth(1800);
+
         stageManagerHelper = springContext.getBean(StageManagerHelper.class, stage);
-        store = springContext.getBean(Store.class);
         displayInitialScene();
     }
 

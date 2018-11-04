@@ -25,6 +25,10 @@ public class StageManagerHelper {
 
     public void switchScene(final FxmlView view) {
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
+        viewRootNodeHierarchy.minWidth(primaryStage.getMinWidth());
+        viewRootNodeHierarchy.minHeight(primaryStage.getMinHeight());
+        viewRootNodeHierarchy.maxWidth(primaryStage.getMinWidth());
+        viewRootNodeHierarchy.maxHeight(primaryStage.getMaxHeight());
         show(viewRootNodeHierarchy, view.getTitle());
     }
 
