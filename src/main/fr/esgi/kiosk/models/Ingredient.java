@@ -2,21 +2,17 @@ package main.fr.esgi.kiosk.models;
 
 public class Ingredient extends  Ressource{
 
-    private String name;
     private int quantity;
+    double price = 0;
 
-    public Ingredient(String uuid,String name, int quantity) {
+    public Ingredient(String uuid,int quantity) {
         this.uuid = uuid;
-        this.name = name;
         this.quantity = quantity;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Ingredient(String uuid,int quantity, double price) {
+        this.uuid = uuid;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public int getQuantity() {

@@ -4,7 +4,15 @@ import javafx.scene.image.Image;
 
 public class Product extends RessourceElementProduct{
 
+    private Ingredients ingredients;
 
+
+    public Product(String uuid,String name, double price, Ingredients ingredients) {
+        this.uuid = uuid;
+        this.name = name;
+        this.price = price;
+        this.ingredients = ingredients;
+    }
     public Product(String uuid,String name, double price) {
         this.uuid = uuid;
         this.name = name;

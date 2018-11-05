@@ -90,7 +90,7 @@ public class StoreRouter {
                             ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
 
                             JSONArray productsJson = (JSONArray) ((JSONObject) section).get("products");
-                            ArrayList<Product> products = JsonHelper.parseJsonProducts(productsJson);
+                            ArrayList<Product> products = JsonHelper.parseJsonProductsIngredients(productsJson);
 
                             Section realSection = new Section(sectionName,meals,products);
                             sections.add(realSection);

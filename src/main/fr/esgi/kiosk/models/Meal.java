@@ -7,6 +7,7 @@ public class Meal extends RessourceElementProduct{
     private String reference;
     private int productQuantity;
     private Product product;
+    private Subsections subsections;
 
     public Meal(String uuid, String reference, String name, double price, int productQuantity, Product product) {
         this.uuid = uuid;
@@ -61,4 +62,11 @@ public class Meal extends RessourceElementProduct{
         return image;
     }
 
+    public Subsections getSubsections() {
+        return subsections;
+    }
+
+    public void setSubsections(Subsections subsections) {
+        this.subsections = subsections;
+    }
 }

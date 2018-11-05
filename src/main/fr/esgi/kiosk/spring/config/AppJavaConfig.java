@@ -2,6 +2,7 @@ package main.fr.esgi.kiosk.spring.config;
 
 import javafx.stage.Stage;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
+import main.fr.esgi.kiosk.models.Order;
 import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.routes.StoreRouter;
 import org.json.simple.parser.ParseException;
@@ -42,6 +43,11 @@ public class AppJavaConfig {
     public Store store() throws IOException, ParseException {
         StoreRouter storeRouter = new StoreRouter();
         return storeRouter.getStore();
+    }
+
+    @Bean
+    public Order order(){
+        return new Order();
     }
 
 }

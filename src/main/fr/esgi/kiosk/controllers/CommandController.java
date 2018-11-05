@@ -9,10 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
-import main.fr.esgi.kiosk.models.Meal;
-import main.fr.esgi.kiosk.models.Product;
-import main.fr.esgi.kiosk.models.RessourceElementProduct;
-import main.fr.esgi.kiosk.models.Store;
+import main.fr.esgi.kiosk.models.*;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,7 @@ public class CommandController implements FxmlController {
     private ArrayList<ElementUI> productElementUIArrayList;
     private ArrayList<ElementUI> mealsElementUIArrayList;
     private Store store;
+    private Order order;
 
     @FXML
     private HBox root;
@@ -42,9 +40,10 @@ public class CommandController implements FxmlController {
     private final StageManagerHelper stageManagerHelper;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
+        this.order = order;
     }
 
     @Override
@@ -91,12 +90,6 @@ public class CommandController implements FxmlController {
     @FXML
     void loadDesserts() {
 
-    }
-
-    public void addProductElement(Object productElement){
-
-        System.out.println(productElement);
-        System.out.println(this);
     }
 
     public static void getProduct(Object productElement) {
