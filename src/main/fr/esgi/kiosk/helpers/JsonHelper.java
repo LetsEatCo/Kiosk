@@ -7,19 +7,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class JsonHelper {
 
-    public static Object parseJsonData(String json) throws ParseException {
+    private static Object parseJsonData(String json) throws ParseException {
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject)jsonParser.parse(json);
@@ -85,7 +81,8 @@ public class JsonHelper {
 
         return productArrayList;
     }
-    public static ArrayList<Product> parseJsonOptionProducts(JSONArray products){
+
+    private static ArrayList<Product> parseJsonOptionProducts(JSONArray products){
 
         ArrayList<Product> productArrayList = new ArrayList<>();
 
@@ -109,7 +106,7 @@ public class JsonHelper {
 
         return productArrayList;
     }
-    public static ArrayList<Ingredient> parseJsonOptionIngredients(JSONArray ingredients){
+    private static ArrayList<Ingredient> parseJsonOptionIngredients(JSONArray ingredients){
 
         ArrayList<Ingredient> ingredientsArrayList = new ArrayList<>();
 
@@ -165,7 +162,7 @@ public class JsonHelper {
                 Meal meal = new Meal(uuid, reference, name, price, productQuantity, product);
 
                 // TODO: load image product
-                meal.setImageUrl("/main/resources/assets/images/370872.jpg");
+                meal.setImageUrl("/main/resources/assets/images/873086.jpg");
                 meal.setImage();
 
                 // TODO : add subsections
@@ -173,6 +170,9 @@ public class JsonHelper {
                 JSONArray jsonSubsections = (JSONArray) ((JSONObject) jsonMeal).get("subsections");
                 Subsections subsections = new Subsections();
 
+                /*
+                * Parse each subsection of a meal
+                * */
                 for (Object jsonSubsection : jsonSubsections) {
 
                     if(jsonSubsection instanceof JSONObject){
@@ -189,7 +189,6 @@ public class JsonHelper {
                                 long minSelectionsPermitted = (long)((JSONObject) jsonSubsection).get("minSelectionsPermitted");
                                 long maxSelectionsPermitted = (long)((JSONObject) jsonSubsection).get("maxSelectionsPermitted");
 
-//                                String optionUuid = (String) ((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("uuid");
                                 ArrayList<Product> optionProducts = parseJsonOptionProducts((JSONArray) ((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("products"));
                                 ArrayList<Ingredient> optionIngredients = parseJsonOptionIngredients((JSONArray) ((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("ingredients"));
 

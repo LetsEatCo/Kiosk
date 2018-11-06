@@ -18,7 +18,7 @@ public class StageManagerHelper {
     private final Stage primaryStage;
     private final SpringFXMLLoader springFXMLLoader;
 
-    public StageManagerHelper(SpringFXMLLoader springFXMLLoader,Stage stage) {
+    public StageManagerHelper(SpringFXMLLoader springFXMLLoader, Stage stage) {
         this.springFXMLLoader = springFXMLLoader;
         this.primaryStage = stage;
     }

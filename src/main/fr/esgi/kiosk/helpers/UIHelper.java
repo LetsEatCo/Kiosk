@@ -5,19 +5,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.views.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Component
 public class UIHelper {
 
-    private final Stage primaryStage;
 
-    public UIHelper(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    private static CommandController commandController;
+
+    @Autowired
+    public UIHelper(CommandController commandController) {
+
+        UIHelper.commandController = commandController;
     }
 
     public static void makeFadeInTransition(Parent root) {
@@ -41,10 +48,9 @@ public class UIHelper {
         fadeTransition.play();
     }
 
-    public static Parent loadFxml(String path, Object controller) throws IOException {
+    public static Parent loadFxml(String path) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(UIHelper.class.getResource(path));
-        fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
 
@@ -54,7 +60,7 @@ public class UIHelper {
 
         for(T productElement : productsElements){
 
-            ElementUI productElementUI = new ElementUI(productElement);
+            ElementUI productElementUI = new ElementUI(productElement, commandController);
             productElementUIArrayList.add(productElementUI);
 
         }

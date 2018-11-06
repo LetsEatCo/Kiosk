@@ -9,6 +9,11 @@ public class Meal extends RessourceElementProduct{
     private Product product;
     private Subsections subsections;
 
+    public Meal(){
+        /*
+        * Voluntary empty Constructor for dependency injection*/
+    }
+
     public Meal(String uuid, String reference, String name, double price, int productQuantity, Product product) {
         this.uuid = uuid;
         this.reference = reference;
