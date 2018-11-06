@@ -45,6 +45,18 @@ public enum FxmlView {
         public String getFxmlFile() {
             return "/fxml/AdminLogin.fxml";
         }
+    },
+    PRODUCT_ELEMENT{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("productElement.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/ProductElement.fxml";
+        }
+
     };
 
     public abstract String getTitle();

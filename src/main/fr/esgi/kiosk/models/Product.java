@@ -6,6 +6,9 @@ public class Product extends RessourceElementProduct{
 
     private Ingredients ingredients;
 
+    public Product(){
+
+    }
 
     public Product(String uuid,String name, double price, Ingredients ingredients) {
         this.uuid = uuid;

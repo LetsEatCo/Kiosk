@@ -1,12 +1,14 @@
 package main.fr.esgi.kiosk.spring.config;
 
+import javafx.scene.Parent;
 import javafx.stage.Stage;
+import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
-import main.fr.esgi.kiosk.models.Order;
-import main.fr.esgi.kiosk.models.Store;
+import main.fr.esgi.kiosk.models.*;
 import main.fr.esgi.kiosk.routes.StoreRouter;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -35,7 +37,7 @@ public class AppJavaConfig {
     }
 
     @Bean
-    @Lazy(value = true) //Stage only created after Spring context bootstap
+    @Lazy //Stage only created after Spring context bootstap
     public StageManagerHelper stageManagerHelper(Stage stage) {
         return new StageManagerHelper(springFXMLLoader, stage);
     }
@@ -44,10 +46,28 @@ public class AppJavaConfig {
         StoreRouter storeRouter = new StoreRouter();
         return storeRouter.getStore();
     }
-
     @Bean
     public Order order(){
         return new Order();
     }
+
+    @Bean
+    public Meal selectedMeal() {
+
+        return new Meal() ;
+    }
+
+    @Bean
+    public Object selectedProduct(){
+
+        return new Product();
+    }
+    @Bean
+    public Object selectedProductElement() {
+
+        return new Object() ;
+    }
+
+
 
 }

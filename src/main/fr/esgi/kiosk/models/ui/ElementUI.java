@@ -8,19 +8,20 @@ import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 
+import java.io.IOException;
+
 public class ElementUI<T extends RessourceElementProduct> extends Parent{
 
     private T element;
-    private JFXButton btn;
+    private final CommandController commandController;
 
-    public ElementUI(T element) {
+    public ElementUI(T element, CommandController commandController) {
 
-//        Parent fxml = UIHelper.loadFxml(properties.getProperty("productElement"));
-
-
+        this.commandController = commandController;
         this.element = element;
 
         JFXButton uiBtn = new JFXButton();
+        uiBtn.setStyle("-fx-background-color: transparent");
         VBox uiVbox = new VBox();
         ImageView uiImageView = new ImageView();
         Label uiLabelProductName = new Label();
@@ -54,7 +55,7 @@ public class ElementUI<T extends RessourceElementProduct> extends Parent{
 
         uiBtn.setGraphic(uiVbox);
 
-        uiBtn.setOnAction(event -> CommandController.getProduct(element));
+        uiBtn.setOnAction(event -> this.commandController.focusProductElement(this.element));
 
         this.getChildren().removeAll();
         this.getChildren().setAll(uiBtn);

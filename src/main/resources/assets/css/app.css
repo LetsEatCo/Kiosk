@@ -8,11 +8,25 @@
     -fx-font-size: 60;
 }
 
+.focus-product-element-choice{
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+}
+
 .btn{
     -fx-font-size: 20;
     -fx-background-color: transparent;
     -fx-font-family: "Roboto";
 
+}
+
+.btn-black{
+
+    -fx-font-size: 20;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
 }
 .btn:hover{
     -fx-background-color: transparent;

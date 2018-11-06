@@ -1,6 +1,6 @@
 package main.fr.esgi.kiosk.controllers;
 
-import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,12 +13,14 @@ import main.fr.esgi.kiosk.models.*;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 @Component
-public class CommandController implements FxmlController {
+public class CommandController <T extends RessourceElementProduct>  implements FxmlController {
 
     private int adminCounter = 0;
     private ArrayList<Product> products;
@@ -38,12 +40,15 @@ public class CommandController implements FxmlController {
     private VBox cartPane;
 
     private final StageManagerHelper stageManagerHelper;
+    private FocusProductElementController focusProductElementController;
+    private T selectedProductElement;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, FocusProductElementController focusProductElementController) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
         this.order = order;
+        this.focusProductElementController = focusProductElementController;
     }
 
     @Override
@@ -92,8 +97,11 @@ public class CommandController implements FxmlController {
 
     }
 
-    public static void getProduct(Object productElement) {
-        System.out.println(productElement);
+    public void focusProductElement(T productElement) {
+
+        focusProductElementController.setSelectedProductElement(productElement);
+        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PRODUCT_ELEMENT);
+
     }
 
     @FXML
