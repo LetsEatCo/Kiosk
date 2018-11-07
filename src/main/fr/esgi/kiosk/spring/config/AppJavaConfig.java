@@ -37,7 +37,7 @@ public class AppJavaConfig {
     }
 
     @Bean
-    @Lazy //Stage only created after Spring context bootstap
+    @Lazy //Stage only created after Spring context bootstrap
     public StageManagerHelper stageManagerHelper(Stage stage) {
         return new StageManagerHelper(springFXMLLoader, stage);
     }
@@ -62,8 +62,5 @@ public class AppJavaConfig {
 
         return new Cart();
     }
-
-
-
 
 }

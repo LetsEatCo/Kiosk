@@ -24,14 +24,17 @@ public class ElementUI<T extends RessourceElementProduct> extends Parent{
         uiBtn.setStyle("-fx-background-color: transparent");
         VBox uiVbox = new VBox();
         ImageView uiImageView = new ImageView();
-        Label uiLabelProductName = new Label();
-        Label uiLabelProductPrice= new Label();
+        Label uiLabelProductName = new Label(element.getName());
+        Label uiLabelProductPrice= new Label(element.getPrice() + " €");
+
+        uiLabelProductName.setStyle("-fx-font-weight: bold;" +
+                "-fx-font-size: 20");
+        uiLabelProductPrice.setStyle("-fx-font-weight: bold;" +
+                "-fx-font-size: 20");
 
         // Settings UI credentials
 
         uiImageView.setImage(element.getImage());
-        uiLabelProductName.setText(element.getName());
-        uiLabelProductPrice.setText(element.getPrice() + " €");
 
         uiVbox.getChildren().addAll(uiImageView, uiLabelProductName, uiLabelProductPrice);
 

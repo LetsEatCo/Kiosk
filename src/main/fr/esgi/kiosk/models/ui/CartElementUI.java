@@ -48,7 +48,14 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
 
         Label productName = new Label(productElement.getName());
         Label quantityLabel = new Label(String.valueOf(quantity));
-        Label productElementPrice = new Label(String.valueOf(productElement.getPrice()));
+        Label productElementPrice = new Label(String.valueOf(productElement.getPrice() + " €"));
+
+        productName.setStyle("-fx-font-weight: bold;" +
+                "-fx-font-size: 20");
+        quantityLabel.setStyle("-fx-font-weight: bold;" +
+                "-fx-font-size: 20");
+        productElementPrice.setStyle("-fx-font-weight: bold;" +
+                "-fx-font-size: 20");
 
         vBox.getChildren().addAll(productName, quantityLabel, productElementPrice);
 
@@ -68,7 +75,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
         JFXButton increaseQuantity = new JFXButton();
         ImageView increaseImage = new ImageView(new Image(ADD_QUANTITY_IMAGE));
         increaseImage.setFitHeight(30);
-        increaseImage.setFitWidth(30);
+        increaseImage.setFitWidth(50);
         increaseQuantity.setGraphic(increaseImage);
 
         btnContainer.getChildren().addAll(decreaseQuantity, increaseQuantity);

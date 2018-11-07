@@ -42,11 +42,11 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private final StageManagerHelper stageManagerHelper;
     private FocusProductElementController focusProductElementController;
     private T selectedProductElement;
-    private Cart cart;
+    private Cart<T> cart;
     private ElementUI test;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, FocusProductElementController focusProductElementController, Cart cart) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, FocusProductElementController focusProductElementController, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
         this.order = order;
@@ -160,6 +160,9 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         products = store.getSections().get(0).getProducts();
         meals = store.getSections().get(0).getMeals();
+
+        System.out.println(store.getSections().size());
+        System.out.println(meals);
 
         productElementUIArrayList = UIHelper.createProductsElementsUI(products);
         mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);

@@ -67,6 +67,15 @@ public class StoreRouter {
 
             JSONObject storeJson = (JSONObject) HttpHelper.httpGetRequest(route);
 
+            String sectionUrl = "http://localhost:8080/stores/me/sections";
+            String jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzY2ZWFiZTYtYzVhOC00NmRjLTgwMzItMTRlMjhkNWRmY2QzIiwiZW1haWwiOiJ0b3RvQHRvdG8uZnIiLCJlbnRpdHkiOiJTdG9yZSIsImlhdCI6MTU0MTU5MjI4MCwiZXhwIjoxNTQyMTk3MDgwfQ.UBEMjHRVQ-C_KfjnKi7jY6p08sMQ_pbNW2xfNBObLOk";
+
+            //JSONObject sectionsJsonWithOptions = (JSONObject) HttpHelper.httpGetRequest(sectionUrl, jwt);
+
+            Object sectionsJsonWithOptions = HttpHelper.httpGetRequest(sectionUrl, jwt);
+
+            System.out.println(sectionsJsonWithOptions);
+           // System.out.println(sectionsJsonWithOptions.get("meals"));
 
             String uuid = (String)storeJson.get("uuid");
             String name = (String) storeJson.get("name");
@@ -74,9 +83,9 @@ public class StoreRouter {
             String phoneNumber = (String) storeJson.get("phoneNumber");
             String imageUrl = (String)storeJson.get("imageUrl");
 
-            if(storeJson.get("sections") instanceof JSONArray){
+            if( sectionsJsonWithOptions instanceof JSONArray){
 
-                JSONArray sectionsJson = (JSONArray) storeJson.get("sections");
+                JSONArray sectionsJson = (JSONArray) sectionsJsonWithOptions;
                 Sections sections = new Sections();
 
                 for (Object section : sectionsJson) {

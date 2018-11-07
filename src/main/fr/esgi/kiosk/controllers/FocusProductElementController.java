@@ -77,6 +77,6 @@ public class FocusProductElementController<T extends RessourceElementProduct>  i
         // TODO: Add to cart
 
         cart.add(selectedProductElement);
-        System.out.println("Added to Cart...");
+        commandHome();
     }
 }
