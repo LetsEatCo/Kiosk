@@ -10,10 +10,10 @@ import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.*;
+import main.fr.esgi.kiosk.models.ui.CartElementUI;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -42,13 +42,16 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private final StageManagerHelper stageManagerHelper;
     private FocusProductElementController focusProductElementController;
     private T selectedProductElement;
+    private Cart cart;
+    private ElementUI test;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, FocusProductElementController focusProductElementController) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, FocusProductElementController focusProductElementController, Cart cart) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
         this.order = order;
         this.focusProductElementController = focusProductElementController;
+        this.cart = cart;
     }
 
     @Override
@@ -57,6 +60,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         root.setOpacity(0);
         UIHelper.makeFadeInTransition(root);
         lazyLoadProducts();
+        loadCartElement(cart);
     }
 
 
@@ -104,10 +108,27 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     }
 
+    public void addToCart(CartElementUI productElement){
+
+        cartPane.getChildren().add(productElement);
+
+    }
+
     @FXML
     void order(ActionEvent event)  {
 
         System.out.println("Order process...");
+
+    }
+
+    private void loadCartElement(Cart<T> cart){
+
+        for(T productElement : cart){
+
+            CartElementUI<T> cartElementUI = new CartElementUI<>(productElement);
+            cartPane.getChildren().add(cartElementUI);
+
+        }
 
     }
 

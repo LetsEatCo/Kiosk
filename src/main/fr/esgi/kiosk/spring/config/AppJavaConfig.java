@@ -58,15 +58,11 @@ public class AppJavaConfig {
     }
 
     @Bean
-    public Object selectedProduct(){
+    public Cart cart(){
 
-        return new Product();
+        return new Cart();
     }
-    @Bean
-    public Object selectedProductElement() {
 
-        return new Object() ;
-    }
 
 
 
