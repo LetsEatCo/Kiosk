@@ -59,23 +59,17 @@ public class StoreRouter {
         Properties routes = credentialsHelper.getRoutes();
         Properties config = credentialsHelper.getStoreCredentials();
 
+        String root = routes.getProperty("getStore");
         String storeUuid = config.getProperty("uuid");
-        String route = routes.getProperty("getStore") + storeUuid;
+        String route = root + storeUuid;
+        String sectionUrl = route + "/sections";
 
 
         if(HttpHelper.httpGetRequest(route) instanceof JSONObject){
 
             JSONObject storeJson = (JSONObject) HttpHelper.httpGetRequest(route);
 
-            String sectionUrl = "http://localhost:8080/stores/me/sections";
-            String jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzY2ZWFiZTYtYzVhOC00NmRjLTgwMzItMTRlMjhkNWRmY2QzIiwiZW1haWwiOiJ0b3RvQHRvdG8uZnIiLCJlbnRpdHkiOiJTdG9yZSIsImlhdCI6MTU0MTU5MjI4MCwiZXhwIjoxNTQyMTk3MDgwfQ.UBEMjHRVQ-C_KfjnKi7jY6p08sMQ_pbNW2xfNBObLOk";
-
-            //JSONObject sectionsJsonWithOptions = (JSONObject) HttpHelper.httpGetRequest(sectionUrl, jwt);
-
-            Object sectionsJsonWithOptions = HttpHelper.httpGetRequest(sectionUrl, jwt);
-
-            System.out.println(sectionsJsonWithOptions);
-           // System.out.println(sectionsJsonWithOptions.get("meals"));
+            Object sectionsJsonWithOptions = HttpHelper.httpGetRequest(sectionUrl);
 
             String uuid = (String)storeJson.get("uuid");
             String name = (String) storeJson.get("name");

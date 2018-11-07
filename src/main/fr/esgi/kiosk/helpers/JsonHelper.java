@@ -91,15 +91,13 @@ public class JsonHelper {
             if( jsonProduct instanceof JSONObject){
 
 
-                String uuid = (String) ((JSONObject) jsonProduct).get("productUuid");
-                String name = (String) ((JSONObject) jsonProduct).get("name");
+                String uuid = (String) ((JSONObject) jsonProduct).get("uuid");
+                long quantity = (long) ((JSONObject) jsonProduct).get("quantity");
                 double price = Double.valueOf(String.valueOf(((JSONObject) jsonProduct).get("price")));
 
-                Product product = new Product(uuid,name, price);
+                Product product = new Product(uuid,quantity, price);
 
                 productArrayList.add(product);
-
-
             }
 
         }
@@ -114,17 +112,13 @@ public class JsonHelper {
 
             if( jsonIngredient instanceof JSONObject){
 
-                if(((JSONObject) jsonIngredient).get("ingredients") instanceof JSONArray){
+                String uuid = (String) ((JSONObject) jsonIngredient).get("uuid");
+                double price = Double.valueOf(String.valueOf(((JSONObject) jsonIngredient).get("price")));
+                long quantity = (long) ((JSONObject) jsonIngredient).get("quantity");
 
+                Ingredient ingredient = new Ingredient(uuid, quantity, price );
 
-                    String uuid = (String) ((JSONObject) jsonIngredient).get("ingredientUuid");
-                    double price = Double.valueOf(String.valueOf(((JSONObject) jsonIngredient).get("price")));
-                    int quantity = (int) ((JSONObject) jsonIngredient).get("quantity");
-
-                    Ingredient ingredient = new Ingredient(uuid, quantity, price );
-
-                    ingredientsArrayList.add(ingredient );
-                }
+                ingredientsArrayList.add(ingredient );
 
             }
 
@@ -177,9 +171,16 @@ public class JsonHelper {
 
                     if(jsonSubsection instanceof JSONObject){
 
-                        if(((JSONObject) jsonSubsection).get("options") instanceof JSONObject){
+                        Object subsectionOptionsJson = ((JSONObject) jsonSubsection).get("options");
+//                        System.out.println("\noptions start");
+//                        System.out.println(subsectionOptionsJson);
+//                        System.out.println("options End\n");
+                        if(subsectionOptionsJson instanceof JSONObject){
 
-                            if(((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("ingredients") instanceof JSONArray && ((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("products") instanceof JSONArray ){
+                            Object productsOptionsJson = ((JSONObject) subsectionOptionsJson).get("products");
+                            Object ingredientsOptionsJson = ((JSONObject) subsectionOptionsJson).get("ingredients");
+
+                            if(ingredientsOptionsJson instanceof JSONArray && productsOptionsJson instanceof JSONArray ){
 
 
                                 String subsectionUuid = (String) ((JSONObject) jsonSubsection).get("uuid");
@@ -189,9 +190,11 @@ public class JsonHelper {
                                 long minSelectionsPermitted = (long)((JSONObject) jsonSubsection).get("minSelectionsPermitted");
                                 long maxSelectionsPermitted = (long)((JSONObject) jsonSubsection).get("maxSelectionsPermitted");
 
-                                ArrayList<Product> optionProducts = parseJsonOptionProducts((JSONArray) ((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("products"));
-                                ArrayList<Ingredient> optionIngredients = parseJsonOptionIngredients((JSONArray) ((JSONObject) ((JSONObject) jsonSubsection).get("options")).get("ingredients"));
 
+                                ArrayList<Product> optionProducts = parseJsonOptionProducts((JSONArray) productsOptionsJson);
+                                ArrayList<Ingredient> optionIngredients = parseJsonOptionIngredients((JSONArray) ingredientsOptionsJson);
+
+//
                                 MealSubsection mealSubsection = new MealSubsection(
                                         subsectionUuid,
                                         subsectionName,

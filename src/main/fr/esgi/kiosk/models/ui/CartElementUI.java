@@ -36,7 +36,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
 
         ImageView productElementImage= new ImageView(productElement.getImage());
 
-        productElementImage.setFitWidth(90);
+        productElementImage.setFitWidth(110);
         productElementImage.setFitHeight(90);
 
         VBox vBox = new VBox();
@@ -75,7 +75,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
         JFXButton increaseQuantity = new JFXButton();
         ImageView increaseImage = new ImageView(new Image(ADD_QUANTITY_IMAGE));
         increaseImage.setFitHeight(30);
-        increaseImage.setFitWidth(50);
+        increaseImage.setFitWidth(30);
         increaseQuantity.setGraphic(increaseImage);
 
         btnContainer.getChildren().addAll(decreaseQuantity, increaseQuantity);
