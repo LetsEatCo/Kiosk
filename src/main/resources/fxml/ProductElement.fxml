@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -35,31 +38,29 @@
       </VBox>
       <VBox fx:id="optionsContainer" layoutX="10.0" layoutY="10.0" prefHeight="1492.0" prefWidth="1236.0">
          <children>
-            <JFXButton onAction="#commandHome" text=" ">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/icons8-arrière-52.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <JFXTabPane prefHeight="1350.0">
+               <tabs>
+                  <Tab text="Accompagnment">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Drink">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Dessert">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+               </tabs>
                <VBox.margin>
-                  <Insets left="20.0" top="50.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
-            </JFXButton>
-            <HBox alignment="CENTER">
-               <children>
-                  <Label styleClass="focus-product-element-choice" text="Make Your Choice :" textAlignment="CENTER">
-                     <font>
-                        <Font size="60.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </HBox>
-            <VBox alignment="BOTTOM_RIGHT" prefHeight="1492.0" prefWidth="1236.0">
+            </JFXTabPane>
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="150.0" prefWidth="1236.0">
                <children>
                   <HBox alignment="TOP_RIGHT" spacing="20.0">
                      <children>

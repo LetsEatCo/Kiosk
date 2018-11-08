@@ -161,13 +161,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         products = store.getSections().get(0).getProducts();
         meals = store.getSections().get(0).getMeals();
 
-        System.out.println(store.getSections().size());
-        System.out.println(meals.get(0).getName());
-        System.out.println(meals.get(1).getName());
-        System.out.println(meals.get(2).getName());
-        System.out.println(meals.get(0).getSubsections().get(0).getIngredients().size());
-        System.out.println(meals.get(0).getSubsections().get(0).getProducts().size());
-
         productElementUIArrayList = UIHelper.createProductsElementsUI(products);
         mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
 

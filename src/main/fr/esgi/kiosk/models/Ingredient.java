@@ -3,7 +3,7 @@ package main.fr.esgi.kiosk.models;
 public class Ingredient extends  Ressource{
 
     private long quantity;
-    double price = 0;
+    private double price = 0;
 
     public Ingredient(String uuid,int quantity) {
         this.uuid = uuid;
@@ -21,5 +21,9 @@ public class Ingredient extends  Ressource{
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }

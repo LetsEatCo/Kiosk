@@ -172,9 +172,6 @@ public class JsonHelper {
                     if(jsonSubsection instanceof JSONObject){
 
                         Object subsectionOptionsJson = ((JSONObject) jsonSubsection).get("options");
-//                        System.out.println("\noptions start");
-//                        System.out.println(subsectionOptionsJson);
-//                        System.out.println("options End\n");
                         if(subsectionOptionsJson instanceof JSONObject){
 
                             Object productsOptionsJson = ((JSONObject) subsectionOptionsJson).get("products");
