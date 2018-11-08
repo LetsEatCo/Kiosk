@@ -4,7 +4,17 @@ import java.util.ResourceBundle;
 
 public enum FxmlView {
 
-    HOME {
+    SPLASH_SCREEN {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("home.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/SplashScreen.fxml";
+        }
+    },HOME {
         @Override
         public String getTitle() {
             return getStringFromResourceBundle("home.title");
