@@ -22,6 +22,8 @@ import java.util.ArrayList;
 @Component
 public class CommandController <T extends RessourceElementProduct>  implements FxmlController {
 
+    @FXML
+    private VBox sectionsContainer;
     private int adminCounter = 0;
     private ArrayList<Product> products;
     private ArrayList<Meal> meals;

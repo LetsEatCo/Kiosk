@@ -1,15 +1,15 @@
 @font-face {
-    font-family: "Roboto";
-    src: url("../fonts/Roboto/Roboto-Black.ttf");
+    font-family: "Secular One";
+    src: url("../fonts/Secular_One/SecularOne-Regular.ttf");
 }
 
 .label-font {
-    -fx-font-family: "Roboto Light";
+    -fx-font-family: "Secular One";
     -fx-font-size: 60;
 }
 
 .focus-product-element-choice{
-    -fx-font-family: "Roboto Light";
+    -fx-font-family: "Secular One";
     -fx-font-size: 40;
     -fx-font-weight: bold;
 }
@@ -17,7 +17,7 @@
 .btn{
     -fx-font-size: 20;
     -fx-background-color: transparent;
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Secular One";
 }
 
 .btn-black{
@@ -25,7 +25,7 @@
     -fx-font-size: 20;
     -fx-background-color: black;
     -fx-text-fill: white;
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Secular One";
 }
 .btn:hover{
     -fx-background-color: transparent;
@@ -37,7 +37,7 @@
 
 .btn-transparent{
 
-    -fx-font-family: "Arvo Bold";
+    -fx-font-family: "Secular One";
     -fx-font-weight: bold;
     -fx-font-size: 30;
     -fx-background-color: transparent;
@@ -55,7 +55,7 @@
 
 .home-background {
 
-    -fx-background-image: url("../images/HeroImage-1.jpg");
+    /*-fx-background-image: url("../images/HeroImage-1.jpg");*/
     -fx-background-repeat: no-repeat;
     -fx-fill-height: 100%;
     -fx-background-position: center;
@@ -64,7 +64,7 @@
 
 .location-background {
 
-    -fx-background-image: url("../images/cafe_restaurant_3.jpg");
+    /*-fx-background-image: url("../images/cafe_restaurant_3.jpg");*/
     -fx-background-repeat: no-repeat;
     -fx-fill-height: 100%;
     -fx-background-position: center;
