@@ -17,12 +17,12 @@
                </image>
             </ImageView>
          </graphic></JFXButton>
-        <JFXButton onAction="#placeToEat" prefHeight="1237.0" prefWidth="1177.0" textFill="WHITE">
+        <JFXButton onAction="#placeToEat" prefHeight="1456.0" prefWidth="2092.0">
          <font>
             <Font name="Arvo Bold" size="60.0" />
          </font>
          <graphic>
-            <Label styleClass="label-font" text="Touch To Start..." textFill="WHITE" />
+            <Label styleClass="label-font" text="Touch To Start..." />
          </graphic></JFXButton>
     </children>
 </VBox>
