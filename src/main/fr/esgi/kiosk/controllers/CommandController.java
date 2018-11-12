@@ -28,7 +28,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private ArrayList<ElementUI> productElementUIArrayList;
     private ArrayList<ElementUI> mealsElementUIArrayList;
     private Store store;
-    private Order order;
+    private Order<T> order;
 
     @FXML
     private HBox root;
@@ -40,17 +40,17 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private VBox cartPane;
 
     private final StageManagerHelper stageManagerHelper;
-    private FocusProductElementController focusProductElementController;
+    private AccompanimentController<T> accompanimentController;
     private T selectedProductElement;
     private Cart<T> cart;
-    private ElementUI test;
+    private ElementUI<RessourceElementProduct> test;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, FocusProductElementController focusProductElementController, Cart<T> cart) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order<T> order, AccompanimentController<T> accompanimentController, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
         this.order = order;
-        this.focusProductElementController = focusProductElementController;
+        this.accompanimentController = accompanimentController;
         this.cart = cart;
     }
 
@@ -85,14 +85,14 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void loadMenu() {
 
-        if(mealsElementUIArrayList != null)loadUIContent(mealsElementUIArrayList);
+        if(mealsElementUIArrayList != null)loadUIContent(mealsElementUIArrayList, mainContent);
 
     }
 
     @FXML
     void loadProducts() {
 
-        if(productElementUIArrayList != null)loadUIContent(productElementUIArrayList);
+        if(productElementUIArrayList != null)loadUIContent(productElementUIArrayList, mainContent);
 
     }
 
@@ -103,12 +103,12 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     public void focusProductElement(T productElement) {
 
-        focusProductElementController.setSelectedProductElement(productElement);
-        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PRODUCT_ELEMENT);
+        accompanimentController.setSelectedProductElement(productElement);
+        stageManagerHelper.switchScene(FxmlView.ACCOMPANIMENT);
 
     }
 
-    public void addToCart(CartElementUI productElement){
+    public void addToCart(CartElementUI<RessourceElementProduct> productElement){
 
         cartPane.getChildren().add(productElement);
 
@@ -132,7 +132,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     }
 
-    private <T> void loadUIContent(ArrayList<T> elementUI) {
+    private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {
 
         VBox vBox = new VBox();
 
@@ -152,8 +152,8 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         }
 
-        mainContent.getChildren().removeAll();
-        mainContent.getChildren().setAll(vBox);
+        content.getChildren().removeAll();
+        content.getChildren().setAll(vBox);
     }
 
     private void lazyLoadProducts() {
