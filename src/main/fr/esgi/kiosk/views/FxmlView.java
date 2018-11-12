@@ -67,6 +67,40 @@ public enum FxmlView {
             return "/fxml/ProductElement.fxml";
         }
 
+    },
+    ACCOMPANIMENT{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("accompaniment.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Accompaniment.fxml";
+        }
+
+    },DRINKS{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("drinks.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Drinks.fxml";
+        }
+
+    },DESSERTS{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("desserts.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Desserts.fxml";
+        }
+
     };
 
     public abstract String getTitle();
