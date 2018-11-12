@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -36,43 +33,18 @@
             </Label>
          </children>
       </VBox>
-      <VBox fx:id="optionsContainer" layoutX="10.0" layoutY="10.0" prefHeight="1492.0" prefWidth="1236.0">
+      <VBox fx:id="optionsContainer" alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="1492.0" prefWidth="1236.0">
          <children>
-            <JFXTabPane prefHeight="1350.0">
-               <tabs>
-                  <Tab text="Accompagnment">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab text="Drink">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab text="Dessert">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-               </tabs>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </JFXTabPane>
-            <VBox alignment="BOTTOM_RIGHT" prefHeight="150.0" prefWidth="1236.0">
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="150.0" prefWidth="1236.0" />
+            <HBox alignment="TOP_RIGHT" spacing="20.0">
                <children>
-                  <HBox alignment="TOP_RIGHT" spacing="20.0">
-                     <children>
-                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#commandHome" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="CANCEL" />
-                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addToCart" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" right="30.0" />
-                     </VBox.margin>
-                  </HBox>
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#commandHome" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="CANCEL" />
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addToCart" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD" />
                </children>
-            </VBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" right="30.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
    </children>

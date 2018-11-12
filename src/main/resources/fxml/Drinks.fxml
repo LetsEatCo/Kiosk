@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1800.0" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.DrinkController">
+<children>
+    <VBox prefHeight="1367.0" prefWidth="1800.0" />
+    <VBox alignment="TOP_RIGHT" prefHeight="101.0" prefWidth="1800.0">
+        <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                <children>
+                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#accompaniment" prefHeight="100.0" prefWidth="275.0" styleClass="btn-black" text="ACCOMPANIMENT" />
+                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#desserts" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="NEXT" />
+                </children>
+                <VBox.margin>
+                    <Insets right="20.0" />
+                </VBox.margin>
+            </HBox>
+        </children>
+    </VBox>
+</children>
+</VBox>
