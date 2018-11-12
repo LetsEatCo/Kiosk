@@ -1,6 +1,7 @@
 package main.fr.esgi.kiosk.helpers;
 
 import main.fr.esgi.kiosk.models.*;
+import main.fr.esgi.kiosk.routes.StoreRouter;
 import org.apache.http.HttpResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,12 +14,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import static main.fr.esgi.kiosk.routes.StoreRouter.*;
+
 public class JsonHelper {
+
+    private final static String PRODUCTS = "products";
+    private final static String INGREDIENTS = "ingredients";
 
     private static Object parseJsonData(String json) throws ParseException {
 
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)jsonParser.parse(json);
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
 
         return jsonObject.get("data");
     }
@@ -33,7 +39,7 @@ public class JsonHelper {
 
         StringBuilder stringBuilder = new StringBuilder();
         String tmp;
-        while ((tmp = bufferedReader.readLine()) != null){
+        while ((tmp = bufferedReader.readLine()) != null) {
 
             stringBuilder.append(tmp);
         }
@@ -41,15 +47,15 @@ public class JsonHelper {
         return parseJsonData(stringBuilder.toString());
     }
 
-    public static ArrayList<Product> parseJsonProductsIngredients(JSONArray products){
+    public static ArrayList<Product> parseJsonProductsIngredients(JSONArray products) {
 
         ArrayList<Product> productArrayList = new ArrayList<>();
 
-        for(Object jsonProduct : products){
+        for (Object jsonProduct : products) {
 
-            if( jsonProduct instanceof JSONObject){
+            if (jsonProduct instanceof JSONObject) {
 
-                if(((JSONObject) jsonProduct).get("ingredients") instanceof JSONArray){
+                if (((JSONObject) jsonProduct).get("ingredients") instanceof JSONArray) {
 
 
                     String uuid = (String) ((JSONObject) jsonProduct).get("uuid");
@@ -62,15 +68,15 @@ public class JsonHelper {
 
                     for (Object jsonProductIngredient : jsonProductsIngredients) {
 
-                        if (jsonProductIngredient instanceof JSONObject){
+                        if (jsonProductIngredient instanceof JSONObject) {
 
-                            String ingredientUuid = (String)((JSONObject) jsonProductIngredient).get("uuid");
+                            String ingredientUuid = (String) ((JSONObject) jsonProductIngredient).get("uuid");
                             int ingredientQuantity = (int) ((JSONObject) jsonProductIngredient).get("quantity");
                             Ingredient ingredient = new Ingredient(ingredientUuid, ingredientQuantity);
                             ingredients.add(ingredient);
                         }
                     }
-                    Product product = new Product(uuid,name, price, ingredients);
+                    Product product = new Product(uuid, name, price, ingredients);
 
                     productArrayList.add(product);
                 }
@@ -82,44 +88,56 @@ public class JsonHelper {
         return productArrayList;
     }
 
-    private static ArrayList<Product> parseJsonOptionProducts(JSONArray products){
+    private static ArrayList<Product> parseJsonOptionProducts(JSONArray products) {
 
         ArrayList<Product> productArrayList = new ArrayList<>();
 
-        for(Object jsonProduct : products){
+        for (Object jsonProduct : products) {
 
-            if( jsonProduct instanceof JSONObject){
+            if (jsonProduct instanceof JSONObject) {
+
+                Object relatedProduct =  ((JSONObject) jsonProduct).get("product");
+                if (relatedProduct instanceof JSONObject) {
+
+                    String uuid = (String) ((JSONObject) jsonProduct).get("uuid");
+                    String name = (String) ((JSONObject) relatedProduct).get("name");
+                    long quantity = (long) ((JSONObject) jsonProduct).get("quantity");
+                    double price = Double.valueOf(String.valueOf(((JSONObject) jsonProduct).get("price")));
+
+                    Product product = new Product(uuid,name,quantity, price);
+
+                    productArrayList.add(product);
+                }
 
 
-                String uuid = (String) ((JSONObject) jsonProduct).get("uuid");
-                long quantity = (long) ((JSONObject) jsonProduct).get("quantity");
-                double price = Double.valueOf(String.valueOf(((JSONObject) jsonProduct).get("price")));
-
-                Product product = new Product(uuid,quantity, price);
-
-                productArrayList.add(product);
             }
 
         }
 
         return productArrayList;
     }
-    private static ArrayList<Ingredient> parseJsonOptionIngredients(JSONArray ingredients){
+
+    private static ArrayList<Ingredient> parseJsonOptionIngredients(JSONArray ingredients) {
 
         ArrayList<Ingredient> ingredientsArrayList = new ArrayList<>();
 
-        for(Object jsonIngredient : ingredients){
+        for (Object jsonIngredient : ingredients) {
 
-            if( jsonIngredient instanceof JSONObject){
+            if (jsonIngredient instanceof JSONObject) {
 
-                String uuid = (String) ((JSONObject) jsonIngredient).get("uuid");
-                double price = Double.valueOf(String.valueOf(((JSONObject) jsonIngredient).get("price")));
-                long quantity = (long) ((JSONObject) jsonIngredient).get("quantity");
+                Object relatedIngredient = ((JSONObject) jsonIngredient).get("ingredient");
 
-                Ingredient ingredient = new Ingredient(uuid, quantity, price );
+                if(relatedIngredient instanceof JSONObject){
 
-                ingredientsArrayList.add(ingredient );
+                    String uuid = (String) ((JSONObject) jsonIngredient).get("uuid");
+                    String name = (String) ((JSONObject) relatedIngredient).get("name");
+                    double price = Double.valueOf(String.valueOf(((JSONObject) jsonIngredient).get("price")));
+                    long quantity = (long) ((JSONObject) jsonIngredient).get("quantity");
 
+                    Ingredient ingredient = new Ingredient(uuid,name, quantity, price);
+
+                    ingredientsArrayList.add(ingredient);
+                }
             }
 
         }
@@ -127,13 +145,13 @@ public class JsonHelper {
         return ingredientsArrayList;
     }
 
-    public static ArrayList<Meal> parseJsonMeals(JSONArray meals){
+    public static ArrayList<Meal> parseJsonMeals(JSONArray meals) {
 
         ArrayList<Meal> mealArrayList = new ArrayList<>();
 
-        for(Object jsonMeal : meals){
+        for (Object jsonMeal : meals) {
 
-            if( jsonMeal instanceof JSONObject && ((JSONObject) jsonMeal).get("product") instanceof JSONObject && ((JSONObject) jsonMeal).get("subsections") instanceof JSONArray){
+            if (jsonMeal instanceof JSONObject && ((JSONObject) jsonMeal).get("subsections") instanceof JSONArray) {
 
                 // Setting Meal Entity
 
@@ -143,17 +161,7 @@ public class JsonHelper {
                 double price = Double.valueOf(String.valueOf(((JSONObject) jsonMeal).get("price")));
                 int productQuantity = Integer.valueOf(String.valueOf(((JSONObject) jsonMeal).get("productQuantity")));
 
-                // Setting related Product
-
-                JSONObject jsonProduct = (JSONObject) ((JSONObject) jsonMeal).get("product");
-
-                String productUuid = (String) jsonProduct.get("uuid");
-                String productName = (String) jsonProduct.get("name");
-                double productPrice = Double.valueOf((String) jsonProduct.get("price"));
-
-                Product product = new Product(productUuid,productName, productPrice);
-
-                Meal meal = new Meal(uuid, reference, name, price, productQuantity, product);
+                Meal meal = new Meal(uuid, reference, name, price, productQuantity);
 
                 // TODO: load image product
                 meal.setImageUrl("/main/resources/assets/images/873086.jpg");
@@ -165,33 +173,32 @@ public class JsonHelper {
                 Subsections subsections = new Subsections();
 
                 /*
-                * Parse each subsection of a meal
-                * */
+                 * Parse each subsection of a meal
+                 * */
                 for (Object jsonSubsection : jsonSubsections) {
 
-                    if(jsonSubsection instanceof JSONObject){
+                    if (jsonSubsection instanceof JSONObject) {
 
                         Object subsectionOptionsJson = ((JSONObject) jsonSubsection).get("options");
-                        if(subsectionOptionsJson instanceof JSONObject){
+                        if (subsectionOptionsJson instanceof JSONObject) {
 
                             Object productsOptionsJson = ((JSONObject) subsectionOptionsJson).get("products");
                             Object ingredientsOptionsJson = ((JSONObject) subsectionOptionsJson).get("ingredients");
 
-                            if(ingredientsOptionsJson instanceof JSONArray && productsOptionsJson instanceof JSONArray ){
+                            if (ingredientsOptionsJson instanceof JSONArray && productsOptionsJson instanceof JSONArray) {
 
 
                                 String subsectionUuid = (String) ((JSONObject) jsonSubsection).get("uuid");
                                 String subsectionName = (String) ((JSONObject) jsonSubsection).get("name");
-                                boolean isRequired = (boolean)((JSONObject) jsonSubsection).get("isRequired");
-                                boolean allowMultipleSelections = (boolean)((JSONObject) jsonSubsection).get("allowMultipleSelections");
-                                long minSelectionsPermitted = (long)((JSONObject) jsonSubsection).get("minSelectionsPermitted");
-                                long maxSelectionsPermitted = (long)((JSONObject) jsonSubsection).get("maxSelectionsPermitted");
+                                boolean isRequired = (boolean) ((JSONObject) jsonSubsection).get("isRequired");
+                                boolean allowMultipleSelections = (boolean) ((JSONObject) jsonSubsection).get("allowMultipleSelections");
+                                long minSelectionsPermitted = (long) ((JSONObject) jsonSubsection).get("minSelectionsPermitted");
+                                long maxSelectionsPermitted = (long) ((JSONObject) jsonSubsection).get("maxSelectionsPermitted");
 
 
                                 ArrayList<Product> optionProducts = parseJsonOptionProducts((JSONArray) productsOptionsJson);
                                 ArrayList<Ingredient> optionIngredients = parseJsonOptionIngredients((JSONArray) ingredientsOptionsJson);
 
-//
                                 MealSubsection mealSubsection = new MealSubsection(
                                         subsectionUuid,
                                         subsectionName,
@@ -205,7 +212,6 @@ public class JsonHelper {
                                 subsections.add(mealSubsection);
                             }
                         }
-
 
 
                     }
