@@ -20,12 +20,11 @@ public class SectionUI extends Parent {
     private void initUI() {
 
         JFXButton btn = new JFXButton(section.getName());
+        btn.prefWidth(350);
+        btn.prefHeight(200);
         btn.getStyleClass().add("btn");
-
         btn.setOnAction(event -> commandController.createUIElements(this.section));
-
         this.getChildren().add(btn);
-
         commandController.addSections(this);
 
     }

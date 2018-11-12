@@ -87,25 +87,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.LOCATION);
     }
 
-    @FXML
-    void loadMenu() {
-
-//        if(mealsElementUIArrayList != null)loadUIContent(productsAndMealsUIS, mainContent);
-
-    }
-
-    @FXML
-    void loadProducts() {
-
-//        if(productElementUIArrayList != null)loadUIContent(productsAndMealsUIS, mainContent);
-
-    }
-
-    @FXML
-    void loadDesserts() {
-
-    }
-
     public void focusProductElement(T productElement) {
 
         accompanimentController.setSelectedProductElement(productElement);
@@ -139,15 +120,19 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     public void createUIElements(Section section){
 
-        ArrayList<ArrayList<ElementUI>> productsAndMealsUIS = new ArrayList<>();
 
+        ArrayList<ElementUI> elementUIS = new ArrayList<>();
         ArrayList<ElementUI> mealsElementUI  = UIHelper.createProductsElementsUI(section.getMeals());
         ArrayList<ElementUI> productsElementUI  = UIHelper.createProductsElementsUI(section.getProducts());
 
-        productsAndMealsUIS.add(mealsElementUI);
-        productsAndMealsUIS.add(productsElementUI);
 
-        loadUIContent(productsAndMealsUIS, mainContent);
+        elementUIS.addAll(mealsElementUI);
+        elementUIS.addAll(productsElementUI);
+
+        System.out.println(elementUIS.size());
+        System.out.println(section);
+
+        loadUIContent(elementUIS, mainContent);
 
 
     }
@@ -157,29 +142,29 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     }
 
-    private <T> void loadUIContent(ArrayList<ArrayList<T>> elementUI, Pane content) {
+    private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {
 
         VBox vBox = new VBox();
 
         int size = elementUI.size();
         int productsIndexJourney = 0;
 
-        for (ArrayList<T> ts : elementUI) {
+
 
             for(int i =0; i<size; i++){
 
                 HBox hBox = new HBox();
 
-                for(int j=productsIndexJourney;j<ts.size();j++){
+                for(int j=productsIndexJourney;j<elementUI.size();j++){
 
-                    hBox.getChildren().add((Node) ts.get(productsIndexJourney));
+                    hBox.getChildren().add((Node) elementUI.get(productsIndexJourney));
                     productsIndexJourney +=1;
                 }
 
                 vBox.getChildren().add(hBox);
 
             }
-        }
+
 
         content.getChildren().removeAll();
         content.getChildren().setAll(vBox);

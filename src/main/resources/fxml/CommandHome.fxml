@@ -29,30 +29,6 @@
                   <Insets bottom="200.0" />
                </VBox.margin>
             </JFXButton>
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadMenu" prefHeight="200.0" prefWidth="350.0" styleClass="btn" text="Menus">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/873086.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic></JFXButton>
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadProducts" prefHeight="200.0" prefWidth="350.0" styleClass="btn" text="Products">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/560491.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic></JFXButton>
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadDesserts" prefHeight="200.0" prefWidth="350.0" styleClass="btn" text="Desserts">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/images/jelly_dessert_berries_raspberries.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic></JFXButton>
          </children>
       </VBox>
       <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="1039.0">

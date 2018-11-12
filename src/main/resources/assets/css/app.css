@@ -15,7 +15,7 @@
 }
 
 .btn{
-    -fx-font-size: 20;
+    -fx-font-size: 40;
     -fx-background-color: transparent;
     -fx-font-family: "Secular One";
 }
@@ -38,7 +38,6 @@
 .btn-transparent{
 
     -fx-font-family: "Secular One";
-    -fx-font-weight: bold;
     -fx-font-size: 30;
     -fx-background-color: transparent;
 
