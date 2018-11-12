@@ -6,7 +6,7 @@ public class Meal extends RessourceElementProduct{
 
     private String reference;
     private int productQuantity;
-    private Product product;
+//    private Product product;
     private Subsections subsections;
 
     public Meal(){
@@ -14,13 +14,13 @@ public class Meal extends RessourceElementProduct{
         * Voluntary empty Constructor for dependency injection*/
     }
 
-    public Meal(String uuid, String reference, String name, double price, int productQuantity, Product product) {
+    public Meal(String uuid, String reference, String name, double price, int productQuantity) {
         this.uuid = uuid;
         this.reference = reference;
         this.name = name;
         this.price = price;
         this.productQuantity = productQuantity;
-        this.product = product;
+//        this.product = product;
     }
 
     public String getReference() {
@@ -53,14 +53,6 @@ public class Meal extends RessourceElementProduct{
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public Image getImage() {

@@ -1,8 +1,7 @@
 package main.fr.esgi.kiosk.models;
 
-public class Ingredient extends  Ressource{
+public class Ingredient extends  RessourceElementProduct{
 
-    private long quantity;
     private double price = 0;
 
     public Ingredient(String uuid,int quantity) {
@@ -11,6 +10,13 @@ public class Ingredient extends  Ressource{
     }
     public Ingredient(String uuid,long quantity, double price) {
         this.uuid = uuid;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public Ingredient(String uuid, String name, long quantity, double price){
+        this.uuid = uuid;
+        this.name = name;
         this.quantity = quantity;
         this.price = price;
     }

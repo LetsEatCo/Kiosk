@@ -6,8 +6,8 @@ public class RessourceElementProduct {
 
     protected String uuid;
     protected String name;
+    protected long quantity;
     protected double price;
-
     protected String imageUrl;
     protected Image image = new Image("/main/resources/assets/images/560491.jpg");
 
@@ -49,5 +49,13 @@ public class RessourceElementProduct {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
 }
