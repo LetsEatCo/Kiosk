@@ -15,12 +15,20 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class StageManagerHelper {
 
     private static final Logger LOG = getLogger(StageManagerHelper.class);
-    private final Stage primaryStage;
+    private Stage primaryStage;
     private final SpringFXMLLoader springFXMLLoader;
 
-    public StageManagerHelper(SpringFXMLLoader springFXMLLoader,Stage stage) {
+    public StageManagerHelper(SpringFXMLLoader springFXMLLoader, Stage stage) {
         this.springFXMLLoader = springFXMLLoader;
         this.primaryStage = stage;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     public void switchScene(final FxmlView view) {

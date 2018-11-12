@@ -4,7 +4,17 @@ import java.util.ResourceBundle;
 
 public enum FxmlView {
 
-    HOME {
+    SPLASH_SCREEN {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("home.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/SplashScreen.fxml";
+        }
+    },HOME {
         @Override
         public String getTitle() {
             return getStringFromResourceBundle("home.title");
@@ -45,6 +55,52 @@ public enum FxmlView {
         public String getFxmlFile() {
             return "/fxml/AdminLogin.fxml";
         }
+    },
+    PRODUCT_ELEMENT{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("productElement.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/ProductElement.fxml";
+        }
+
+    },
+    ACCOMPANIMENT{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("accompaniment.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Accompaniment.fxml";
+        }
+
+    },DRINKS{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("drinks.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Drinks.fxml";
+        }
+
+    },DESSERTS{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("desserts.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Desserts.fxml";
+        }
+
     };
 
     public abstract String getTitle();

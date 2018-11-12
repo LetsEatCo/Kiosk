@@ -1,6 +1,6 @@
 package main.fr.esgi.kiosk.controllers;
 
-import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,19 +9,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
-import main.fr.esgi.kiosk.models.Meal;
-import main.fr.esgi.kiosk.models.Product;
-import main.fr.esgi.kiosk.models.RessourceElementProduct;
-import main.fr.esgi.kiosk.models.Store;
+import main.fr.esgi.kiosk.models.*;
+import main.fr.esgi.kiosk.models.ui.CartElementUI;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 @Component
-public class CommandController implements FxmlController {
+public class CommandController <T extends RessourceElementProduct>  implements FxmlController {
 
     private int adminCounter = 0;
     private ArrayList<Product> products;
@@ -29,6 +28,7 @@ public class CommandController implements FxmlController {
     private ArrayList<ElementUI> productElementUIArrayList;
     private ArrayList<ElementUI> mealsElementUIArrayList;
     private Store store;
+    private Order<T> order;
 
     @FXML
     private HBox root;
@@ -40,11 +40,18 @@ public class CommandController implements FxmlController {
     private VBox cartPane;
 
     private final StageManagerHelper stageManagerHelper;
+    private AccompanimentController<T> accompanimentController;
+    private T selectedProductElement;
+    private Cart<T> cart;
+    private ElementUI<RessourceElementProduct> test;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order<T> order, AccompanimentController<T> accompanimentController, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
+        this.order = order;
+        this.accompanimentController = accompanimentController;
+        this.cart = cart;
     }
 
     @Override
@@ -53,6 +60,7 @@ public class CommandController implements FxmlController {
         root.setOpacity(0);
         UIHelper.makeFadeInTransition(root);
         lazyLoadProducts();
+        loadCartElement(cart);
     }
 
 
@@ -77,14 +85,14 @@ public class CommandController implements FxmlController {
     @FXML
     void loadMenu() {
 
-        if(mealsElementUIArrayList != null)loadUIContent(mealsElementUIArrayList);
+        if(mealsElementUIArrayList != null)loadUIContent(mealsElementUIArrayList, mainContent);
 
     }
 
     @FXML
     void loadProducts() {
 
-        if(productElementUIArrayList != null)loadUIContent(productElementUIArrayList);
+        if(productElementUIArrayList != null)loadUIContent(productElementUIArrayList, mainContent);
 
     }
 
@@ -93,14 +101,17 @@ public class CommandController implements FxmlController {
 
     }
 
-    public void addProductElement(Object productElement){
+    public void focusProductElement(T productElement) {
 
-        System.out.println(productElement);
-        System.out.println(this);
+        accompanimentController.setSelectedProductElement(productElement);
+        stageManagerHelper.switchScene(FxmlView.ACCOMPANIMENT);
+
     }
 
-    public static void getProduct(Object productElement) {
-        System.out.println(productElement);
+    public void addToCart(CartElementUI<RessourceElementProduct> productElement){
+
+        cartPane.getChildren().add(productElement);
+
     }
 
     @FXML
@@ -110,7 +121,18 @@ public class CommandController implements FxmlController {
 
     }
 
-    private <T> void loadUIContent(ArrayList<T> elementUI) {
+    private void loadCartElement(Cart<T> cart){
+
+        for(T productElement : cart){
+
+            CartElementUI<T> cartElementUI = new CartElementUI<>(productElement);
+            cartPane.getChildren().add(cartElementUI);
+
+        }
+
+    }
+
+    private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {
 
         VBox vBox = new VBox();
 
@@ -130,8 +152,8 @@ public class CommandController implements FxmlController {
 
         }
 
-        mainContent.getChildren().removeAll();
-        mainContent.getChildren().setAll(vBox);
+        content.getChildren().removeAll();
+        content.getChildren().setAll(vBox);
     }
 
     private void lazyLoadProducts() {

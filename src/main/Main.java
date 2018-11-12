@@ -2,7 +2,9 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
+import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +24,7 @@ public class Main extends Application {
      * window.
      */
     protected void displayInitialScene() {
-        stageManagerHelper.switchScene(FxmlView.HOME);
+        stageManagerHelper.switchScene(FxmlView.SPLASH_SCREEN);
     }
 
     public static void main(String[] args){
@@ -40,8 +42,9 @@ public class Main extends Application {
 
         stage.setMinHeight(1492);
         stage.setMinWidth(1800);
-
+        
         stageManagerHelper = springContext.getBean(StageManagerHelper.class, stage);
+
         displayInitialScene();
     }
 

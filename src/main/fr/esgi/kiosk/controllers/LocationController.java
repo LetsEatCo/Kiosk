@@ -1,11 +1,13 @@
 package main.fr.esgi.kiosk.controllers;
 
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
+import main.fr.esgi.kiosk.models.Order;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LocationController implements FxmlController {
 
+    private Order order;
     @FXML
     private BorderPane root;
 
@@ -21,12 +24,17 @@ public class LocationController implements FxmlController {
 
     @Autowired
     @Lazy
-    public LocationController(StageManagerHelper stageManagerHelper) {
+    public LocationController(StageManagerHelper stageManagerHelper, Order order) {
         this.stageManagerHelper = stageManagerHelper;
+        this.order = order;
     }
 
     @FXML
     void openCommandHome(ActionEvent event){
+
+        JFXButton jfxButton = (JFXButton) event.getSource();
+
+        order.setPlaceToEat(jfxButton.getText());
 
         UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
 

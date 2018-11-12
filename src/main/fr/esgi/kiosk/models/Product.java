@@ -4,11 +4,37 @@ import javafx.scene.image.Image;
 
 public class Product extends RessourceElementProduct{
 
+    private Ingredients ingredients;
 
+
+    public Product(){
+
+    }
+
+    public Product(String uuid,String name, double price, Ingredients ingredients) {
+        this.uuid = uuid;
+        this.name = name;
+        this.price = price;
+        this.ingredients = ingredients;
+    }
     public Product(String uuid,String name, double price) {
         this.uuid = uuid;
         this.name = name;
         this.price = price;
+    }
+    public Product(String uuid,long quantity, double price) {
+        this.uuid = uuid;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public Product(String uuid, String name, long quantity, double price){
+
+        this.uuid = uuid;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+
     }
 
     public String getName() {
@@ -35,4 +61,19 @@ public class Product extends RessourceElementProduct{
         this.image = image;
     }
 
+    public Ingredients getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Ingredients ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
 }

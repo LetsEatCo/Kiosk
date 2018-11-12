@@ -10,6 +10,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import javax.json.Json;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,20 +54,39 @@ public class StoreRouter {
         return null ;
     }
 
+    public static JSONObject getProductOrIngredient(String type,String productOrIngredientUuid) throws IOException, ParseException {
+
+        CredentialsHelper credentialsHelper = new CredentialsHelper();
+        Properties routes = credentialsHelper.getRoutes();
+        Properties config = credentialsHelper.getStoreCredentials();
+
+        String root = routes.getProperty("getStore");
+        String storeUuid = config.getProperty("uuid");
+        String route = root + storeUuid + "/" +type + "/" + productOrIngredientUuid;
+
+        System.out.println(route);
+
+        return (JSONObject) HttpHelper.httpGetRequest(route);
+    }
+
+
     public Store getStore() throws IOException, ParseException {
 
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties routes = credentialsHelper.getRoutes();
         Properties config = credentialsHelper.getStoreCredentials();
 
+        String root = routes.getProperty("getStore");
         String storeUuid = config.getProperty("uuid");
-        String route = routes.getProperty("getStore") + storeUuid;
+        String route = root + storeUuid;
+        String sectionUrl = route + "/sections";
+
+        Object store = HttpHelper.httpGetRequest(route);
 
 
-        if(HttpHelper.httpGetRequest(route) instanceof JSONObject){
+        if(store instanceof JSONObject && ((JSONObject) store).get("sections") instanceof JSONArray){
 
-            JSONObject storeJson = (JSONObject) HttpHelper.httpGetRequest(route);
-
+            JSONObject storeJson = (JSONObject) store;
 
             String uuid = (String)storeJson.get("uuid");
             String name = (String) storeJson.get("name");
@@ -74,37 +94,33 @@ public class StoreRouter {
             String phoneNumber = (String) storeJson.get("phoneNumber");
             String imageUrl = (String)storeJson.get("imageUrl");
 
-            if(storeJson.get("sections") instanceof JSONArray){
 
-                JSONArray sectionsJson = (JSONArray) storeJson.get("sections");
-                Sections sections = new Sections();
+            JSONArray sectionsJson = (JSONArray) storeJson.get("sections");
+            Sections sections = new Sections();
 
-                for (Object section : sectionsJson) {
+            for (Object section : sectionsJson) {
 
-                    if(section instanceof JSONObject){
+                if(section instanceof JSONObject){
 
-                        if(((JSONObject) section).get("meals") instanceof JSONArray && ((JSONObject) section).get("products") instanceof JSONArray){
+                    if(((JSONObject) section).get("meals") instanceof JSONArray && ((JSONObject) section).get("products") instanceof JSONArray){
 
-                            String sectionName = (String) ((JSONObject) section).get("name");
-                            JSONArray mealsJson = (JSONArray) ((JSONObject) section).get("meals");
-                            ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
+                        String sectionName = (String) ((JSONObject) section).get("name");
+                        JSONArray mealsJson = (JSONArray) ((JSONObject) section).get("meals");
+                        ArrayList<Meal> meals = JsonHelper.parseJsonMeals(mealsJson);
 
-                            JSONArray productsJson = (JSONArray) ((JSONObject) section).get("products");
-                            ArrayList<Product> products = JsonHelper.parseJsonProducts(productsJson);
+                        JSONArray productsJson = (JSONArray) ((JSONObject) section).get("products");
+                        ArrayList<Product> products = JsonHelper.parseJsonProductsIngredients(productsJson);
 
-                            Section realSection = new Section(sectionName,meals,products);
-                            sections.add(realSection);
-
-                        }
+                        Section realSection = new Section(sectionName,meals,products);
+                        sections.add(realSection);
 
                     }
 
                 }
 
+            }
 
             return new Store(uuid,name,email,phoneNumber, imageUrl, sections);
-
-            }
 
 
         }

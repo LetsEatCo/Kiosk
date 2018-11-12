@@ -8,11 +8,24 @@
     -fx-font-size: 60;
 }
 
+.focus-product-element-choice{
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+}
+
 .btn{
     -fx-font-size: 20;
     -fx-background-color: transparent;
     -fx-font-family: "Roboto";
+}
 
+.btn-black{
+
+    -fx-font-size: 20;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
 }
 .btn:hover{
     -fx-background-color: transparent;
@@ -56,4 +69,25 @@
     -fx-fill-height: 100%;
     -fx-background-position: center;
     -fx-background-size: cover;
+}
+
+/*Focus Product Element style */
+
+.tab{
+
+    -fx-pref-height: 100;
+    -fx-pref-width: 390;
+}
+
+.tab-selected-line{
+    -fx-background-color: black;
+}
+
+.tab-label{
+    -fx-text-fill: black;
+    -fx-font-size: 30;
+}
+
+.tab-header-background{
+    -fx-background-color: transparent;
 }
