@@ -7,12 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import main.fr.esgi.kiosk.controllers.AccompanimentController;
-import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 
 public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
 
-    private long quantity = 1;
     private double price;
     private String checkBoxLabel;
 
@@ -20,32 +18,46 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
     private JFXCheckBox checkBox;
     private Label supplement;
 
-    private long minSelections;
-    private long maxSelections;
-
     private AccompanimentController controller;
+    private SubsectionUI subsectionUI;
     private T productElement;
+    private boolean isClicked =false;
 
-    public OptionMealUI(T productElement, AccompanimentController controller) {
+
+    public OptionMealUI(T productElement, AccompanimentController controller, SubsectionUI subsectionUI) {
 
         this.controller = controller;
+        this.subsectionUI = subsectionUI;
         this.price = productElement.getPrice();
         this.checkBoxLabel = productElement.getName();
+
         this.supplement = new Label(" ( + " + price + " € )");
         supplement.getStyleClass().add("option-price");
 
 
         checkBox = new JFXCheckBox();
         container = new HBox();
-
-        container.setAlignment(Pos.CENTER);
+        container.setAlignment(Pos.CENTER_LEFT);
 
         container.setSpacing(30);
 
         checkBox.setText(checkBoxLabel);
         checkBox.getStyleClass().add("option-product-element-checkbox");
+
         checkBox.setOnAction(event -> {
-            checkBox.setSelected(false);
+
+
+            if((subsectionUI.getCurrentSelections()<subsectionUI.getMaxSelections()) && !isClicked){
+
+                isClicked = true;
+                subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()+1);
+            }
+            else if(isClicked){
+                isClicked = false;
+                subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()-1);
+            }else{
+                checkBox.setSelected(false);
+            }
         });
 
         container.getChildren().addAll(checkBox, supplement);
@@ -54,27 +66,11 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
         this.getChildren().addAll(container);
     }
 
-    public long getQuantity() {
-        return quantity;
+    public boolean isClicked() {
+        return isClicked;
     }
 
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getCheckBoxLabel() {
-        return checkBoxLabel;
-    }
-
-    public void setCheckBoxLabel(String checkBoxLabel) {
-        this.checkBoxLabel = checkBoxLabel;
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
     }
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class SubsectionUI extends VBox {
     private long minSelections;
     private long maxSelections;
+    private long currentSelections=0;
     private AccompanimentController accompanimentController;
     private MealSubsection mealSubsection;
 
@@ -32,11 +33,34 @@ public class SubsectionUI extends VBox {
         subsectionName.getStyleClass().add("option-subsection-name");
         this.getChildren().add(subsectionName);
 
-        ArrayList<OptionMealUI> optionProductsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getProducts(), accompanimentController);
-        ArrayList<OptionMealUI> optionIngredientsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getIngredients(), accompanimentController);
+        ArrayList<OptionMealUI> optionProductsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getProducts(), accompanimentController, this);
+        ArrayList<OptionMealUI> optionIngredientsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getIngredients(), accompanimentController, this);
 
         this.getChildren().addAll(optionIngredientsUIArrayList);
         this.getChildren().addAll(optionProductsUIArrayList);
-        this.setAlignment(Pos.CENTER);
+    }
+
+    public long getMinSelections() {
+        return minSelections;
+    }
+
+    public void setMinSelections(long minSelections) {
+        this.minSelections = minSelections;
+    }
+
+    public long getMaxSelections() {
+        return maxSelections;
+    }
+
+    public void setMaxSelections(long maxSelections) {
+        this.maxSelections = maxSelections;
+    }
+
+    public long getCurrentSelections() {
+        return currentSelections;
+    }
+
+    public void setCurrentSelections(long currentSelections) {
+        this.currentSelections = currentSelections;
     }
 }

@@ -61,6 +61,7 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
                 String description = selectedProductElement.getDescription();
                 productElementDescription.setText(!description.isEmpty()? description: "");
 
+                productElementImage.setImage(selectedProductElement.getImage());
 
                 for (MealSubsection mealSubsection : subsections) {
 

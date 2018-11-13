@@ -31,12 +31,15 @@
          <HBox.margin>
             <Insets />
          </HBox.margin>
+         <padding>
+            <Insets top="200.0" />
+         </padding>
       </VBox>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1236.0" stylesheets="@../assets/css/app.css">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1236.0" stylesheets="@../assets/css/app.css">
          <children>
-            <VBox alignment="CENTER" prefHeight="1367.0" prefWidth="1800.0" spacing="30.0">
+            <VBox prefHeight="1367.0" prefWidth="1800.0" spacing="30.0">
                <children>
-                  <HBox alignment="CENTER">
+                  <HBox alignment="TOP_CENTER">
                      <children>
                         <VBox>
                            <children>
@@ -49,14 +52,17 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <VBox fx:id="optionsContainer" prefHeight="1217.0" prefWidth="1236.0" spacing="30.0" styleClass="option-container" />
+                  <VBox fx:id="optionsContainer" prefHeight="1217.0" prefWidth="1236.0" spacing="30.0" styleClass="option-container">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding></VBox>
                </children></VBox>
             <VBox alignment="CENTER" prefHeight="101.0" prefWidth="1800.0">
                <children>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cancel" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="CANCEL" />
-                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#drinks" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="DRINKS" />
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#drinks" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD" />
                      </children>
                      <VBox.margin>
                         <Insets right="20.0" />
