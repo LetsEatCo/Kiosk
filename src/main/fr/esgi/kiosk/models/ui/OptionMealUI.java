@@ -43,7 +43,7 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
         container.setSpacing(30);
 
         checkBox.setText(checkBoxLabel);
-        checkBox.setStyle("-fx-font-size: 30; -fx-font-family: Roboto");
+        checkBox.getStyleClass().add("option-product-element-checkbox");
         checkBox.setOnAction(event -> {
             checkBox.setSelected(false);
         });

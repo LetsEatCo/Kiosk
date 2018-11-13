@@ -14,12 +14,13 @@ public class Meal extends RessourceElementProduct{
         * Voluntary empty Constructor for dependency injection*/
     }
 
-    public Meal(String uuid, String reference, String name, double price, int productQuantity) {
+    public Meal(String uuid, String reference, String name,String description, double price, int productQuantity) {
         this.uuid = uuid;
         this.reference = reference;
         this.name = name;
         this.price = price;
         this.productQuantity = productQuantity;
+        this.description = description;
 //        this.product = product;
     }
 
