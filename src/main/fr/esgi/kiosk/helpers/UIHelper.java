@@ -1,13 +1,9 @@
 package main.fr.esgi.kiosk.helpers;
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.fr.esgi.kiosk.controllers.AccompanimentController;
 import main.fr.esgi.kiosk.controllers.CommandController;
@@ -98,6 +94,13 @@ public class UIHelper {
 
             content.getChildren().add((Node) elementUI.get(i));
         }
+
+    }
+
+    public static <T> void loadUIContent(Pane origin, Pane content) {
+
+        content.getChildren().removeAll();
+        content.getChildren().add(origin);
 
     }
 
