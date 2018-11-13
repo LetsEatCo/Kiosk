@@ -7,11 +7,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <HBox fx:id="root" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.AccompanimentController">
    <children>
-      <VBox alignment="CENTER" prefHeight="1492.0" prefWidth="565.0">
+      <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="565.0">
          <children>
             <VBox alignment="CENTER">
                <children>
@@ -20,40 +19,39 @@
                         <Image url="@../assets/images/560491.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="productElementName" alignment="CENTER" contentDisplay="CENTER" text="Menu Burger">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="productElementPrice" alignment="CENTER" contentDisplay="CENTER" text="10 €">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                  </Label>
                </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="86.0" prefWidth="565.0">
-               <VBox.margin>
+               <opaqueInsets>
                   <Insets />
-               </VBox.margin>
+               </opaqueInsets>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </padding>
             </VBox>
          </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
       </VBox>
-      <VBox fx:id="rootOptions" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1236.0" stylesheets="@../assets/css/app.css">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1236.0" stylesheets="@../assets/css/app.css">
          <children>
             <VBox alignment="CENTER" prefHeight="1367.0" prefWidth="1800.0" spacing="30.0">
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label fx:id="subsectionName" styleClass="label-font" text="Accompaniment" />
+                        <VBox>
+                           <children>
+                              <Label fx:id="productElementName" styleClass="label-font" text="Accompaniment" />
+                              <Label fx:id="productElementDescription" styleClass="product-element-description" text="Accompaniment" />
+                           </children>
+                        </VBox>
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <VBox fx:id="optionsContainer" alignment="CENTER" prefHeight="1217.0" prefWidth="1236.0" spacing="30.0" />
+                  <VBox fx:id="optionsContainer" prefHeight="1217.0" prefWidth="1236.0" spacing="30.0" styleClass="option-container" />
                </children></VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="101.0" prefWidth="1800.0">
+            <VBox alignment="CENTER" prefHeight="101.0" prefWidth="1800.0">
                <children>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>

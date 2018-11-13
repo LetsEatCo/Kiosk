@@ -92,5 +92,29 @@
 }
 
 .option-price{
+
+    -fx-font-size: 20;
+    -fx-font-family: "Secular One";
     -fx-text-fill: #00c853 ;
+}
+
+.option-subsection-name{
+    -fx-font-size: 30;
+    -fx-font-family: "Secular One";
+}
+
+.product-element-description{
+    -fx-font-family: "Secular One";
+    -fx-font-size: 30;
+    -fx-text-fill: grey;
+}
+
+.option-container{
+    -fx-border-color: lightgrey;
+    -fx-border-width: 0px 0px 0px 5px;
+}
+
+.option-product-element-checkbox{
+    -fx-font-family: "Secular One";
+    -fx-font-size: 30;
 }
