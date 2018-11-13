@@ -5,10 +5,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.*;
 import main.fr.esgi.kiosk.models.ui.OptionMealUI;
+import main.fr.esgi.kiosk.models.ui.SectionUI;
+import main.fr.esgi.kiosk.models.ui.SubsectionUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -43,7 +46,7 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
         this.drinkController = drinkController;
     }
 
-    public void setSelectedProductElement(T selectedProductElement) {
+    void setSelectedProductElement(T selectedProductElement) {
         this.selectedProductElement = selectedProductElement;
     }
 
@@ -58,10 +61,11 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
                 Subsections subsections = ((Meal) selectedProductElement).getSubsections();
                 MealSubsection subsection = subsections.get(0);
                 subsectionName.setText(subsection.getName());
-                initOptions(subsection);
 
                 for (MealSubsection mealSubsection : subsections) {
 
+                    SubsectionUI subsectionUI = new SubsectionUI(mealSubsection, this);
+                    initOptions(subsectionUI);
 
                 }
             }
@@ -80,16 +84,8 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
         UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
     }
 
-    void initOptions(MealSubsection subsection){
-
-        ArrayList<Product> productsOptions = subsection.getProducts();
-        ArrayList<Ingredient> ingredientsOptions = subsection.getIngredients();
-
-        ArrayList<OptionMealUI> optionProductsUIArrayList = UIHelper.createProductsElementsOptionsUI(productsOptions, this);
-        ArrayList<OptionMealUI> optionIngredientsUIArrayList = UIHelper.createProductsElementsOptionsUI(ingredientsOptions, this);
-
-        UIHelper.loadUIContent(optionProductsUIArrayList, optionsContainer);
-        UIHelper.loadUIContent(optionIngredientsUIArrayList, optionsContainer);
+    private void initOptions(SubsectionUI subsectionUI){
+        UIHelper.loadUIContent(subsectionUI, optionsContainer);
     }
 
 }

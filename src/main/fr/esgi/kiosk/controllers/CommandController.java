@@ -125,12 +125,8 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         ArrayList<ElementUI> mealsElementUI  = UIHelper.createProductsElementsUI(section.getMeals());
         ArrayList<ElementUI> productsElementUI  = UIHelper.createProductsElementsUI(section.getProducts());
 
-
         elementUIS.addAll(mealsElementUI);
         elementUIS.addAll(productsElementUI);
-
-        System.out.println(elementUIS.size());
-        System.out.println(section);
 
         loadUIContent(elementUIS, mainContent);
 
