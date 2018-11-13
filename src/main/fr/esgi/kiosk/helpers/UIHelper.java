@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.fr.esgi.kiosk.controllers.AccompanimentController;
 import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
@@ -74,7 +75,7 @@ public class UIHelper {
 
     }
 
-    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, Object controller){
+    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, AccompanimentController controller){
 
         ArrayList<OptionMealUI> productElementUIArrayList = new ArrayList<>();
 

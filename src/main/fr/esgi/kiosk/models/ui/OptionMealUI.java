@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import main.fr.esgi.kiosk.controllers.AccompanimentController;
 import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 
@@ -16,14 +18,22 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
 
     private HBox container;
     private JFXCheckBox checkBox;
+    private Label supplement;
 
-    private Object controller;
+    private long minSelections;
+    private long maxSelections;
 
-    public OptionMealUI(T productElement, Object controller) {
+    private AccompanimentController controller;
+    private T productElement;
+
+    public OptionMealUI(T productElement, AccompanimentController controller) {
 
         this.controller = controller;
         this.price = productElement.getPrice();
-        this.checkBoxLabel = productElement.getName() + " ( + " + price + " € )";
+        this.checkBoxLabel = productElement.getName();
+        this.supplement = new Label(" ( + " + price + " € )");
+        supplement.getStyleClass().add("option-price");
+
 
         checkBox = new JFXCheckBox();
         container = new HBox();
@@ -38,7 +48,7 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
             checkBox.setSelected(false);
         });
 
-        container.getChildren().addAll(checkBox);
+        container.getChildren().addAll(checkBox, supplement);
 
         this.getChildren().removeAll();
         this.getChildren().addAll(container);

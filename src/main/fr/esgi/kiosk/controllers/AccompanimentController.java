@@ -34,6 +34,8 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
     private Cart<T> cart;
     private T selectedProductElement;
 
+    private long maxSelections ;
+
     private StageManagerHelper stageManagerHelper;
     private DrinkController<T> drinkController;
 
@@ -58,10 +60,10 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
                 Subsections subsections = ((Meal) selectedProductElement).getSubsections();
                 MealSubsection subsection = subsections.get(0);
                 subsectionName.setText(subsection.getName());
-                initOptions(subsection);
 
                 for (MealSubsection mealSubsection : subsections) {
 
+                    initOptions(mealSubsection);
 
                 }
             }
