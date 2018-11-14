@@ -1,6 +1,7 @@
 package main.fr.esgi.kiosk.models.ui;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -21,20 +22,22 @@ public class ElementUI<T extends RessourceElementProduct> extends Parent{
         this.element = element;
 
         JFXButton uiBtn = new JFXButton();
-        uiBtn.setStyle("-fx-background-color: transparent");
+        uiBtn.setStyle("-fx-background-color: transparent;-fx-font-family: 'Secular One'");
         VBox uiVbox = new VBox();
         ImageView uiImageView = new ImageView();
         Label uiLabelProductName = new Label(element.getName());
-        Label uiLabelProductPrice= new Label(element.getPrice() + " €");
+        Label uiLabelProductPrice= new Label(String.format("%.2f", element.getPrice()) + " €");
 
-        uiLabelProductName.setStyle("-fx-font-weight: bold;" +
-                "-fx-font-size: 20");
-        uiLabelProductPrice.setStyle("-fx-font-weight: bold;" +
-                "-fx-font-size: 20");
+        String labelCss = "-fx-font-family: 'Secular One'; -fx-font-weight: bold; -fx-font-size: 20";
+        uiLabelProductName.setStyle(labelCss);
+        uiLabelProductPrice.setStyle(labelCss);
 
         // Settings UI credentials
 
         uiImageView.setImage(element.getImage());
+
+
+        uiVbox.setStyle("-fx-background-color: transparent;-fx-text-fill: black");
 
         uiVbox.getChildren().addAll(uiImageView, uiLabelProductName, uiLabelProductPrice);
 

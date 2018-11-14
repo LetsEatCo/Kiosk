@@ -1,7 +1,6 @@
 package main.fr.esgi.kiosk.controllers;
 
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -19,7 +18,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 @Component
 public class CommandController <T extends RessourceElementProduct>  implements FxmlController {
@@ -27,11 +25,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     private VBox sectionsContainer;
     private int adminCounter = 0;
-    private ArrayList<Product> products;
-    private ArrayList<Meal> meals;
-    ArrayList<ArrayList<RessourceElementProduct>> productsAndMeals = new ArrayList<>();
-    private ArrayList<ElementUI> productElementUIArrayList;
-    private ArrayList<ElementUI> mealsElementUIArrayList;
     private Store store;
     private Order<T> order;
 
@@ -45,13 +38,12 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private VBox cartPane;
 
     private final StageManagerHelper stageManagerHelper;
-    private AccompanimentController<T> accompanimentController;
-    private T selectedProductElement;
+    private ProductCompositionController<T> accompanimentController;
     private Cart<T> cart;
     private ElementUI<RessourceElementProduct> test;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order<T> order, AccompanimentController<T> accompanimentController, Cart<T> cart) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order<T> order, ProductCompositionController<T> accompanimentController, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
         this.order = order;
@@ -70,7 +62,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
 
     @FXML
-    void adminRegistration(ActionEvent event) {
+    void adminRegistration() {
 
         adminCounter +=1;
 
@@ -82,7 +74,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     }
 
     @FXML
-    void loadPreviousPage(ActionEvent event) {
+    void loadPreviousPage() {
 
         UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.LOCATION);
     }
@@ -94,14 +86,8 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     }
 
-    public void addToCart(CartElementUI<RessourceElementProduct> productElement){
-
-        cartPane.getChildren().add(productElement);
-
-    }
-
     @FXML
-    void order(ActionEvent event)  {
+    void order()  {
 
         System.out.println("Order process...");
 
@@ -167,12 +153,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     }
 
     private void lazyLoadProducts() {
-
-        products = store.getSections().get(0).getProducts();
-        meals = store.getSections().get(0).getMeals();
-
-        productElementUIArrayList = UIHelper.createProductsElementsUI(products);
-        mealsElementUIArrayList = UIHelper.createProductsElementsUI(meals);
 
         Sections sections = store.getSections();
 

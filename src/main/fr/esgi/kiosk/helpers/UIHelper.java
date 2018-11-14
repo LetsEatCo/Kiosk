@@ -5,12 +5,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import main.fr.esgi.kiosk.controllers.AccompanimentController;
+import main.fr.esgi.kiosk.controllers.ProductCompositionController;
 import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.models.ui.OptionMealUI;
-import main.fr.esgi.kiosk.models.ui.SectionUI;
 import main.fr.esgi.kiosk.models.ui.SubsectionUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +72,7 @@ public class UIHelper {
 
     }
 
-    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, AccompanimentController controller, SubsectionUI subsectionUI){
+    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, ProductCompositionController controller, SubsectionUI subsectionUI){
 
         ArrayList<OptionMealUI> productElementUIArrayList = new ArrayList<>();
 

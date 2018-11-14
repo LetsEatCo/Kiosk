@@ -1,11 +1,10 @@
 package main.fr.esgi.kiosk.models.ui;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import main.fr.esgi.kiosk.controllers.AccompanimentController;
+import main.fr.esgi.kiosk.controllers.ProductCompositionController;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.MealSubsection;
 
@@ -15,12 +14,12 @@ public class SubsectionUI extends VBox {
     private long minSelections;
     private long maxSelections;
     private long currentSelections=0;
-    private AccompanimentController accompanimentController;
+    private ProductCompositionController productCompositionController;
     private MealSubsection mealSubsection;
 
-    public SubsectionUI(MealSubsection mealSubsection, AccompanimentController accompanimentController) {
+    public SubsectionUI(MealSubsection mealSubsection, ProductCompositionController productCompositionController) {
 
-        this.accompanimentController = accompanimentController;
+        this.productCompositionController = productCompositionController;
         this.mealSubsection = mealSubsection;
         this.minSelections = mealSubsection.getMinSelectionsPermitted();
         this.maxSelections = mealSubsection.getMaxSelectionsPermitted();
@@ -39,8 +38,8 @@ public class SubsectionUI extends VBox {
 
         this.getChildren().add(titleContainer);
 
-        ArrayList<OptionMealUI> optionProductsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getProducts(), accompanimentController, this);
-        ArrayList<OptionMealUI> optionIngredientsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getIngredients(), accompanimentController, this);
+        ArrayList<OptionMealUI> optionProductsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getProducts(), productCompositionController, this);
+        ArrayList<OptionMealUI> optionIngredientsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getIngredients(), productCompositionController, this);
 
         this.getChildren().addAll(optionIngredientsUIArrayList);
         this.getChildren().addAll(optionProductsUIArrayList);

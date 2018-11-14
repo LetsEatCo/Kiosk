@@ -76,29 +76,7 @@ public enum FxmlView {
 
         @Override
         public String getFxmlFile() {
-            return "/fxml/Accompaniment.fxml";
-        }
-
-    },DRINKS{
-        @Override
-        public String getTitle() {
-            return getStringFromResourceBundle("drinks.title");
-        }
-
-        @Override
-        public String getFxmlFile() {
-            return "/fxml/Drinks.fxml";
-        }
-
-    },DESSERTS{
-        @Override
-        public String getTitle() {
-            return getStringFromResourceBundle("desserts.title");
-        }
-
-        @Override
-        public String getFxmlFile() {
-            return "/fxml/Desserts.fxml";
+            return "/fxml/ProductComposition.fxml";
         }
 
     };

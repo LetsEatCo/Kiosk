@@ -1,12 +1,11 @@
 package main.fr.esgi.kiosk.models.ui;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import main.fr.esgi.kiosk.controllers.AccompanimentController;
+import main.fr.esgi.kiosk.controllers.ProductCompositionController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 
 public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
@@ -18,20 +17,20 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
     private JFXCheckBox checkBox;
     private Label supplement;
 
-    private AccompanimentController controller;
+    private ProductCompositionController controller;
     private SubsectionUI subsectionUI;
     private T productElement;
     private boolean isClicked =false;
 
 
-    public OptionMealUI(T productElement, AccompanimentController controller, SubsectionUI subsectionUI) {
+    public OptionMealUI(T productElement, ProductCompositionController controller, SubsectionUI subsectionUI) {
 
         this.controller = controller;
         this.subsectionUI = subsectionUI;
         this.price = productElement.getPrice();
         this.checkBoxLabel = productElement.getName();
 
-        this.supplement = new Label(" ( + " + price + " € )");
+        this.supplement = new Label(" ( + " + String.format("%.2f", price) + " € )");
         supplement.getStyleClass().add("option-price");
 
 

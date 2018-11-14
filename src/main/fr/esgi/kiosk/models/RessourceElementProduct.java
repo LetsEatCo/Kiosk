@@ -7,7 +7,7 @@ public class RessourceElementProduct {
     protected String uuid;
     protected String name;
     protected long quantity;
-    protected double price;
+    protected Double price;
     protected String imageUrl;
     protected String description;
     protected Image image = new Image("/main/resources/assets/images/560491.jpg");

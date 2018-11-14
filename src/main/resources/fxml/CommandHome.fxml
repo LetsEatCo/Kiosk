@@ -58,17 +58,17 @@
                      <children>
                         <HBox spacing="50.0">
                            <children>
-                              <JFXButton style="-fx-background-color: black;" text="Our Offers" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Our Offers" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: black;" text="Promotions" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Promotions" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: black;" text="Very Bon Plans" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Very Bon Plans" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
@@ -77,12 +77,12 @@
                         </HBox>
                         <HBox spacing="50.0">
                            <children>
-                              <JFXButton style="-fx-background-color: black;" text="On the map" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="On the map" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: black;" text="Now..." textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Now..." textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
@@ -125,7 +125,7 @@
                </padding></VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="90.0" prefWidth="323.0">
                <children>
-                  <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#order" style="-fx-background-color: black;" text="Order" textFill="WHITE">
+                  <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#order" styleClass="btn-black" text="Order" textFill="WHITE">
                      <font>
                         <Font name="Arvo Bold" size="20.0" />
                      </font>

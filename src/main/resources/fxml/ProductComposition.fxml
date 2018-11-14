@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.AccompanimentController">
+<HBox fx:id="root" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.ProductCompositionController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="565.0">
          <children>
@@ -82,7 +82,7 @@
                            </children>
                         </HBox>
                         <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cancel" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="CANCEL" />
-                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#drinks" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD TO CART" />
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addToCart" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD TO CART" />
                      </children>
                      <VBox.margin>
                         <Insets right="20.0" />

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AccompanimentController<T extends RessourceElementProduct> implements FxmlController{
+public class ProductCompositionController<T extends RessourceElementProduct> implements FxmlController{
 
     @FXML
     private HBox root;
@@ -41,12 +41,11 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
     private T selectedProductElement;
 
     private StageManagerHelper stageManagerHelper;
-    private DrinkController<T> drinkController;
 
     @Autowired @Lazy
-    public AccompanimentController(StageManagerHelper stageManagerHelper, DrinkController<T> drinkController) {
+    public ProductCompositionController(StageManagerHelper stageManagerHelper, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
-        this.drinkController = drinkController;
+        this.cart = cart;
     }
 
     void setSelectedProductElement(T selectedProductElement) {
@@ -80,9 +79,16 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
     }
 
     @FXML
-    void drinks(){
-        drinkController.setSelectedProductElement(selectedProductElement);
-        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.DRINKS);
+    void addToCart(){
+
+        if(!cart.contains(selectedProductElement)){
+
+            cart.add(selectedProductElement);
+            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
+        }else{
+            System.out.println("Already In the cart !");
+        }
+
     }
 
     @FXML

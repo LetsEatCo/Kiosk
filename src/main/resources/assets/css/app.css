@@ -136,3 +136,8 @@
     -fx-border-style: solid;
     -fx-border-width: 2;
 }
+
+.product-element-label{
+    -fx-font-family: "Secular One";
+    -fx-font-size: 20;
+}
