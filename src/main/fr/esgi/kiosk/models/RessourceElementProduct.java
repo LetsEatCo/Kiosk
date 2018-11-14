@@ -10,7 +10,7 @@ public class RessourceElementProduct {
     protected Double price;
     protected String imageUrl;
     protected String description;
-    protected Image image = new Image("/main/resources/assets/images/560491.jpg");
+    protected Image image;
 
     public String getUuid() {
         return uuid;
@@ -32,17 +32,10 @@ public class RessourceElementProduct {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public Image getImage() {
         return image;
@@ -60,11 +53,4 @@ public class RessourceElementProduct {
         this.imageUrl = imageUrl;
     }
 
-    public long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
-    }
 }

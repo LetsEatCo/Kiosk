@@ -2,35 +2,29 @@ package main.fr.esgi.kiosk.models;
 
 import javafx.scene.image.Image;
 
-public class Meal extends RessourceElementProduct{
+import java.util.HashSet;
+public class Meal extends RessourceElementProduct {
 
     private String reference;
     private int productQuantity;
-//    private Product product;
     private Subsections subsections;
+    private HashSet<String> optionsUuids = new HashSet<>();
 
-    public Meal(){
+    public Meal() {
         /*
-        * Voluntary empty Constructor for dependency injection*/
+         * Voluntary empty Constructor for dependency injection*/
     }
 
-    public Meal(String uuid, String reference, String name,String description, double price, int productQuantity) {
+    public Meal(String uuid, String reference, String name, String description, double price, int productQuantity) {
         this.uuid = uuid;
         this.reference = reference;
         this.name = name;
         this.price = price;
         this.productQuantity = productQuantity;
         this.description = description;
-//        this.product = product;
+
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
 
     public String getName() {
         return name;
@@ -42,14 +36,6 @@ public class Meal extends RessourceElementProduct{
 
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getProductQuantity() {
-        return productQuantity;
     }
 
     public void setProductQuantity(int productQuantity) {
@@ -66,5 +52,17 @@ public class Meal extends RessourceElementProduct{
 
     public void setSubsections(Subsections subsections) {
         this.subsections = subsections;
+    }
+
+    public void addOption(String uuid) {
+        optionsUuids.add(uuid);
+    }
+
+    public void removeOption(String uuid) {
+        optionsUuids.remove(uuid);
+    }
+
+    public HashSet<String> getOptionsUuids() {
+        return optionsUuids;
     }
 }
