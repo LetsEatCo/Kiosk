@@ -26,7 +26,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private VBox sectionsContainer;
     private int adminCounter = 0;
     private Store store;
-    private Order<T> order;
+    private Order order;
 
     @FXML
     private HBox root;
@@ -43,7 +43,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private ElementUI<RessourceElementProduct> test;
 
     @Autowired @Lazy
-    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order<T> order, ProductCompositionController<T> accompanimentController, Cart<T> cart) {
+    public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, ProductCompositionController<T> accompanimentController, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
         this.store = store;
         this.order = order;

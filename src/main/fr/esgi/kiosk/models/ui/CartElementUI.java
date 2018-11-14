@@ -3,24 +3,14 @@ package main.fr.esgi.kiosk.models.ui;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.controllers.CommandController;
-import main.fr.esgi.kiosk.helpers.CredentialsHelper;
-import main.fr.esgi.kiosk.helpers.UIHelper;
-import main.fr.esgi.kiosk.models.Cart;
 import main.fr.esgi.kiosk.models.Meal;
-import main.fr.esgi.kiosk.models.Product;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.Properties;
 
 
 public class CartElementUI<T extends RessourceElementProduct> extends Parent {
@@ -36,9 +26,6 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
 
         this.commandController = commandController;
         this.productElement = productElement;
-
-        System.out.println("Ref original" + productElement);
-        System.out.println("Ref copy" + this.productElement);
 
         HBox mainContainer = new HBox();
 

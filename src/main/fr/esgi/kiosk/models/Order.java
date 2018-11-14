@@ -1,25 +1,26 @@
 package main.fr.esgi.kiosk.models;
 
+
 import java.util.ArrayList;
 
-public class Order <T extends RessourceElementProduct>{
+public class Order extends ArrayList<CartElement> {
 
-    private String placeToEat;
-    private ArrayList<T> productsElements;
+    private boolean isTakeAway;
 
-    public String getPlaceToEat() {
-        return placeToEat;
+    public void setTakeAway(boolean takeAway) {
+        isTakeAway = takeAway;
     }
 
-    public void setPlaceToEat(String placeToEat) {
-        this.placeToEat = placeToEat;
-    }
+    public <T extends RessourceElementProduct> void initialize(Cart<T> cart){
 
-    public ArrayList<T> getProductsElements() {
-        return productsElements;
-    }
+        for (T productElement : cart) {
 
-    public void setProductsElements(ArrayList<T> productsElements) {
-        this.productsElements = productsElements;
+            String uuid = productElement.getUuid();
+            int quantity = (int)productElement.getQuantity();
+            CartElement cartElement = new CartElement(uuid,quantity, productElement.getOptionsUuids());
+            this.add(cartElement);
+
+        }
+
     }
 }
