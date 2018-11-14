@@ -11,7 +11,7 @@ public class Order extends ArrayList<CartElement> {
         isTakeAway = takeAway;
     }
 
-    public <T extends RessourceElementProduct> void initialize(Cart<T> cart){
+    public <T extends RessourceElementProduct> void process(Cart<T> cart){
 
         for (T productElement : cart) {
 

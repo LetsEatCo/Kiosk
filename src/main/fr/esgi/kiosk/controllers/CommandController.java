@@ -89,7 +89,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void order()  {
 
-        System.out.println("Order process...");
+        order.process(cart);
 
     }
 
