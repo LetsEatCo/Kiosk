@@ -6,7 +6,7 @@ public class RessourceElementProduct {
 
     protected String uuid;
     protected String name;
-    protected long quantity;
+    protected long quantity = 1;
     protected Double price;
     protected String imageUrl;
     protected String description;
@@ -36,6 +36,13 @@ public class RessourceElementProduct {
         return price;
     }
 
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
 
     public Image getImage() {
         return image;
