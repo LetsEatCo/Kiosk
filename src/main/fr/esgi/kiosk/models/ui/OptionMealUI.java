@@ -11,34 +11,26 @@ import main.fr.esgi.kiosk.models.RessourceElementProduct;
 
 public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
 
-    private double price;
-    private String checkBoxLabel;
-
-    private HBox container;
     private JFXCheckBox checkBox;
-    private Label supplement;
 
-    private ProductCompositionController controller;
-    private SubsectionUI subsectionUI;
+    private ProductCompositionController<T> controller;
     private T productElement;
     private boolean isClicked =false;
     private String uuid;
 
 
-    public OptionMealUI(T productElement, ProductCompositionController controller, SubsectionUI subsectionUI) {
+    public OptionMealUI(T productElement, ProductCompositionController<T> controller, SubsectionUI subsectionUI) {
 
         this.productElement = productElement;
-        this.controller = controller;
-        this.subsectionUI = subsectionUI;
-        this.price = productElement.getPrice();
-        this.checkBoxLabel = productElement.getName();
+        double price = productElement.getPrice();
+        String checkBoxLabel = productElement.getName();
         this.uuid = productElement.getUuid();
-        this.supplement = new Label(" ( + " + String.format("%.2f", price) + " € )");
+        Label supplement = new Label(" ( + " + String.format("%.2f", price) + " € )");
         supplement.getStyleClass().add("option-price");
 
 
         checkBox = new JFXCheckBox();
-        container = new HBox();
+        HBox container = new HBox();
         container.setAlignment(Pos.CENTER_LEFT);
 
         container.setSpacing(30);
@@ -59,7 +51,6 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
                         ((Meal) controllerCpy).getOptionsUuids().add(uuid);
                         isClicked = true;
                         subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()+1);
-                        System.out.println("Option size : " + ((Meal) controllerCpy).getOptionsUuids().size());
                     }
 
                 }
@@ -71,7 +62,6 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
                         ((Meal) controllerCpy).getOptionsUuids().remove(uuid);
                         isClicked = false;
                         subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()-1);
-                        System.out.println("Option size : " + ((Meal) controllerCpy).getOptionsUuids().size());
                     }
                 }else{
                     checkBox.setSelected(false);
