@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox fx:id="root" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.AccompanimentController">
    <children>
@@ -61,8 +62,27 @@
                <children>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="276.0" spacing="10.0" styleClass="product-element-quantity">
+                           <children>
+                              <JFXButton onAction="#decreaseQuantity" prefHeight="50.0" prefWidth="50.0" text="-">
+                                 <font>
+                                    <Font name="SecularOne-Regular" size="30.0" />
+                                 </font>
+                              </JFXButton>
+                              <Label fx:id="quantityLabel" alignment="CENTER" text="1">
+                                 <font>
+                                    <Font name="SecularOne-Regular" size="30.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton layoutX="79.0" layoutY="47.0" onAction="#increaseQuantity" prefHeight="50.0" prefWidth="50.0" text="+">
+                                 <font>
+                                    <Font name="SecularOne-Regular" size="30.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
                         <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cancel" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="CANCEL" />
-                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#drinks" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD" />
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#drinks" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD TO CART" />
                      </children>
                      <VBox.margin>
                         <Insets right="20.0" />

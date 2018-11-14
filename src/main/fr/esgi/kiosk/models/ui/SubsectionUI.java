@@ -1,7 +1,9 @@
 package main.fr.esgi.kiosk.models.ui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.controllers.AccompanimentController;
 import main.fr.esgi.kiosk.helpers.UIHelper;
@@ -31,7 +33,11 @@ public class SubsectionUI extends VBox {
 
         Label subsectionName = new Label(mealSubsection.getName() + " (UP TO " + mealSubsection.getMaxSelectionsPermitted()+")");
         subsectionName.getStyleClass().add("option-subsection-name");
-        this.getChildren().add(subsectionName);
+
+        HBox titleContainer = new HBox(subsectionName);
+        titleContainer.setPadding(new Insets(0,0,50,0));
+
+        this.getChildren().add(titleContainer);
 
         ArrayList<OptionMealUI> optionProductsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getProducts(), accompanimentController, this);
         ArrayList<OptionMealUI> optionIngredientsUIArrayList = UIHelper.createProductsElementsOptionsUI(mealSubsection.getIngredients(), accompanimentController, this);

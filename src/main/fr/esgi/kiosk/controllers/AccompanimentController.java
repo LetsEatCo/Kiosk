@@ -32,6 +32,11 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
     @FXML
     private ImageView productElementImage;
 
+    @FXML
+    private Label quantityLabel;
+
+    private int quantity = 1;
+
     private Cart<T> cart;
     private T selectedProductElement;
 
@@ -78,6 +83,20 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
     void drinks(){
         drinkController.setSelectedProductElement(selectedProductElement);
         UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.DRINKS);
+    }
+
+    @FXML
+    void decreaseQuantity(){
+        if(quantity>1){
+            quantity-=1;
+            quantityLabel.setText(String.valueOf(quantity));
+        }
+    }
+
+    @FXML
+    void increaseQuantity(){
+        quantity+=1;
+        quantityLabel.setText(String.valueOf(quantity));
     }
 
     @FXML

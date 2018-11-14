@@ -26,6 +26,7 @@
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-family: "Secular One";
+    -fx-background-radius: 4em;
 }
 .btn:hover{
     -fx-background-color: transparent;
@@ -126,4 +127,12 @@
 .option-product-element-checkbox{
     -fx-font-family: "Secular One";
     -fx-font-size: 30;
+}
+
+.product-element-quantity{
+    -fx-background-radius: 4em;
+    -fx-border-radius: 4em;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
 }
