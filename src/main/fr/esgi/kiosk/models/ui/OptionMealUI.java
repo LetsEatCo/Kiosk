@@ -68,7 +68,7 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
 
                     if(controllerCpy instanceof Meal){
 
-                        ((Meal) controllerCpy).removeOption(uuid);
+                        ((Meal) controllerCpy).getOptionsUuids().remove(uuid);
                         isClicked = false;
                         subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()-1);
                         System.out.println("Option size : " + ((Meal) controllerCpy).getOptionsUuids().size());

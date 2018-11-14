@@ -54,14 +54,6 @@ public class Meal extends RessourceElementProduct {
         this.subsections = subsections;
     }
 
-    public void addOption(String uuid) {
-        optionsUuids.add(uuid);
-    }
-
-    public void removeOption(String uuid) {
-        optionsUuids.remove(uuid);
-    }
-
     public HashSet<String> getOptionsUuids() {
         return optionsUuids;
     }

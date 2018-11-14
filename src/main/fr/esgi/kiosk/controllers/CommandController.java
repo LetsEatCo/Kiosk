@@ -158,7 +158,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         for (Section section : sections) {
 
-            SectionUI sectionUI  = new SectionUI(section, this);
+            new SectionUI(section, this);
 
         }
 
