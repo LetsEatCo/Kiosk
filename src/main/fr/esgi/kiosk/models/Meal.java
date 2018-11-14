@@ -6,7 +6,6 @@ import java.util.HashSet;
 public class Meal extends RessourceElementProduct {
 
     private String reference;
-    private int productQuantity;
     private Subsections subsections;
     private HashSet<String> optionsUuids = new HashSet<>();
 
@@ -20,7 +19,7 @@ public class Meal extends RessourceElementProduct {
         this.reference = reference;
         this.name = name;
         this.price = price;
-        this.productQuantity = productQuantity;
+        this.quantity = productQuantity;
         this.description = description;
 
     }
@@ -36,10 +35,6 @@ public class Meal extends RessourceElementProduct {
 
     public double getPrice() {
         return price;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
     }
 
     public Image getImage() {

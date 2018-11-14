@@ -87,9 +87,9 @@ public class ProductCompositionController<T extends RessourceElementProduct> imp
 
         if(!cart.contains(selectedProductElement)){
 
-            if(selectedProductElement instanceof Meal){
-                ((Meal) selectedProductElement).setProductQuantity(quantity);
-            }
+
+            selectedProductElement.setQuantity(quantity);
+
             cart.add(selectedProductElement);
             UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
         }else{
