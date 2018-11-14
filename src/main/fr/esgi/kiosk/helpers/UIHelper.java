@@ -72,29 +72,18 @@ public class UIHelper {
 
     }
 
-    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, ProductCompositionController controller, SubsectionUI subsectionUI){
+    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI<T>> createProductsElementsOptionsUI(ArrayList<T> productsElements, ProductCompositionController<T> controller, SubsectionUI subsectionUI){
 
-        ArrayList<OptionMealUI> productElementUIArrayList = new ArrayList<>();
+        ArrayList<OptionMealUI<T>> productElementUIArrayList = new ArrayList<>();
 
         for(T productElement : productsElements){
 
-            OptionMealUI productElementUI = new OptionMealUI(productElement, controller, subsectionUI);
+            OptionMealUI<T> productElementUI = new OptionMealUI(productElement, controller, subsectionUI);
             productElementUIArrayList.add(productElementUI);
 
         }
 
         return productElementUIArrayList;
-
-    }
-
-    public static <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {
-
-        int size = elementUI.size();
-
-        for(int i =0; i<size; i++){
-
-            content.getChildren().add((Node) elementUI.get(i));
-        }
 
     }
 

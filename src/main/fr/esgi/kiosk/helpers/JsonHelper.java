@@ -18,9 +18,6 @@ import static main.fr.esgi.kiosk.routes.StoreRouter.*;
 
 public class JsonHelper {
 
-    private final static String PRODUCTS = "products";
-    private final static String INGREDIENTS = "ingredients";
-
     private static Object parseJsonData(String json) throws ParseException {
 
         JSONParser jsonParser = new JSONParser();
