@@ -1,19 +1,16 @@
 package main.fr.esgi.kiosk.helpers;
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import main.fr.esgi.kiosk.controllers.AccompanimentController;
+import main.fr.esgi.kiosk.controllers.ProductCompositionController;
 import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.models.ui.OptionMealUI;
+import main.fr.esgi.kiosk.models.ui.SubsectionUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -75,13 +72,13 @@ public class UIHelper {
 
     }
 
-    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, AccompanimentController controller){
+    public static <T extends RessourceElementProduct> ArrayList<OptionMealUI> createProductsElementsOptionsUI(ArrayList<T> productsElements, ProductCompositionController controller, SubsectionUI subsectionUI){
 
         ArrayList<OptionMealUI> productElementUIArrayList = new ArrayList<>();
 
         for(T productElement : productsElements){
 
-            OptionMealUI productElementUI = new OptionMealUI(productElement, controller);
+            OptionMealUI productElementUI = new OptionMealUI(productElement, controller, subsectionUI);
             productElementUIArrayList.add(productElementUI);
 
         }
@@ -98,6 +95,13 @@ public class UIHelper {
 
             content.getChildren().add((Node) elementUI.get(i));
         }
+
+    }
+
+    public static <T> void loadUIContent(Pane origin, Pane content) {
+
+        content.getChildren().removeAll();
+        content.getChildren().add(origin);
 
     }
 

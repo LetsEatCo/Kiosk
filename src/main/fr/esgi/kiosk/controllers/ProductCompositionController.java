@@ -1,49 +1,51 @@
 package main.fr.esgi.kiosk.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.*;
-import main.fr.esgi.kiosk.models.ui.OptionMealUI;
-import main.fr.esgi.kiosk.models.ui.SectionUI;
 import main.fr.esgi.kiosk.models.ui.SubsectionUI;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-
 @Component
-public class AccompanimentController<T extends RessourceElementProduct> implements FxmlController{
+public class ProductCompositionController<T extends RessourceElementProduct> implements FxmlController{
 
     @FXML
     private HBox root;
 
     @FXML
-    private VBox rootOptions;
-
-    @FXML
     private VBox optionsContainer;
 
     @FXML
-    private Label subsectionName;
+    private Label productElementName;
+
+    @FXML
+    private Label productElementDescription;
+
+    @FXML
+    private ImageView productElementImage;
+
+    @FXML
+    private Label quantityLabel;
+
+    private int quantity = 1;
 
     private Cart<T> cart;
     private T selectedProductElement;
 
     private StageManagerHelper stageManagerHelper;
-    private DrinkController<T> drinkController;
 
     @Autowired @Lazy
-    public AccompanimentController(StageManagerHelper stageManagerHelper, DrinkController<T> drinkController) {
+    public ProductCompositionController(StageManagerHelper stageManagerHelper, Cart<T> cart) {
         this.stageManagerHelper = stageManagerHelper;
-        this.drinkController = drinkController;
+        this.cart = cart;
     }
 
     void setSelectedProductElement(T selectedProductElement) {
@@ -59,8 +61,11 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
             if (((Meal) selectedProductElement).getSubsections() != null){
 
                 Subsections subsections = ((Meal) selectedProductElement).getSubsections();
-                MealSubsection subsection = subsections.get(0);
-                subsectionName.setText(subsection.getName());
+                productElementName.setText(selectedProductElement.getName());
+                String description = selectedProductElement.getDescription();
+                productElementDescription.setText(!description.isEmpty()? description: "");
+
+                productElementImage.setImage(selectedProductElement.getImage());
 
                 for (MealSubsection mealSubsection : subsections) {
 
@@ -74,9 +79,30 @@ public class AccompanimentController<T extends RessourceElementProduct> implemen
     }
 
     @FXML
-    void drinks(){
-        drinkController.setSelectedProductElement(selectedProductElement);
-        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.DRINKS);
+    void addToCart(){
+
+        if(!cart.contains(selectedProductElement)){
+
+            cart.add(selectedProductElement);
+            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
+        }else{
+            System.out.println("Already In the cart !");
+        }
+
+    }
+
+    @FXML
+    void decreaseQuantity(){
+        if(quantity>1){
+            quantity-=1;
+            quantityLabel.setText(String.valueOf(quantity));
+        }
+    }
+
+    @FXML
+    void increaseQuantity(){
+        quantity+=1;
+        quantityLabel.setText(String.valueOf(quantity));
     }
 
     @FXML

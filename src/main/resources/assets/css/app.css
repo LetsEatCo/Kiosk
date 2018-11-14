@@ -15,7 +15,7 @@
 }
 
 .btn{
-    -fx-font-size: 40;
+    -fx-font-size: 30;
     -fx-background-color: transparent;
     -fx-font-family: "Secular One";
 }
@@ -26,6 +26,7 @@
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-family: "Secular One";
+    -fx-background-radius: 4em;
 }
 .btn:hover{
     -fx-background-color: transparent;
@@ -92,5 +93,51 @@
 }
 
 .option-price{
+
+    -fx-font-size: 20;
+    -fx-font-family: "Secular One";
     -fx-text-fill: #00c853 ;
+}
+
+.option-subsection-name{
+
+    -fx-font-size: 30;
+    -fx-font-family: "Secular One";
+    -fx-border-color: lightgrey;
+    -fx-border-width: 0px 0px 3px 0px;
+
+}
+
+.product-element-description{
+    -fx-font-family: "Secular One";
+    -fx-font-size: 30;
+    -fx-text-fill: grey;
+}
+
+.option-container{
+    -fx-border-color: lightgrey;
+    -fx-border-width: 0px 0px 0px 5px;
+}
+
+.product-element-container{
+    -fx-border-color: lightgrey;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.option-product-element-checkbox{
+    -fx-font-family: "Secular One";
+    -fx-font-size: 30;
+}
+
+.product-element-quantity{
+    -fx-background-radius: 4em;
+    -fx-border-radius: 4em;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
+
+.product-element-label{
+    -fx-font-family: "Secular One";
+    -fx-font-size: 20;
 }

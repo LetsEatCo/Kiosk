@@ -12,24 +12,31 @@
 
 <HBox fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1800.0" styleClass="contentPane" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.CommandController">
    <children>
-      <VBox fx:id="sectionsContainer" alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="400.0">
+      <VBox fx:id="sectionsContainer" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0">
          <children>
-            <JFXButton onAction="#adminRegistration" prefHeight="126.0" prefWidth="151.0" text=" ">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="141.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="logo">
-                     <image>
-                        <Image url="@../assets/images/logo.png" />
-                     </image>
-                     <effect>
-                        <InnerShadow />
-                     </effect>
-                  </ImageView>
-               </graphic>
+            <HBox alignment="CENTER">
                <VBox.margin>
                   <Insets bottom="200.0" />
                </VBox.margin>
-            </JFXButton>
+               <children>
+                  <JFXButton onAction="#adminRegistration" prefHeight="126.0" prefWidth="151.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="141.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                           <image>
+                              <Image url="@../assets/images/logo.png" />
+                           </image>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
          </children>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
       </VBox>
       <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="1039.0">
          <children>
@@ -51,17 +58,17 @@
                      <children>
                         <HBox spacing="50.0">
                            <children>
-                              <JFXButton style="-fx-background-color: black;" text="Our Offers" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Our Offers" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: black;" text="Promotions" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Promotions" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: black;" text="Very Bon Plans" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Very Bon Plans" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
@@ -70,12 +77,12 @@
                         </HBox>
                         <HBox spacing="50.0">
                            <children>
-                              <JFXButton style="-fx-background-color: black;" text="On the map" textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="On the map" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: black;" text="Now..." textFill="WHITE">
+                              <JFXButton styleClass="btn-black" text="Now..." textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
@@ -89,7 +96,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1479.0" prefWidth="1039.0">
+            <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1206.0" prefWidth="1039.0" styleClass="product-element-container">
                <VBox.margin>
                   <Insets top="100.0" />
                </VBox.margin>
@@ -118,7 +125,7 @@
                </padding></VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="90.0" prefWidth="323.0">
                <children>
-                  <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#order" style="-fx-background-color: black;" text="Order" textFill="WHITE">
+                  <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#order" styleClass="btn-black" text="Order" textFill="WHITE">
                      <font>
                         <Font name="Arvo Bold" size="20.0" />
                      </font>

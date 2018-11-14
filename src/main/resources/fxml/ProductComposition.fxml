@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="root" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.ProductCompositionController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="565.0">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <ImageView fx:id="productElementImage" fitHeight="468.0" fitWidth="565.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/560491.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets top="200.0" />
+         </padding>
+      </VBox>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1236.0" stylesheets="@../assets/css/app.css">
+         <children>
+            <VBox prefHeight="1367.0" prefWidth="1800.0" spacing="30.0">
+               <children>
+                  <HBox alignment="TOP_CENTER">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label fx:id="productElementName" styleClass="label-font" text="Accompaniment" />
+                              <Label fx:id="productElementDescription" styleClass="product-element-description" text="Accompaniment" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox fx:id="optionsContainer" prefHeight="1217.0" prefWidth="1236.0" spacing="30.0" styleClass="option-container">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding></VBox>
+               </children></VBox>
+            <VBox alignment="CENTER" prefHeight="101.0" prefWidth="1800.0">
+               <children>
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="276.0" spacing="10.0" styleClass="product-element-quantity">
+                           <children>
+                              <JFXButton onAction="#decreaseQuantity" prefHeight="50.0" prefWidth="50.0" text="-">
+                                 <font>
+                                    <Font name="SecularOne-Regular" size="30.0" />
+                                 </font>
+                              </JFXButton>
+                              <Label fx:id="quantityLabel" alignment="CENTER" text="1">
+                                 <font>
+                                    <Font name="SecularOne-Regular" size="30.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton layoutX="79.0" layoutY="47.0" onAction="#increaseQuantity" prefHeight="50.0" prefWidth="50.0" text="+">
+                                 <font>
+                                    <Font name="SecularOne-Regular" size="30.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cancel" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="CANCEL" />
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addToCart" prefHeight="100.0" prefWidth="200.0" styleClass="btn-black" text="ADD TO CART" />
+                     </children>
+                     <VBox.margin>
+                        <Insets right="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>
