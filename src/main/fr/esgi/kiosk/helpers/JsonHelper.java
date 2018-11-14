@@ -162,7 +162,7 @@ public class JsonHelper {
                 double price = Double.valueOf(String.valueOf(((JSONObject) jsonMeal).get("price")));
                 int productQuantity = Integer.valueOf(String.valueOf(((JSONObject) jsonMeal).get("productQuantity")));
 
-                Meal meal = new Meal(uuid, reference,description,name, price, productQuantity);
+                Meal meal = new Meal(uuid, reference,name,description, price, productQuantity);
 
                 // TODO: load image product
                 meal.setImageUrl("/main/resources/assets/images/873086.jpg");

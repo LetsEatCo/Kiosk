@@ -37,39 +37,6 @@ public class StoreRouter {
 
     }
 
-    public JSONArray getProducts() throws IOException, ParseException {
-
-        CredentialsHelper credentialsHelper = new CredentialsHelper();
-        Properties routes = credentialsHelper.getRoutes();
-        Properties config = credentialsHelper.getStoreCredentials();
-
-        String route = routes.getProperty("getProducts");
-        String jwt = config.getProperty("jwt");
-
-        if(HttpHelper.httpGetRequest(route, jwt) instanceof JSONArray){
-
-           return (JSONArray) HttpHelper.httpGetRequest(route, jwt);
-        }
-
-        return null ;
-    }
-
-    public static JSONObject getProductOrIngredient(String type,String productOrIngredientUuid) throws IOException, ParseException {
-
-        CredentialsHelper credentialsHelper = new CredentialsHelper();
-        Properties routes = credentialsHelper.getRoutes();
-        Properties config = credentialsHelper.getStoreCredentials();
-
-        String root = routes.getProperty("getStore");
-        String storeUuid = config.getProperty("uuid");
-        String route = root + storeUuid + "/" +type + "/" + productOrIngredientUuid;
-
-        System.out.println(route);
-
-        return (JSONObject) HttpHelper.httpGetRequest(route);
-    }
-
-
     public Store getStore() throws IOException, ParseException {
 
         CredentialsHelper credentialsHelper = new CredentialsHelper();
@@ -79,7 +46,6 @@ public class StoreRouter {
         String root = routes.getProperty("getStore");
         String storeUuid = config.getProperty("uuid");
         String route = root + storeUuid;
-        String sectionUrl = route + "/sections";
 
         Object store = HttpHelper.httpGetRequest(route);
 

@@ -97,7 +97,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         for(T productElement : cart){
 
-            CartElementUI<T> cartElementUI = new CartElementUI<>(productElement);
+            CartElementUI<T> cartElementUI = new CartElementUI<>(productElement, this);
             cartPane.getChildren().add(cartElementUI);
 
         }
@@ -121,6 +121,15 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     public void addSections(SectionUI sectionUI){
         sectionsContainer.getChildren().add(sectionUI);
+
+    }
+
+    public void removeProductElementToCart(T productElement, CartElementUI cartElementUI){
+
+        cart.remove(productElement);
+        cartPane.getChildren().remove(cartElementUI);
+
+//        loadCartElement(cart);
 
     }
 
@@ -158,7 +167,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         for (Section section : sections) {
 
-            SectionUI sectionUI  = new SectionUI(section, this);
+            new SectionUI(section, this);
 
         }
 

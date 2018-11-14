@@ -3,29 +3,42 @@ package main.fr.esgi.kiosk.models.ui;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import main.fr.esgi.kiosk.controllers.CommandController;
 import main.fr.esgi.kiosk.helpers.CredentialsHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
+import main.fr.esgi.kiosk.models.Cart;
+import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.Product;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Properties;
 
+
 public class CartElementUI<T extends RessourceElementProduct> extends Parent {
 
-    private T productElement;
-    private int quantity = 1;
     private static final String ADD_QUANTITY_IMAGE = "/main/resources/assets/images/add.png";
     private static final String DECREASE_QUANTITY_IMAGE = "/main/resources/assets/images/delete.png";
+    private T productElement;
+    private Label quantityLabel;
+    private Label productElementPrice;
+    private CommandController<T> commandController;
 
-    public CartElementUI(T productElement) {
+    public CartElementUI(T productElement, CommandController<T> commandController) {
 
+        this.commandController = commandController;
         this.productElement = productElement;
+
+        System.out.println("Ref original" + productElement);
+        System.out.println("Ref copy" + this.productElement);
 
         HBox mainContainer = new HBox();
 
@@ -34,7 +47,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
         mainContainer.prefWidth(325);
         mainContainer.prefHeight(90);
 
-        ImageView productElementImage= new ImageView(productElement.getImage());
+        ImageView productElementImage = new ImageView(productElement.getImage());
 
         productElementImage.setFitWidth(110);
         productElementImage.setFitHeight(90);
@@ -47,15 +60,14 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
         vBox.minHeight(vBox.getPrefHeight());
 
         Label productName = new Label(productElement.getName());
-        Label quantityLabel = new Label(String.valueOf(quantity));
-        Label productElementPrice = new Label(String.valueOf(productElement.getPrice() + " €"));
+        quantityLabel = new Label(String.valueOf(productElement.getQuantity()));
+        productElementPrice = new Label(String.valueOf(productElement.getPrice() * productElement.getQuantity() + " €"));
 
-        productName.setStyle("-fx-font-weight: bold;" +
-                "-fx-font-size: 20");
-        quantityLabel.setStyle("-fx-font-weight: bold;" +
-                "-fx-font-size: 20");
-        productElementPrice.setStyle("-fx-font-weight: bold;" +
-                "-fx-font-size: 20");
+        String cartCss = "-fx-font-family: 'Secular One';-fx-font-size: 20";
+
+        productName.setStyle(cartCss);
+        quantityLabel.setStyle(cartCss);
+        productElementPrice.setStyle(cartCss);
 
         vBox.getChildren().addAll(productName, quantityLabel, productElementPrice);
 
@@ -77,6 +89,38 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
         increaseImage.setFitHeight(30);
         increaseImage.setFitWidth(30);
         increaseQuantity.setGraphic(increaseImage);
+
+        // Btn actions
+
+        increaseQuantity.setOnAction(event -> {
+
+
+            this.productElement.setQuantity(this.productElement.getQuantity() + 1);
+            quantityLabel.setText(String.valueOf(this.productElement.getQuantity()));
+            productElementPrice.setText(String.format("%.2f €", this.productElement.getPrice() * this.productElement.getQuantity()));
+
+
+        });
+
+        decreaseQuantity.setOnAction(event -> {
+
+            if (this.productElement.getQuantity() > 1) {
+                this.productElement.setQuantity(this.productElement.getQuantity() - 1);
+                quantityLabel.setText(String.valueOf(this.productElement.getQuantity()));
+                productElementPrice.setText(String.format("%.2f €", this.productElement.getPrice() * this.productElement.getQuantity()));
+            }else{
+
+                // TODO: Dialog action
+
+                if(this.productElement instanceof Meal){
+
+                    ((Meal) this.productElement).getOptionsUuids().clear();
+                }
+                commandController.removeProductElementToCart(this.productElement, this);
+
+            }
+
+        });
 
         btnContainer.getChildren().addAll(decreaseQuantity, increaseQuantity);
 

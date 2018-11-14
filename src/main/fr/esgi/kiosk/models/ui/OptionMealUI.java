@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import main.fr.esgi.kiosk.controllers.ProductCompositionController;
+import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
 
 public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
@@ -21,15 +22,17 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
     private SubsectionUI subsectionUI;
     private T productElement;
     private boolean isClicked =false;
+    private String uuid;
 
 
     public OptionMealUI(T productElement, ProductCompositionController controller, SubsectionUI subsectionUI) {
 
+        this.productElement = productElement;
         this.controller = controller;
         this.subsectionUI = subsectionUI;
         this.price = productElement.getPrice();
         this.checkBoxLabel = productElement.getName();
-
+        this.uuid = productElement.getUuid();
         this.supplement = new Label(" ( + " + String.format("%.2f", price) + " € )");
         supplement.getStyleClass().add("option-price");
 
@@ -46,30 +49,42 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
         checkBox.setOnAction(event -> {
 
 
-            if((subsectionUI.getCurrentSelections()<subsectionUI.getMaxSelections()) && !isClicked){
 
-                isClicked = true;
-                subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()+1);
-            }
-            else if(isClicked){
-                isClicked = false;
-                subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()-1);
-            }else{
-                checkBox.setSelected(false);
-            }
+                Object controllerCpy = controller.getSelectedProductElement();
+
+                if((subsectionUI.getCurrentSelections()<subsectionUI.getMaxSelections()) && !isClicked){
+
+                    if(controllerCpy instanceof Meal){
+
+                        ((Meal) controllerCpy).getOptionsUuids().add(uuid);
+                        isClicked = true;
+                        subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()+1);
+                        System.out.println("Option size : " + ((Meal) controllerCpy).getOptionsUuids().size());
+                    }
+
+                }
+
+                else if(isClicked){
+
+                    if(controllerCpy instanceof Meal){
+
+                        ((Meal) controllerCpy).getOptionsUuids().remove(uuid);
+                        isClicked = false;
+                        subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()-1);
+                        System.out.println("Option size : " + ((Meal) controllerCpy).getOptionsUuids().size());
+                    }
+                }else{
+                    checkBox.setSelected(false);
+                }
+
+
+
+
         });
 
         container.getChildren().addAll(checkBox, supplement);
 
         this.getChildren().removeAll();
         this.getChildren().addAll(container);
-    }
-
-    public boolean isClicked() {
-        return isClicked;
-    }
-
-    public void setClicked(boolean clicked) {
-        isClicked = clicked;
     }
 }

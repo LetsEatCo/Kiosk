@@ -52,6 +52,10 @@ public class ProductCompositionController<T extends RessourceElementProduct> imp
         this.selectedProductElement = selectedProductElement;
     }
 
+    public T getSelectedProductElement() {
+        return selectedProductElement;
+    }
+
     @Override
     public void initialize() {
         UIHelper.makeFadeInTransition(root);
@@ -82,6 +86,9 @@ public class ProductCompositionController<T extends RessourceElementProduct> imp
     void addToCart(){
 
         if(!cart.contains(selectedProductElement)){
+
+
+            selectedProductElement.setQuantity(quantity);
 
             cart.add(selectedProductElement);
             UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);

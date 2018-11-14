@@ -96,7 +96,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1206.0" prefWidth="1039.0" styleClass="product-element-container">
+            <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1143.0" prefWidth="1039.0" styleClass="product-element-container">
                <VBox.margin>
                   <Insets top="100.0" />
                </VBox.margin>
