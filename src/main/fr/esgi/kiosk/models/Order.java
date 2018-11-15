@@ -42,9 +42,9 @@ public class Order extends ArrayList<CartElement> {
             Properties routes = credentialsHelper.getRoutes();
             String orderUrl = routes.getProperty("order");
             params = new StringEntity(gson.toJson(this));
-            HttpHelper.httpPostRequest(orderUrl, params);
+//            HttpHelper.httpPostRequest(orderUrl, params);
 
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

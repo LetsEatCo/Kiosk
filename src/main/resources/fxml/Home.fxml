@@ -2,22 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1800.0" styleClass="home-background" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.MainController">
     <children>
-      <JFXButton fx:id="adminButton" onAction="#adminRegistration" prefHeight="160.0" prefWidth="64.0" text=" " textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/images/logo.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
-        <JFXButton onAction="#placeToEat" prefHeight="1456.0" prefWidth="2092.0">
+        <JFXButton onAction="#placeToEat" prefHeight="1717.0" prefWidth="1800.0">
          <font>
             <Font name="Arvo Bold" size="60.0" />
          </font>
