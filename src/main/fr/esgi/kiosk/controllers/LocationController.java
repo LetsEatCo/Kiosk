@@ -39,6 +39,7 @@ public class LocationController implements FxmlController {
     @FXML
     void takeAway(){
         order.setTakeAway(true);
+        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
     }
 
     @FXML
