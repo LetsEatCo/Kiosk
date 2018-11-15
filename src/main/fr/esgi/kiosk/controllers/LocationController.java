@@ -1,7 +1,6 @@
 package main.fr.esgi.kiosk.controllers;
 
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
@@ -30,14 +29,17 @@ public class LocationController implements FxmlController {
     }
 
     @FXML
-    void openCommandHome(ActionEvent event){
+    void onTheSpot(){
 
-        JFXButton jfxButton = (JFXButton) event.getSource();
-
-        order.setPlaceToEat(jfxButton.getText());
-
+        order.setTakeAway(false);
         UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
 
+    }
+
+    @FXML
+    void takeAway(){
+        order.setTakeAway(true);
+        UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
     }
 
     @FXML

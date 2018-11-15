@@ -2,6 +2,8 @@ package main.fr.esgi.kiosk.models;
 
 import javafx.scene.image.Image;
 
+import java.util.HashSet;
+
 public class RessourceElementProduct {
 
     protected String uuid;
@@ -11,6 +13,7 @@ public class RessourceElementProduct {
     protected String imageUrl;
     protected String description;
     protected Image image;
+    protected HashSet<String> optionsUuids = new HashSet<>();
 
     public String getUuid() {
         return uuid;
@@ -58,6 +61,10 @@ public class RessourceElementProduct {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public HashSet<String> getOptionsUuids() {
+        return optionsUuids;
     }
 
 }

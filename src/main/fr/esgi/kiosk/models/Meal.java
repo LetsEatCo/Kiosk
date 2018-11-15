@@ -7,7 +7,6 @@ public class Meal extends RessourceElementProduct {
 
     private String reference;
     private Subsections subsections;
-    private HashSet<String> optionsUuids = new HashSet<>();
 
     public Meal() {
         /*
@@ -49,7 +48,4 @@ public class Meal extends RessourceElementProduct {
         this.subsections = subsections;
     }
 
-    public HashSet<String> getOptionsUuids() {
-        return optionsUuids;
-    }
 }

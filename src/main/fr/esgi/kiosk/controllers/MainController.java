@@ -22,8 +22,6 @@ import java.io.IOException;
 @Component
 public class MainController implements FxmlController{
 
-    private int adminCounter = 0 ;
-
     @FXML
     private VBox root;
 
@@ -41,19 +39,6 @@ public class MainController implements FxmlController{
     @Autowired @Lazy
     public MainController(StageManagerHelper stageManagerHelper) {
         this.stageManagerHelper = stageManagerHelper;
-    }
-
-    @FXML
-    void adminRegistration(ActionEvent event) {
-
-        adminCounter +=1;
-
-        if(adminCounter == 10) {
-
-            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.ADMIN_LOGIN);
-
-            adminCounter=0;
-        }
     }
 
     @FXML
