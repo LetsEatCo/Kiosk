@@ -5,6 +5,7 @@ import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.helpers.JsonHelper;
 import main.fr.esgi.kiosk.models.*;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,7 +28,9 @@ public class StoreRouter {
         credentials.add(new BasicNameValuePair("email", email));
         credentials.add(new BasicNameValuePair("password", password));
 
-        JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), credentials);
+        UrlEncodedFormEntity entity = new UrlEncodedFormEntity(credentials);
+
+        JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), entity);
 
         if( jsonObject.get("jwt") instanceof String && jsonObject.get("uuid") instanceof String){
 
