@@ -2,10 +2,7 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
-import main.fr.esgi.kiosk.helpers.UIHelper;
-import main.fr.esgi.kiosk.models.Store;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

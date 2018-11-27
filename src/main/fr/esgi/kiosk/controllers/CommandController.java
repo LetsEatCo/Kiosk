@@ -40,7 +40,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     private final StageManagerHelper stageManagerHelper;
     private ProductCompositionController<T> accompanimentController;
     private Cart<T> cart;
-    private ElementUI<RessourceElementProduct> test;
 
     @Autowired @Lazy
     public CommandController(StageManagerHelper stageManagerHelper, Store store, Order order, ProductCompositionController<T> accompanimentController, Cart<T> cart) {
@@ -89,6 +88,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void order()  {
 
+        order.setStoreUuid(store.getUuid());
         order.process(cart);
 
     }
@@ -128,8 +128,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         cart.remove(productElement);
         cartPane.getChildren().remove(cartElementUI);
-
-//        loadCartElement(cart);
 
     }
 
