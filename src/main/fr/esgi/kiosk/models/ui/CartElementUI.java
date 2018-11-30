@@ -48,7 +48,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
 
         Label productName = new Label(productElement.getName());
         quantityLabel = new Label(String.valueOf(productElement.getQuantity()));
-        productElementPrice = new Label(String.valueOf(productElement.getPrice() * productElement.getQuantity() + " €"));
+        productElementPrice = new Label(String.valueOf((productElement.getPrice() + productElement.getTotalOptionsPrice()) * productElement.getQuantity() + " €"));
 
         String cartCss = "-fx-font-family: 'Secular One';-fx-font-size: 20";
 
@@ -84,7 +84,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
 
             this.productElement.setQuantity(this.productElement.getQuantity() + 1);
             quantityLabel.setText(String.valueOf(this.productElement.getQuantity()));
-            productElementPrice.setText(String.format("%.2f €", this.productElement.getPrice() * this.productElement.getQuantity()));
+            productElementPrice.setText(String.format("%.2f €", (this.productElement.getPrice() + this.productElement.getTotalOptionsPrice() )* this.productElement.getQuantity()));
 
 
         });
@@ -94,7 +94,7 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
             if (this.productElement.getQuantity() > 1) {
                 this.productElement.setQuantity(this.productElement.getQuantity() - 1);
                 quantityLabel.setText(String.valueOf(this.productElement.getQuantity()));
-                productElementPrice.setText(String.format("%.2f €", this.productElement.getPrice() * this.productElement.getQuantity()));
+                productElementPrice.setText(String.format("%.2f €", (this.productElement.getPrice() + this.productElement.getTotalOptionsPrice() )* this.productElement.getQuantity()));
             }else{
 
                 // TODO: Dialog action

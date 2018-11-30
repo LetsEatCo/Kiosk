@@ -42,13 +42,14 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
 
 
 
-                Object controllerCpy = controller.getSelectedProductElement();
+                Object selectedProduct = controller.getSelectedProductElement();
 
                 if((subsectionUI.getCurrentSelections()<subsectionUI.getMaxSelections()) && !isClicked){
 
-                    if(controllerCpy instanceof Meal){
+                    if(selectedProduct instanceof Meal){
 
-                        ((Meal) controllerCpy).getOptionsUuids().add(uuid);
+                        ((Meal) selectedProduct).getOptionsUuids().add(uuid);
+                        ((Meal) selectedProduct).increaseTotalOptionsPrice(price);
                         isClicked = true;
                         subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()+1);
                     }
@@ -57,9 +58,10 @@ public class OptionMealUI<T extends RessourceElementProduct> extends Parent {
 
                 else if(isClicked){
 
-                    if(controllerCpy instanceof Meal){
+                    if(selectedProduct instanceof Meal){
 
-                        ((Meal) controllerCpy).getOptionsUuids().remove(uuid);
+                        ((Meal) selectedProduct).getOptionsUuids().remove(uuid);
+                        ((Meal) selectedProduct).decreaseTotalOptionsPrice(price);
                         isClicked = false;
                         subsectionUI.setCurrentSelections(subsectionUI.getCurrentSelections()-1);
                     }

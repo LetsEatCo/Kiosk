@@ -16,36 +16,53 @@ public class Order{
     private boolean isTakeAway = false;
     private boolean isEatIn = false;
     private String storeUuid;
+    private PaymentDetails paymentDetails;
+    private double totalToPay = 0;
     private ArrayList<CartElement> cart = new ArrayList<>();
 
-
-    public void setTakeAway(boolean takeAway) {
-        isTakeAway = takeAway;
+    public Order(String storeUuid) {
+        this.storeUuid = storeUuid;
     }
 
-    public void setEatIn(boolean eatIn) {
-        isEatIn = eatIn;
+    public void setTakeAway(boolean isTakeAway) {
+        this.isTakeAway = isTakeAway;
+    }
+
+    public void setEatIn(boolean isEatIn) {
+        this.isEatIn = isEatIn;
     }
 
     public void setStoreUuid(String storeUuid) {
         this.storeUuid = storeUuid;
     }
 
-    public <T extends RessourceElementProduct> void process(Cart<T> cart) {
+    public double getTotalToPay() {
+        return totalToPay;
+    }
 
+    public <T extends RessourceElementProduct> void convertCart(Cart<T> cart) {
+
+        double total = 0;
         for (T productElement : cart) {
 
+            total += (productElement.getPrice() + productElement.totalOptionsPrice)*productElement.getQuantity();
             String uuid = productElement.getUuid();
             int quantity = (int)productElement.getQuantity();
             CartElement cartElement = new CartElement(uuid,quantity, productElement.getOptionsUuids(), productElement);
             this.cart.add(cartElement);
 
         }
+        totalToPay = total;
 
-        processOrder();
+
+//        processOrder();
     }
 
-    private void processOrder()  {
+    public void setPaymentDetails(PaymentDetails paymentDetails) {
+        this.paymentDetails = paymentDetails;
+    }
+
+    private void processOrder() {
 
         Gson gson = new Gson();
         StringEntity params;

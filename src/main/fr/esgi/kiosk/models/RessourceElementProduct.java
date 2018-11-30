@@ -14,6 +14,7 @@ public class RessourceElementProduct {
     protected String description;
     protected Image image;
     protected HashSet<String> optionsUuids = new HashSet<>();
+    protected double totalOptionsPrice = 0;
 
     public String getUuid() {
         return uuid;
@@ -67,4 +68,15 @@ public class RessourceElementProduct {
         return optionsUuids;
     }
 
+    public void increaseTotalOptionsPrice(double extra) {
+        totalOptionsPrice = extra;
+    }
+
+    public void decreaseTotalOptionsPrice(double extra){
+        totalOptionsPrice -= extra;
+    }
+
+    public double getTotalOptionsPrice() {
+        return totalOptionsPrice;
+    }
 }
