@@ -58,7 +58,7 @@
                      <children>
                         <HBox spacing="50.0">
                            <children>
-                              <JFXButton styleClass="btn-black" text="Our Offers" textFill="WHITE">
+                              <JFXButton onAction="#switchTheme" styleClass="btn-black" text="Our Offers" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>

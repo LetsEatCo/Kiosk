@@ -1,6 +1,7 @@
 package main.fr.esgi.kiosk.controllers;
 
 
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -12,11 +13,14 @@ import main.fr.esgi.kiosk.models.*;
 import main.fr.esgi.kiosk.models.ui.CartElementUI;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.models.ui.SectionUI;
+import main.fr.esgi.kiosk.plugin.PluginLoader;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 @Component
@@ -59,6 +63,9 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         loadCartElement(cart);
     }
 
+    public HBox getRoot() {
+        return root;
+    }
 
     @FXML
     void adminRegistration() {
@@ -129,6 +136,19 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         cart.remove(productElement);
         cartPane.getChildren().remove(cartElementUI);
 
+    }
+
+    @FXML
+    void switchTheme() {
+//        // TODO: Real values
+        try {
+            PluginLoader pluginLoader = new PluginLoader();
+            pluginLoader.processSkinChange(this, "jarPath", "themePath");
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {

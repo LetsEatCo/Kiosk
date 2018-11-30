@@ -1,4 +1,6 @@
 package main.fr.esgi.kiosk.plugin;
 
-public class Plugin {
+public abstract class Plugin {
+
+    public abstract void process(String path);
 }
