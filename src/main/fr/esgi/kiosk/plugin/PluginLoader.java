@@ -33,7 +33,7 @@ public class PluginLoader {
         URLClassLoader child = new URLClassLoader (new URL[]{dir.toURI().toURL()}, this.getClass().getClassLoader());
         Class pluginClass = Class.forName ("fr.esgi.plugin.PluginImpl", true, child);
         Constructor constructor = pluginClass.getConstructor(CommandController.class);
-        Method method = pluginClass.getMethod("process", String.class);
+        Method method = pluginClass.getMethod("convertCart", String.class);
         Object instance = constructor.newInstance(commandController);
         method.invoke(instance, cssTheme);
 

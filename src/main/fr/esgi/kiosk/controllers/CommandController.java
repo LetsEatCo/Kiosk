@@ -61,6 +61,9 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         UIHelper.makeFadeInTransition(root);
         lazyLoadProducts();
         loadCartElement(cart);
+
+        // We fill the first section to display
+        if(store.getSections().size()>0)createUIElements(store.getSections().get(0));
     }
 
     public HBox getRoot() {
@@ -95,15 +98,20 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void order()  {
 
-        order.setStoreUuid(store.getUuid());
-        order.process(cart);
+        if (cart.size() > 0 ){
+
+            order.convertCart(cart);
+
+            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PAYMENT_SCREEN);
+        }
+        // TODO: UI error
+
 
     }
 
     private void loadCartElement(Cart<T> cart){
 
         for(T productElement : cart){
-
             CartElementUI<T> cartElementUI = new CartElementUI<>(productElement, this);
             cartPane.getChildren().add(cartElementUI);
 
@@ -144,9 +152,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         try {
             PluginLoader pluginLoader = new PluginLoader();
             pluginLoader.processSkinChange(this, "jarPath", "themePath");
-        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -185,7 +191,10 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         for (Section section : sections) {
 
-            new SectionUI(section, this);
+            if(section.getMeals().size() > 0 || section.getProducts().size()>0){
+
+                new SectionUI(section, this);
+            }
 
         }
 

@@ -89,10 +89,11 @@ public class ProductCompositionController<T extends RessourceElementProduct> imp
 
 
             selectedProductElement.setQuantity(quantity);
-
             cart.add(selectedProductElement);
             UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
         }else{
+
+            // TODO: UI error
             System.out.println("Already In the cart !");
         }
 
