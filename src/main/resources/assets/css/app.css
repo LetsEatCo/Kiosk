@@ -71,27 +71,6 @@
     -fx-background-size: cover;
 }
 
-/*Focus Product Element style */
-
-.tab{
-
-    -fx-pref-height: 100;
-    -fx-pref-width: 390;
-}
-
-.tab-selected-line{
-    -fx-background-color: black;
-}
-
-.tab-label{
-    -fx-text-fill: black;
-    -fx-font-size: 30;
-}
-
-.tab-header-background{
-    -fx-background-color: transparent;
-}
-
 .option-price{
 
     -fx-font-size: 20;
