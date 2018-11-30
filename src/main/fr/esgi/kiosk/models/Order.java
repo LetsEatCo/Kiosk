@@ -32,10 +32,6 @@ public class Order{
         this.isEatIn = isEatIn;
     }
 
-    public void setStoreUuid(String storeUuid) {
-        this.storeUuid = storeUuid;
-    }
-
     public double getTotalToPay() {
         return totalToPay;
     }
@@ -54,15 +50,13 @@ public class Order{
         }
         totalToPay = total;
 
-
-//        processOrder();
     }
 
     public void setPaymentDetails(PaymentDetails paymentDetails) {
         this.paymentDetails = paymentDetails;
     }
 
-    private void processOrder() {
+    public void processOrder() {
 
         Gson gson = new Gson();
         StringEntity params;

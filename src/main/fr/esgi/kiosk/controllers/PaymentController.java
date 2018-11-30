@@ -71,7 +71,7 @@ public class PaymentController implements FxmlController {
         }
 
         if (!(NumberUtils.isCreatable(number)&&NumberUtils.isCreatable(expMonth)&&NumberUtils.isCreatable(expYear)&&NumberUtils.isCreatable(cvc))){
-
+            //TODO: Add UI error
             return;
         }
 
@@ -83,7 +83,7 @@ public class PaymentController implements FxmlController {
         PaymentDetails paymentDetails = new PaymentDetails(token);
         order.setPaymentDetails(paymentDetails);
 
-        System.out.println(token);
+        order.processOrder();
 
         //TODO: Send to a success page and after go back home !
     }
