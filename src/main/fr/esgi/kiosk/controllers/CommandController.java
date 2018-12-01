@@ -1,6 +1,7 @@
 package main.fr.esgi.kiosk.controllers;
 
 
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -12,11 +13,14 @@ import main.fr.esgi.kiosk.models.*;
 import main.fr.esgi.kiosk.models.ui.CartElementUI;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.models.ui.SectionUI;
+import main.fr.esgi.kiosk.plugin.PluginLoader;
 import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 @Component
@@ -57,8 +61,14 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         UIHelper.makeFadeInTransition(root);
         lazyLoadProducts();
         loadCartElement(cart);
+
+        // We fill the first section to display
+        if(store.getSections().size()>0)createUIElements(store.getSections().get(0));
     }
 
+    public HBox getRoot() {
+        return root;
+    }
 
     @FXML
     void adminRegistration() {
@@ -88,15 +98,20 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void order()  {
 
-        order.setStoreUuid(store.getUuid());
-        order.process(cart);
+        if (cart.size() > 0 ){
+
+            order.convertCart(cart);
+
+            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PAYMENT_SCREEN);
+        }
+        // TODO: UI error
+
 
     }
 
     private void loadCartElement(Cart<T> cart){
 
         for(T productElement : cart){
-
             CartElementUI<T> cartElementUI = new CartElementUI<>(productElement, this);
             cartPane.getChildren().add(cartElementUI);
 
@@ -129,6 +144,17 @@ public class CommandController <T extends RessourceElementProduct>  implements F
         cart.remove(productElement);
         cartPane.getChildren().remove(cartElementUI);
 
+    }
+
+    @FXML
+    void switchTheme() {
+//        // TODO: Real values
+        try {
+            PluginLoader pluginLoader = new PluginLoader();
+            pluginLoader.processSkinChange(this, "jarPath", "themePath");
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {
@@ -165,7 +191,10 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         for (Section section : sections) {
 
-            new SectionUI(section, this);
+            if(section.getMeals().size() > 0 || section.getProducts().size()>0){
+
+                new SectionUI(section, this);
+            }
 
         }
 

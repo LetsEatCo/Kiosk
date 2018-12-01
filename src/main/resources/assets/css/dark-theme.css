@@ -23,15 +23,15 @@
 .btn-black{
 
     -fx-font-size: 20;
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-background-color: white;
+    -fx-text-fill: black;
     -fx-font-family: "Secular One";
     -fx-background-radius: 4em;
 }
 .btn:hover{
     -fx-background-color: transparent;
     -fx-background-radius: 0px;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-border-width: 0px 0px 0px 5px;
     -fx-border-style: solid;
 }
@@ -45,7 +45,7 @@
 }
 
 .contentPane{
-    -fx-background-color:  #F0F0F0;
+    -fx-background-color: black;
 }
 
 .box-shadow{
@@ -69,6 +69,14 @@
     -fx-fill-height: 100%;
     -fx-background-position: center;
     -fx-background-size: cover;
+}
+
+/*Focus Product Element style */
+
+.tab{
+
+    -fx-pref-height: 100;
+    -fx-pref-width: 390;
 }
 
 .option-price{

@@ -11,8 +11,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class Main extends Application {
 
-    protected ConfigurableApplicationContext springContext;
-    protected StageManagerHelper stageManagerHelper;
+    private ConfigurableApplicationContext springContext;
+    private StageManagerHelper stageManagerHelper;
 
 
     /**

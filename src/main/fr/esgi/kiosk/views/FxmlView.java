@@ -79,6 +79,18 @@ public enum FxmlView {
             return "/fxml/ProductComposition.fxml";
         }
 
+    },
+    PAYMENT_SCREEN{
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("payment.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/PaymentScreen.fxml";
+        }
+
     };
 
     public abstract String getTitle();
