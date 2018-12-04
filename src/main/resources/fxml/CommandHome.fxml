@@ -40,7 +40,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" prefHeight="1492.0" prefWidth="1039.0">
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="122.0" prefWidth="1039.0">
                <children>
                   <JFXButton onAction="#loadPreviousPage" text=" ">
                      <graphic>
@@ -58,37 +58,19 @@
                      <children>
                         <HBox spacing="50.0">
                            <children>
-                              <JFXButton onAction="#switchTheme" styleClass="btn-black" text="Our Offers" textFill="WHITE">
+                              <JFXButton onAction="#switchTheme" prefHeight="106.0" prefWidth="234.0" styleClass="btn-black" text="Dark Mode" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton styleClass="btn-black" text="Promotions" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arvo Bold" size="20.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton styleClass="btn-black" text="Very Bon Plans" textFill="WHITE">
+                              <JFXButton layoutX="10.0" layoutY="10.0" onAction="#defaultTheme" prefHeight="106.0" prefWidth="234.0" styleClass="btn-black" text="Default" textFill="WHITE">
                                  <font>
                                     <Font name="Arvo Bold" size="20.0" />
                                  </font>
                               </JFXButton>
                            </children>
                         </HBox>
-                        <HBox spacing="50.0">
-                           <children>
-                              <JFXButton styleClass="btn-black" text="On the map" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arvo Bold" size="20.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton styleClass="btn-black" text="Now..." textFill="WHITE">
-                                 <font>
-                                    <Font name="Arvo Bold" size="20.0" />
-                                 </font>
-                              </JFXButton>
-                           </children>
-                        </HBox>
+                        <HBox spacing="50.0" />
                      </children>
                   </VBox>
                </children>
@@ -116,7 +98,7 @@
                   <Insets />
                </VBox.margin>
             </ImageView>
-            <VBox fx:id="cartPane" minWidth="-Infinity" prefHeight="600.0" spacing="5.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
+            <VBox fx:id="cartPane" minWidth="-Infinity" prefHeight="144.0" prefWidth="385.0" spacing="5.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.*;
@@ -44,6 +45,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     private final StageManagerHelper stageManagerHelper;
     private ProductCompositionController<T> accompanimentController;
+    PluginLoader pluginLoader = new PluginLoader();
     private Cart<T> cart;
 
     @Autowired @Lazy
@@ -150,15 +152,32 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void switchTheme() {
        // TODO: Real values
-        try {
-            PluginLoader pluginLoader = new PluginLoader();
-            String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin.jar";
-            String cssPath= "./src/main/resources/assets/css/dark-theme.css";
+       // String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
+        String css = "assets/css/dark-theme.css";
 
-            pluginLoader.processSkinChange(this, jarPath, cssPath);
+        processPlugin(css);
+    }
+
+    private void processPlugin(String cssPath) {
+        try {
+
+
+            if(pluginLoader.getJarFile()==null){
+
+                File jar = PluginLoader.importJar(stageManagerHelper.getPrimaryStage());
+                if(jar!=null) pluginLoader.processSkinChange(this, jar, cssPath);
+            }else pluginLoader.processSkinChange(this, pluginLoader.getJarFile(), cssPath);
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void defaultTheme() {
+       // TODO: Real values
+        String css = "assets/css/app.css";
+//        String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
+        processPlugin(css);
     }
 
     private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {
