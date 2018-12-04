@@ -7,7 +7,7 @@
 
 <VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1492.0" prefWidth="1800.0" styleClass="home-background" stylesheets="@../assets/css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fr.esgi.kiosk.controllers.MainController">
     <children>
-        <JFXButton onAction="#placeToEat" prefHeight="1717.0" prefWidth="1800.0">
+        <JFXButton onAction="#placeToEat" prefHeight="1492.0" prefWidth="1800.0">
          <font>
             <Font name="Arvo Bold" size="60.0" />
          </font>

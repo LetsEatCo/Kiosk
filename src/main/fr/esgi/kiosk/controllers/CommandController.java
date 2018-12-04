@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -148,10 +149,13 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     void switchTheme() {
-//        // TODO: Real values
+       // TODO: Real values
         try {
             PluginLoader pluginLoader = new PluginLoader();
-            pluginLoader.processSkinChange(this, "jarPath", "themePath");
+            String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin.jar";
+            String cssPath= "./src/main/resources/assets/css/dark-theme.css";
+
+            pluginLoader.processSkinChange(this, jarPath, cssPath);
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
