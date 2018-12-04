@@ -45,6 +45,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     private final StageManagerHelper stageManagerHelper;
     private ProductCompositionController<T> accompanimentController;
+    PluginLoader pluginLoader = new PluginLoader();
     private Cart<T> cart;
 
     @Autowired @Lazy
@@ -151,16 +152,21 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void switchTheme() {
        // TODO: Real values
-        String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
+       // String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
         String css = "assets/css/dark-theme.css";
-        processPlugin(jarPath,css);
+
+        processPlugin(css);
     }
 
-    private void processPlugin(String jarPath, String cssPath) {
+    private void processPlugin(String cssPath) {
         try {
-            PluginLoader pluginLoader = new PluginLoader();
 
-            pluginLoader.processSkinChange(this, jarPath, cssPath);
+
+            if(pluginLoader.getJarFile()==null){
+
+                File jar = PluginLoader.importJar(stageManagerHelper.getPrimaryStage());
+                if(jar!=null) pluginLoader.processSkinChange(this, jar, cssPath);
+            }else pluginLoader.processSkinChange(this, pluginLoader.getJarFile(), cssPath);
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -170,8 +176,8 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     void defaultTheme() {
        // TODO: Real values
         String css = "assets/css/app.css";
-        String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
-        processPlugin(jarPath,css);
+//        String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
+        processPlugin(css);
     }
 
     private <T> void loadUIContent(ArrayList<T> elementUI, Pane content) {

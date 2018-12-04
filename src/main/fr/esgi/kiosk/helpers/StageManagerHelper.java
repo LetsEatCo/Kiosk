@@ -23,6 +23,10 @@ public class StageManagerHelper {
         this.primaryStage = stage;
     }
 
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
     public void switchScene(final FxmlView view) {
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
         viewRootNodeHierarchy.minWidth(primaryStage.getMinWidth());
