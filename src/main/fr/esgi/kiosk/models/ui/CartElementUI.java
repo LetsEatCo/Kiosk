@@ -3,14 +3,20 @@ package main.fr.esgi.kiosk.models.ui;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.controllers.CommandController;
+import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.Meal;
 import main.fr.esgi.kiosk.models.RessourceElementProduct;
+import main.fr.esgi.kiosk.views.FxmlView;
+
+import java.util.Optional;
 
 
 public class CartElementUI<T extends RessourceElementProduct> extends Parent {
@@ -97,13 +103,23 @@ public class CartElementUI<T extends RessourceElementProduct> extends Parent {
                 productElementPrice.setText(String.format("%.2f €", (this.productElement.getPrice() + this.productElement.getTotalOptionsPrice() )* this.productElement.getQuantity()));
             }else{
 
-                // TODO: Dialog action
 
-                if(this.productElement instanceof Meal){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Remove Product");
+                alert.setHeaderText(null);
+                alert.setContentText("Remove Product From Cart");
 
-                    ((Meal) this.productElement).getOptionsUuids().clear();
+                Optional<ButtonType> action = alert.showAndWait();
+
+                if(action.get() == ButtonType.OK){
+
+                    if(this.productElement instanceof Meal){
+
+                        (this.productElement).getOptionsUuids().clear();
+                    }
+                    commandController.removeProductElementToCart(this.productElement, this);
                 }
-                commandController.removeProductElementToCart(this.productElement, this);
+
 
             }
 

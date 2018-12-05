@@ -4,6 +4,8 @@ package main.fr.esgi.kiosk.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -24,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Component
 public class CommandController <T extends RessourceElementProduct>  implements FxmlController {
@@ -101,13 +104,32 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void order()  {
 
+        System.out.println("Ici");
         if (cart.size() > 0 ){
 
-            order.convertCart(cart);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Make Order");
+            alert.setHeaderText(null);
+            alert.setContentText("Are You Sure ?");
 
-            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PAYMENT_SCREEN);
+            Optional<ButtonType> action = alert.showAndWait();
+
+            if(action.get() == ButtonType.OK){
+
+                order.convertCart(cart);
+
+                UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PAYMENT_SCREEN);
+            }
+
+
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Order");
+            alert.setHeaderText(null);
+            alert.setContentText("Empty Cart");
+            alert.show();
+
         }
-        // TODO: UI error
 
 
     }

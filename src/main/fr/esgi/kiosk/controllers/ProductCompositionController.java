@@ -1,6 +1,8 @@
 package main.fr.esgi.kiosk.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -13,6 +15,8 @@ import main.fr.esgi.kiosk.views.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class ProductCompositionController<T extends RessourceElementProduct> implements FxmlController{
@@ -85,17 +89,35 @@ public class ProductCompositionController<T extends RessourceElementProduct> imp
     @FXML
     void addToCart(){
 
-        if(!cart.contains(selectedProductElement)){
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Add To Cart");
+        alert.setHeaderText(null);
+        alert.setContentText("Are You Sure ?");
+
+        Optional<ButtonType> action = alert.showAndWait();
+
+        if(action.get() == ButtonType.OK){
+
+            if(!cart.contains(selectedProductElement)){
+
+                selectedProductElement.setQuantity(quantity);
+                cart.add(selectedProductElement);
+                UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
+
+            }else{
 
 
-            selectedProductElement.setQuantity(quantity);
-            cart.add(selectedProductElement);
-            UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.COMMAND_HOME);
-        }else{
+                alert.setAlertType(Alert.AlertType.WARNING);
+                alert.setTitle("Add To Cart");
+                alert.setHeaderText(null);
+                alert.setContentText("Already in the Cart");
+                alert.show();
+            }
 
-            // TODO: UI error
-            System.out.println("Already In the cart !");
+
         }
+
 
     }
 
