@@ -103,8 +103,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     void order()  {
-
-        System.out.println("Ici");
+        
         if (cart.size() > 0 ){
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -173,7 +172,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     void switchTheme() {
-       // TODO: Real values
 
         String css = "assets/css/dark-theme.css";
 
@@ -196,7 +194,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     void defaultTheme() {
-       // TODO: Real values
         String css = "assets/css/app.css";
         processPlugin(css);
     }
