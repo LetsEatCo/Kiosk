@@ -85,7 +85,7 @@ public class PaymentController implements FxmlController {
 
         order.processOrder();
 
-        //TODO: Send to a success page and after go back home !
+        UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.CONFIRM_SCREEN);
     }
 
     @FXML

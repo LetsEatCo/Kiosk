@@ -56,15 +56,15 @@ public enum FxmlView {
             return "/fxml/AdminLogin.fxml";
         }
     },
-    PRODUCT_ELEMENT{
+    CONFIRM_SCREEN{
         @Override
         public String getTitle() {
-            return getStringFromResourceBundle("productElement.title");
+            return getStringFromResourceBundle("confirm.title");
         }
 
         @Override
         public String getFxmlFile() {
-            return "/fxml/ProductElement.fxml";
+            return "/fxml/ConfirmScreen.fxml";
         }
 
     },

@@ -152,7 +152,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     @FXML
     void switchTheme() {
        // TODO: Real values
-       // String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
+
         String css = "assets/css/dark-theme.css";
 
         processPlugin(css);
@@ -176,7 +176,6 @@ public class CommandController <T extends RessourceElementProduct>  implements F
     void defaultTheme() {
        // TODO: Real values
         String css = "assets/css/app.css";
-//        String jarPath = "./src/main/resources/plugins/Kiosk-Skin-Plugin_VF.jar";
         processPlugin(css);
     }
 
