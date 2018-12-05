@@ -2,6 +2,9 @@ package main.fr.esgi.kiosk.controllers;
 
 
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -10,7 +13,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.UIHelper;
 import main.fr.esgi.kiosk.models.*;
@@ -18,7 +20,9 @@ import main.fr.esgi.kiosk.models.ui.CartElementUI;
 import main.fr.esgi.kiosk.models.ui.ElementUI;
 import main.fr.esgi.kiosk.models.ui.SectionUI;
 import main.fr.esgi.kiosk.plugin.PluginLoader;
+import main.fr.esgi.kiosk.routes.StoreRouter;
 import main.fr.esgi.kiosk.views.FxmlView;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -49,6 +53,18 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     private ScrollPane scrollPane;
+
+    @FXML
+    private HBox adminRoot;
+
+    @FXML
+    private JFXTextField emailInput;
+
+    @FXML
+    private JFXPasswordField passwordInput;
+
+    @FXML
+    private JFXTextField voucherField;
 
     private final StageManagerHelper stageManagerHelper;
     private ProductCompositionController<T> accompanimentController;
@@ -110,6 +126,17 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         if (cart.size() > 0 ){
 
+
+            StoreRouter storeRouter = new StoreRouter();
+
+            double reduction = 0;
+            try {
+                reduction = storeRouter.getVoucher(voucherField.getText());
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Make Order");
             alert.setHeaderText(null);
@@ -119,7 +146,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
             if(action.get() == ButtonType.OK){
 
-                order.convertCart(cart);
+                order.convertCart(cart, reduction);
 
                 UIHelper.makeFadeOutTransition(root, stageManagerHelper, FxmlView.PAYMENT_SCREEN);
             }
@@ -243,6 +270,20 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
         }
 
+    }
+
+    @FXML
+    void login() throws IOException, ParseException {
+        String email = emailInput.getText();
+        String password = passwordInput.getText();
+        StoreRouter storeRouter = new StoreRouter();
+        storeRouter.login(email, password);
+    }
+
+    @FXML
+    void home(ActionEvent event){
+
+        UIHelper.makeFadeOutTransition(adminRoot, stageManagerHelper, FxmlView.COMMAND_HOME);
     }
 
 
