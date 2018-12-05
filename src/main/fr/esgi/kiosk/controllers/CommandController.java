@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -45,6 +46,9 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     private VBox cartPane;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     private final StageManagerHelper stageManagerHelper;
     private ProductCompositionController<T> accompanimentController;
@@ -103,7 +107,7 @@ public class CommandController <T extends RessourceElementProduct>  implements F
 
     @FXML
     void order()  {
-        
+
         if (cart.size() > 0 ){
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -116,6 +116,13 @@
     -fx-border-width: 2;
 }
 
+.cart-pane {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-border-color: black;
+}
+
 .product-element-label{
     -fx-font-family: "Secular One";
     -fx-font-size: 20;
