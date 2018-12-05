@@ -57,7 +57,7 @@ public class PaymentRequestScreenController implements FxmlController {
                 PaymentDetails paymentDetails = new PaymentDetails(token);
                 order.setPaymentDetails(paymentDetails);
 
-//                order.processOrder();
+                order.processOrder();
 
                 UIHelper.makeFadeOutTransition(splashRoot, stageManagerHelper, FxmlView.CONFIRM_SCREEN);
             } catch (InterruptedException | CardException | APIException | AuthenticationException | InvalidRequestException | APIConnectionException e) {
