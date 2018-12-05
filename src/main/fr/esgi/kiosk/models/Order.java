@@ -36,9 +36,11 @@ public class Order{
         return totalToPay;
     }
 
-    public <T extends RessourceElementProduct> void convertCart(Cart<T> cart) {
+    public <T extends RessourceElementProduct> void convertCart(Cart<T> cart, double reduction) {
 
         double total = 0;
+
+        System.out.println("reduction "+ reduction);
         for (T productElement : cart) {
 
             total += (productElement.getPrice() + productElement.totalOptionsPrice)*productElement.getQuantity();
@@ -48,7 +50,7 @@ public class Order{
             this.cart.add(cartElement);
 
         }
-        totalToPay = total;
+        totalToPay = total - reduction;
 
     }
 

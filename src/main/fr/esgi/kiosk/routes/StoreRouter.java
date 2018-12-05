@@ -1,11 +1,13 @@
 package main.fr.esgi.kiosk.routes;
 
+import com.google.gson.Gson;
 import main.fr.esgi.kiosk.helpers.CredentialsHelper;
 import main.fr.esgi.kiosk.helpers.HttpHelper;
 import main.fr.esgi.kiosk.helpers.JsonHelper;
 import main.fr.esgi.kiosk.models.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,17 +25,22 @@ public class StoreRouter {
         CredentialsHelper credentialsHelper = new CredentialsHelper();
         Properties routes = credentialsHelper.getRoutes();
 
-        List<NameValuePair> credentials = new ArrayList<>();
-        credentials.add(new BasicNameValuePair("email", email));
-        credentials.add(new BasicNameValuePair("password", password));
+        StoreLogin storeLogin = new StoreLogin(email, password);
+        Gson gson = new Gson();
+        StringEntity params;
 
-        UrlEncodedFormEntity entity = new UrlEncodedFormEntity(credentials);
+        params = new StringEntity(gson.toJson(storeLogin));
+        params.setContentType("application/json");
 
-        JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), entity);
+        JSONObject jsonObject = (JSONObject) HttpHelper.httpPostRequest(routes.getProperty("login"), params);
 
-        if( jsonObject.get("jwt") instanceof String && jsonObject.get("uuid") instanceof String){
+        Object jwt = jsonObject.get("jwt");
+        if( jwt instanceof String){
 
-            StoreCredentials storeCredentials = new StoreCredentials((String) jsonObject.get("jwt"), (String) jsonObject.get("uuid"));
+            Object store = HttpHelper.httpGetRequest(routes.getProperty("me"), (String) jwt);
+
+            String uuid = (String) ((JSONObject)store).get("uuid");
+            StoreCredentials storeCredentials = new StoreCredentials((String) jwt, uuid);
             credentialsHelper.createCredentials(storeCredentials);
         }
 
@@ -94,6 +101,25 @@ public class StoreRouter {
         }
 
         return null;
+    }
+
+    public double getVoucher(String voucherCode) throws IOException, ParseException {
+
+        CredentialsHelper credentialsHelper = new CredentialsHelper();
+        Properties routes = credentialsHelper.getRoutes();
+        Properties config = credentialsHelper.getStoreCredentials();
+
+        String root = routes.getProperty("getVoucher");
+        String jwt = config.getProperty("jwt");
+        String route = root + voucherCode;
+
+        JSONObject voucher = (JSONObject) HttpHelper.httpGetRequest(route,jwt);
+
+        if (voucher!=null){
+            if((boolean)voucher.get("valid"))
+                return (double)voucher.get("reduction") ;
+        }
+        return 0;
     }
 
 
