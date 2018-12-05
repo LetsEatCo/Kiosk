@@ -39,6 +39,8 @@ public class Main extends Application {
 
         stage.setMinHeight(1492);
         stage.setMinWidth(1800);
+        stage.setMaxHeight(stage.getMinHeight());
+        stage.setMaxWidth(stage.getMinWidth()+30);
         
         stageManagerHelper = springContext.getBean(StageManagerHelper.class, stage);
 

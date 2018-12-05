@@ -35,7 +35,7 @@ public class ConfirmOrderController implements FxmlController{
     private void sleep() {
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.stripe.exception.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 import main.fr.esgi.kiosk.helpers.StageManagerHelper;
 import main.fr.esgi.kiosk.helpers.StripeRequestHelper;
@@ -42,13 +43,15 @@ public class PaymentController implements FxmlController {
     private Order order;
     private final StageManagerHelper stageManagerHelper;
     private final StripeRequestHelper stripeRequestHelper;
+    private PaymentRequestScreenController paymentRequestScreenController;
 
     @Autowired
     @Lazy
-    public PaymentController(StageManagerHelper stageManagerHelper, StripeRequestHelper stripeRequestHelper, Order order) {
+    public PaymentController(StageManagerHelper stageManagerHelper, StripeRequestHelper stripeRequestHelper, PaymentRequestScreenController paymentRequestScreenController, Order order) {
         this.stageManagerHelper = stageManagerHelper;
         this.stripeRequestHelper = stripeRequestHelper;
         this.order = order;
+        this.paymentRequestScreenController = paymentRequestScreenController;
     }
 
     @Override
@@ -57,35 +60,36 @@ public class PaymentController implements FxmlController {
     }
 
     @FXML
-    void processPayment() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+    void processPayment() {
 
         String number = cardNumberField.getText();
         String expMonth = expMonthField.getText() ;
         String expYear = expYearField.getText();
         String cvc = cvcField.getText();
 
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         if (number.length() != 16 || expMonth.length()!= 2 ||expYear.length()!=4 || cvc.length()!=3 ){
-            //TODO: Add UI error
+            alert.setTitle("WRONG CARD CREDENTIALS");
+            alert.setHeaderText(null);
+            alert.setContentText("WRONG CARD CREDENTIALS SIZES!");
+            alert.show();
 
             return;
         }
 
         if (!(NumberUtils.isCreatable(number)&&NumberUtils.isCreatable(expMonth)&&NumberUtils.isCreatable(expYear)&&NumberUtils.isCreatable(cvc))){
-            //TODO: Add UI error
+
+            alert.setTitle("WRONG CARD CREDENTIALS");
+            alert.setHeaderText(null);
+            alert.setContentText("WRONG CARD CREDENTIALS !");
+            alert.show();
+
             return;
         }
 
-
         CreditCard card = new CreditCard(number,expMonth,expYear,cvc);
-
-        String token = stripeRequestHelper.requestToken(card);
-
-        PaymentDetails paymentDetails = new PaymentDetails(token);
-        order.setPaymentDetails(paymentDetails);
-
-        order.processOrder();
-
-        UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.CONFIRM_SCREEN);
+        paymentRequestScreenController.setCreditCard(card);
+        UIHelper.makeFadeOutTransition(root,stageManagerHelper,FxmlView.PAYMENT_REQUEST_SCREEN);
     }
 
     @FXML
